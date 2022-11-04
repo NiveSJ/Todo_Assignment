@@ -25,7 +25,7 @@ public class PersonTest {
         String Lastname = person[0].getLastName();
         assertEquals("Jayanth", Lastname);
 
-        //
+        //setLastName exception throw
         assertThrows(IllegalArgumentException.class, () -> {
             person[1].setLastName(null); });
 
@@ -33,6 +33,8 @@ public class PersonTest {
         //email getter check
         String email = person[0].getEmail();
         assertEquals("nive@gmail.com", email);
+
+        //email exception throw
         assertThrows(IllegalArgumentException.class, () -> {
             person[1].setEmail(null); });
 
