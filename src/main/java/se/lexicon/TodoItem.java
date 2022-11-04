@@ -52,7 +52,7 @@ public class TodoItem {
 
     public void setDeadline(LocalDate deadline) {
 
-        if(deadline == null) throw new IllegalArgumentException("Deadline cannot be null");
+        if (deadline == null) throw new IllegalArgumentException("Deadline cannot be null");
         this.deadline = deadline;
     }
 
@@ -88,13 +88,13 @@ public class TodoItem {
     }
 
     public String getSummary() {
-        String status="Not done";
+        String status = "Not done";
         if (this.done)
-            status="done";
+            status = "done";
 
 
-            return "Taskid:" + this.id + "\t" + "with title:" + this.title + "\t" + "and taskDescription:" + this.taskDescription + "\t" + "with deadline: " + this.deadline +
-                    "\t" + "has been created by:" + this.creator.getFirstName() + "\n\t" + "is " + status;
+        return "Taskid:" + this.id + "\t" + "with title:" + this.title + "\t" + "and taskDescription:" + this.taskDescription + "\t" + "with deadline: " + this.deadline +
+                "\t" + "has been created by:" + this.creator.getFirstName() + "\n\t" + "is " + status;
 
     }
 

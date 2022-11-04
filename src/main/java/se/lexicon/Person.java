@@ -46,7 +46,6 @@ public class Person {
 
     public void setEmail(String email) {
         if (email== null) throw new IllegalArgumentException("Email cannot be null");
-
         this.email = email;
     }
 
