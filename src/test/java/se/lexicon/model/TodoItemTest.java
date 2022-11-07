@@ -1,15 +1,13 @@
-package se.lexicon;
+package se.lexicon.model;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.Assert;
+
+import se.lexicon.model.Person;
+import se.lexicon.model.TodoItem;
 
 
 import java.time.LocalDate;
-
-import static junit.framework.TestCase.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 public class TodoItemTest {
 
 

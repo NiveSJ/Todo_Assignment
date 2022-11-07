@@ -1,9 +1,12 @@
-package se.lexicon;
+package se.lexicon.model;
 
-import org.junit.Test;
+
+
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-import static junit.framework.TestCase.assertEquals;
+
 
 public class PersonTest {
 

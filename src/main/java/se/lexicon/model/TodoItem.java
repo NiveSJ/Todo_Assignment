@@ -1,6 +1,7 @@
-package se.lexicon;
+package se.lexicon.model;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class TodoItem {
     private int id;
@@ -91,15 +92,33 @@ public class TodoItem {
         return false;
     }
 
-    public String getSummary() {
+    @Override
+    public String toString() {
+
         String status = "Not done";
         if (this.done)
             status = "done";
 
-
-        return "Taskid:" + getId() + "\t" + "with title:" + getTitle() + "\t" + "and taskDescription:" + getTaskDescription() + "\t" + "with deadline: " + getDeadline() +
-                "\t" + "has been created by:" + this.creator.getFirstName() + "\n\t" + "is " + status;
-
+        return "TodoItem{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", taskDescription='" + taskDescription + '\'' +
+                ", deadline=" + deadline +
+                ", done=" + done +
+                ", creator=" + creator +
+                '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TodoItem todoItem = (TodoItem) o;
+        return id == todoItem.id && done == todoItem.done && title.equals(todoItem.title) && taskDescription.equals(todoItem.taskDescription) && deadline.equals(todoItem.deadline) && creator.equals(todoItem.creator);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, taskDescription, deadline, done, creator);
+    }
 }

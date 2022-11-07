@@ -1,11 +1,14 @@
-package se.lexicon;
+package se.lexicon.model;
+import se.lexicon.model.Person;
+import se.lexicon.model.TodoItem;
 
-import javafx.css.Styleable;
-import org.junit.jupiter.api.*;
 
 import java.time.LocalDate;
+import org.junit.jupiter.api.Test;
 
-import static junit.framework.TestCase.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+
+
 
 public class TodoItemTaskTest {
 

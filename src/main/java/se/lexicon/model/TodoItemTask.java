@@ -1,7 +1,9 @@
-package se.lexicon;
+package se.lexicon.model;
 
 /* boolean assigned is encapsulated and set to true if assignee  is not null
  */
+
+import java.util.Objects;
 
 public class TodoItemTask {
 
@@ -41,7 +43,7 @@ public class TodoItemTask {
         return todoItem;
     }
 
-    public void setTodoItem(TodoItem todoItem) {
+    public void setTodoItem(TodoItem todoItem) {   // Ask about object equals() check here
 
         if(todoItem.equals(null))throw new IllegalArgumentException("Todo Item cannot be null");
         this.todoItem = todoItem;
@@ -51,21 +53,35 @@ public class TodoItemTask {
         return assignee;
     }
 
-    public void setAssignee(Person assignee) {
+    public void setAssignee(Person assignee) {    // Ask about object equals() check here
 
         if (assignee == null) throw new IllegalArgumentException("assignee cannot be null");
             this.assignee = assignee;
             this.assigned=true;
-
-
-
-    }
-
-    public String getSummary() {
-
-
-        return "TodoItemTaskId:" + getId() + "\t" + "Task:" + this.todoItem.getTitle()  +"\t" + "by assignee:" +  this.assignee.getFirstName();
     }
 
 
+
+    @Override
+    public String toString() {
+        return "TodoItemTask{" +
+                "id=" + id +
+                ", assigned=" + assigned +
+                ", todoItem=" + todoItem.getTitle() +
+                ", assignee=" + assignee.getFirstName() +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TodoItemTask that = (TodoItemTask) o;
+        return id == that.id && assigned == that.assigned && todoItem.equals(that.todoItem) && assignee.equals(that.assignee);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, assigned, todoItem, assignee);
+    }
 }

@@ -1,5 +1,7 @@
 package se.lexicon;
 
+import se.lexicon.model.*;
+
 import java.time.LocalDate;
 
 /**
@@ -15,25 +17,30 @@ public class App {
 
 
         TodoItem todoItem[] = new TodoItem[5];
-        todoItem[0]= new TodoItem(2001,"Project Meeting","Discuss about project setup",
-                LocalDate.parse("2022-11-01"),person[0]);
+        todoItem[0] = new TodoItem(2001, "Project Meeting", "Discuss about project setup",
+                LocalDate.parse("2022-11-01"), person[0]);
 
-        String summary=person[0].getSummary();
 
         System.out.println("############person Information####################");
-        System.out.println(summary);
+        System.out.println(person[0]);
         System.out.println("\n");
 
         System.out.println("#################Todo Information#################");
-        String todoSummary =todoItem[0].getSummary();
-        System.out.println(todoSummary);
+
+        System.out.println(todoItem[0]);
         System.out.println("\n");
 
         System.out.println("##################TodoItem task information Information##################");
-        TodoItemTask todoItemTask[]= new TodoItemTask[2];
-        todoItemTask[0]= new TodoItemTask(3001,todoItem[0],person[0]);
-        String taskSummary=todoItemTask[0].getSummary();
-        System.out.println(taskSummary);
+        TodoItemTask todoItemTask[] = new TodoItemTask[2];
+        todoItemTask[0] = new TodoItemTask(3001, todoItem[0], person[0]);
+
+        System.out.println(todoItemTask[0]);
+
+        System.out.println("##################AppUser##################");
+
+        AppUser appUser = new AppUser(20, "Erik", "Johnsson", "erik@gmail.com",
+                "20wqfj", AppRole.ROLE_APP_USER);
+        System.out.println(appUser.toString());
 
 
     }

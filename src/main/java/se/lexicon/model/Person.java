@@ -1,4 +1,6 @@
-package se.lexicon;
+package se.lexicon.model;
+
+import java.util.Objects;
 
 public class Person {
 
@@ -7,11 +9,21 @@ public class Person {
     private String LastName;
     private String email;
 
+    private AppUser credentials;
+
     public Person(int id, String firstName, String LastName, String email) {
         this.id = id;
         setFirstName(firstName);
         setLastName(LastName);
         setEmail(email);
+    }
+
+    public AppUser getCredentials() {
+        return credentials;
+    }
+
+    public void setCredentials(AppUser credentials) {
+        this.credentials = credentials;
     }
 
     public int getId() {
@@ -40,6 +52,7 @@ public class Person {
         this.LastName = LastName;
     }
 
+
     public String getEmail() {
         return email;
     }
@@ -49,10 +62,30 @@ public class Person {
         this.email = email;
     }
 
-    public String getSummary() {
 
-        return "Person Id:" + getId() + "\t" + "Name:" + getFirstName() + " " + getLastName() + "\t" + "email:" + getEmail();
+
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", LastName='" + LastName + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 
+    @Override  // Excluded Credentials from equals and hashcode
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return id == person.id && firstName.equals(person.firstName) &&
+                LastName.equals(person.LastName) && email.equals(person.email);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, LastName, email);
+    }
 }
