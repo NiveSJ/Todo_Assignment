@@ -10,12 +10,16 @@ public class TodoItem {
     private boolean done;
     private Person creator;
 
+    public TodoItem() {
+        this.done = false;
+    }
+
     public TodoItem(int id, String title, String taskDescription, LocalDate deadline, Person creator) {
         this.id = id;
-        this.title = title;
+        setTitle(title);
         this.taskDescription = taskDescription;
-        this.deadline = deadline;
-        this.done = false;
+        setDeadline(deadline);
+        setDone(done);
         this.creator = creator;
 
     }
@@ -93,7 +97,7 @@ public class TodoItem {
             status = "done";
 
 
-        return "Taskid:" + this.id + "\t" + "with title:" + this.title + "\t" + "and taskDescription:" + this.taskDescription + "\t" + "with deadline: " + this.deadline +
+        return "Taskid:" + getId() + "\t" + "with title:" + getTitle() + "\t" + "and taskDescription:" + getTaskDescription() + "\t" + "with deadline: " + getDeadline() +
                 "\t" + "has been created by:" + this.creator.getFirstName() + "\n\t" + "is " + status;
 
     }

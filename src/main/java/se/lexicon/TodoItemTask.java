@@ -17,8 +17,8 @@ public class TodoItemTask {
     public TodoItemTask(int id, TodoItem todoItem, Person assignee) {
         this();
         this.id = id;
-        this.todoItem = todoItem;
-        this.assignee = assignee;
+        setTodoItem(todoItem);
+        setAssignee(assignee);
     }
 
     public int getId() {
@@ -64,7 +64,7 @@ public class TodoItemTask {
     public String getSummary() {
 
 
-        return "TodoItemTaskId:" + this.id + "\t" + "Task:" + this.todoItem.getTitle()  +"\t" + "by assignee:" +  this.assignee.getFirstName();
+        return "TodoItemTaskId:" + getId() + "\t" + "Task:" + this.todoItem.getTitle()  +"\t" + "by assignee:" +  this.assignee.getFirstName();
     }
 
 

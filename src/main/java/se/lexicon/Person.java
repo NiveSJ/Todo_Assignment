@@ -9,9 +9,9 @@ public class Person {
 
     public Person(int id, String firstName, String LastName, String email) {
         this.id = id;
-        this.firstName = firstName;
-        this.LastName = LastName;
-        this.email = email;
+        setFirstName(firstName);
+        setLastName(LastName);
+        setEmail(email);
     }
 
     public int getId() {
@@ -36,7 +36,7 @@ public class Person {
     }
 
     public void setLastName(String LastName) {
-        if (LastName==null) throw new IllegalArgumentException("Last name cannot be null");
+        if (LastName == null) throw new IllegalArgumentException("Last name cannot be null");
         this.LastName = LastName;
     }
 
@@ -45,13 +45,13 @@ public class Person {
     }
 
     public void setEmail(String email) {
-        if (email== null) throw new IllegalArgumentException("Email cannot be null");
+        if (email == null) throw new IllegalArgumentException("Email cannot be null");
         this.email = email;
     }
 
     public String getSummary() {
 
-        return "Person Id:" + this.id +"\t"+ "Name:" + firstName +" "+ LastName +"\t" +"email:" + this.email;
+        return "Person Id:" + getId() + "\t" + "Name:" + getFirstName() + " " + getLastName() + "\t" + "email:" + getEmail();
     }
 
 
