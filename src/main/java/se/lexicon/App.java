@@ -33,8 +33,10 @@ public class App {
         System.out.println("##################TodoItem task information Information##################");
         TodoItemTask todoItemTask[] = new TodoItemTask[2];
         todoItemTask[0] = new TodoItemTask(3001, todoItem[0], person[0]);
-
         System.out.println(todoItemTask[0]);
+
+
+
 
         System.out.println("##################AppUser##################");
 

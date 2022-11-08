@@ -75,9 +75,9 @@ public class TodoItemTask {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null) return false;
         TodoItemTask that = (TodoItemTask) o;
-        return id == that.id && assigned == that.assigned && todoItem.equals(that.todoItem) && assignee.equals(that.assignee);
+        return id == that.id ;
     }
 
     @Override

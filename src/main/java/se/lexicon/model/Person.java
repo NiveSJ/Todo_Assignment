@@ -78,10 +78,9 @@ public class Person {
     @Override  // Excluded Credentials from equals and hashcode
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Person person = (Person) o;
-        return id == person.id && firstName.equals(person.firstName) &&
-                LastName.equals(person.LastName) && email.equals(person.email);
+        if (o == null) return false;
+        return id == this.id && firstName.equals(this.firstName) &&
+                LastName.equals(this.LastName) && email.equals(this.email);
     }
 
     @Override

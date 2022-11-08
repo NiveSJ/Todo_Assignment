@@ -114,8 +114,8 @@ public class TodoItem {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TodoItem todoItem = (TodoItem) o;
-        return id == todoItem.id && done == todoItem.done && title.equals(todoItem.title) && taskDescription.equals(todoItem.taskDescription) && deadline.equals(todoItem.deadline) && creator.equals(todoItem.creator);
-    }
+        return id == todoItem.id;
+                  }
 
     @Override
     public int hashCode() {
