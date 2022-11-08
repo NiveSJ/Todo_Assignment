@@ -12,16 +12,24 @@ public class TodoItemTask {
     private TodoItem todoItem;
     private Person assignee;
 
-    public TodoItemTask(){
+    public TodoItemTask() {
 
         this.assigned = false;
     }
+
     public TodoItemTask(int id, TodoItem todoItem, Person assignee) {
         this();
         this.id = id;
         setTodoItem(todoItem);
         setAssignee(assignee);
     }
+    public TodoItemTask(int id, TodoItem todoItem) {
+        this();
+        this.id = id;
+        setTodoItem(todoItem);
+
+    }
+
 
     public int getId() {
         return id;
@@ -45,7 +53,7 @@ public class TodoItemTask {
 
     public void setTodoItem(TodoItem todoItem) {   // Ask about object equals() check here
 
-        if(todoItem.equals(null))throw new IllegalArgumentException("Todo Item cannot be null");
+        if (todoItem == null) throw new IllegalArgumentException("Todo Item cannot be null");
         this.todoItem = todoItem;
     }
 
@@ -56,10 +64,9 @@ public class TodoItemTask {
     public void setAssignee(Person assignee) {    // Ask about object equals() check here
 
         if (assignee == null) throw new IllegalArgumentException("assignee cannot be null");
-            this.assignee = assignee;
-            this.assigned=true;
+        this.assignee = assignee;
+        this.assigned = true;
     }
-
 
 
     @Override
@@ -67,8 +74,8 @@ public class TodoItemTask {
         return "TodoItemTask{" +
                 "id=" + id +
                 ", assigned=" + assigned +
-                ", todoItem=" + todoItem.getTitle() +
-                ", assignee=" + assignee.getFirstName() +
+                ", todoItem=" + todoItem +
+                ", assignee=" + assignee +
                 '}';
     }
 
@@ -77,7 +84,7 @@ public class TodoItemTask {
         if (this == o) return true;
         if (o == null) return false;
         TodoItemTask that = (TodoItemTask) o;
-        return id == that.id ;
+        return id == that.id;
     }
 
     @Override

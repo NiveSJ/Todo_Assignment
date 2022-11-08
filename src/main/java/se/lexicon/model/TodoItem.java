@@ -21,7 +21,7 @@ public class TodoItem {
         this.taskDescription = taskDescription;
         setDeadline(deadline);
         setDone(done);
-        this.creator = creator;
+        setCreator(creator);
 
     }
 
@@ -81,6 +81,9 @@ public class TodoItem {
     }
 
     public void setCreator(Person creator) {
+        if(creator == null) throw new IllegalArgumentException("Creator was null");
+        if(creator.getCredentials().getAppRole() != AppRole.ROLE_APP_ADMIN)
+            throw new IllegalArgumentException("No Permission");
         this.creator = creator;
     }
 

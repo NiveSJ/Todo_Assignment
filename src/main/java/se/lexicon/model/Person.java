@@ -11,11 +11,13 @@ public class Person {
 
     private AppUser credentials;
 
-    public Person(int id, String firstName, String LastName, String email) {
+    public Person(int id, String firstName, String LastName, String email, AppUser credentials) {
         this.id = id;
         setFirstName(firstName);
         setLastName(LastName);
         setEmail(email);
+        setCredentials(credentials);
+
     }
 
     public AppUser getCredentials() {

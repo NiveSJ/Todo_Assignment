@@ -1,6 +1,6 @@
 package se.lexicon.model;
 
-public class AppUser extends Person {
+public class AppUser  {
 
     private String userName;
     private String password;
@@ -8,9 +8,9 @@ public class AppUser extends Person {
     private AppRole appRole;
 
 // Can i get password and app role from user (Or App role has to be set by logic)
-    public AppUser(int id, String firstName, String LastName, String email, String password, AppRole appRole) {
-        super(id, firstName, LastName, email);
-        setUserName();
+    public AppUser(String username, String password, AppRole appRole) {
+
+        setUserName(username);
         setPassword(password);
         setAppRole(appRole);
     }
@@ -20,8 +20,9 @@ public class AppUser extends Person {
         return userName;
     }
 
-    public void setUserName() {
-        this.userName = getFirstName() + " " + getLastName();
+    public void setUserName(String username) {
+
+        this.userName =username ;
     }
 
     public String getPassword() {
@@ -44,7 +45,7 @@ public class AppUser extends Person {
 
     @Override  // Ask whether to display app role
     public String toString() {
-        return super.toString() + '\'' + ", AppRole='" + appRole + '\'';
+        return  ", AppRole='" + appRole + '\'';
 
     }
 
