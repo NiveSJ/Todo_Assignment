@@ -14,8 +14,11 @@ public class TodoItemTest {
     @Test
     public void overdueTest() {
         AppUser appUser1 = new AppUser("Test", "20wqfj", AppRole.ROLE_APP_ADMIN);
-        Person person[] = new Person[1];
+        AppUser appUser2 = new AppUser("Test", "20wqfj", AppRole.ROLE_APP_USER);
+
+        Person person[] = new Person[2];
         person[0] = new Person(1001, "Nivethitha", "Jayanth", "nive@gmail.com",appUser1);
+        person[1] = new Person(1001, "Nivethitha", "Jayanth", "nive@gmail.com",appUser2);
 
         TodoItem todoItem[] = new TodoItem[1];
         todoItem[0] = new TodoItem(2001, "Project Meeting", "Discuss",
@@ -28,6 +31,12 @@ public class TodoItemTest {
     //
         Person personcheck = todoItem[0].getCreator();
         assertEquals(person[0], personcheck);
+        todoItem[0].setCreator(person[0]);
+        assertEquals(todoItem[0].getCreator(),person[0]);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            todoItem[0].setCreator(person[1]); });
+
 
         String desc = todoItem[0].getTaskDescription();
         assertEquals("Discuss", desc);
