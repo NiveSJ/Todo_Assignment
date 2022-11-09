@@ -12,34 +12,35 @@ public class PersonTest {
 
     @Test
     public void persontest() {
-        Person person[] = new Person[2];
-        person[0] = new Person(1001, "Nivethitha", "Jayanth", "nive@gmail.com");
-        person[1] = new Person(1001, " ", " ", " ");
 
-        String firstName = person[0].getFirstName();
+        AppUser appUser1 = new AppUser("Test", "20wqfj", AppRole.ROLE_APP_ADMIN);
+        Person person = new Person(1001, "Nivethitha", "Jayanth", "nive@gmail.com",appUser1);
+       // person[1] = new Person(1001, " ", " ", " ");
+
+        String firstName = person.getFirstName();
         assertEquals("Nivethitha", firstName);
 
 
         assertThrows(IllegalArgumentException.class, () -> {
-            person[1].setFirstName(null); });
+            person.setFirstName(null); });
 
 
         //LastName getter
-        String Lastname = person[0].getLastName();
+        String Lastname = person.getLastName();
         assertEquals("Jayanth", Lastname);
 
         //setLastName exception throw
         assertThrows(IllegalArgumentException.class, () -> {
-            person[1].setLastName(null); });
+            person.setLastName(null); });
 
 
         //email getter check
-        String email = person[0].getEmail();
+        String email = person.getEmail();
         assertEquals("nive@gmail.com", email);
 
         //email exception throw
         assertThrows(IllegalArgumentException.class, () -> {
-            person[1].setEmail(null); });
+            person.setEmail(null); });
 
 
     }

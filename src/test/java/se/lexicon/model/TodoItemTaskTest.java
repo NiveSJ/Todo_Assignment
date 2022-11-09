@@ -15,8 +15,9 @@ public class TodoItemTaskTest {
 
     @Test
     public void todoitemtaskTest() {
+        AppUser appUser1 = new AppUser("Test", "20wqfj", AppRole.ROLE_APP_ADMIN);
 
-        Person person =new Person(1001, "Nivethitha", "Jayanth", "nive@gmail.com");
+        Person person =new Person(1001, "Nivethitha", "Jayanth", "nive@gmail.com",appUser1);
 
         TodoItem todoItem = new TodoItem(2001, "Project Meeting", "Discuss",
                 LocalDate.parse("2022-11-01"), person);

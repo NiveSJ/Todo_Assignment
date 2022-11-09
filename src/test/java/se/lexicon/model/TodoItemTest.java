@@ -13,8 +13,9 @@ public class TodoItemTest {
 
     @Test
     public void overdueTest() {
+        AppUser appUser1 = new AppUser("Test", "20wqfj", AppRole.ROLE_APP_ADMIN);
         Person person[] = new Person[1];
-        person[0] = new Person(1001, "Nivethitha", "Jayanth", "nive@gmail.com");
+        person[0] = new Person(1001, "Nivethitha", "Jayanth", "nive@gmail.com",appUser1);
 
         TodoItem todoItem[] = new TodoItem[1];
         todoItem[0] = new TodoItem(2001, "Project Meeting", "Discuss",
