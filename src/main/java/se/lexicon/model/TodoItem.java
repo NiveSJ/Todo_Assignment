@@ -108,20 +108,22 @@ public class TodoItem {
                 ", taskDescription='" + taskDescription + '\'' +
                 ", deadline=" + deadline +
                 ", done=" + done +
-                ", creator=" + creator +
                 '}';
     }
 
-    @Override
+    @Override  // Excluded creator person objects
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TodoItem todoItem = (TodoItem) o;
-        return id == todoItem.id;
-                  }
+        return id == todoItem.id &&
+                done == todoItem.done && title.equals(todoItem.title) &&
+                taskDescription.equals(todoItem.taskDescription) &&
+                    deadline.equals(todoItem.deadline) ;
+    }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, taskDescription, deadline, done, creator);
+        return Objects.hash(id, title, taskDescription, deadline, done);
     }
 }

@@ -1,13 +1,15 @@
 package se.lexicon.model;
 
-public class AppUser  {
+import java.util.Objects;
+
+public class AppUser {
 
     private String userName;
     private String password;
 
     private AppRole appRole;
 
-// Can i get password and app role from user (Or App role has to be set by logic)
+
     public AppUser(String username, String password, AppRole appRole) {
 
         setUserName(username);
@@ -21,8 +23,9 @@ public class AppUser  {
     }
 
     public void setUserName(String username) {
+        if(username == null) throw new IllegalArgumentException("username cannot be null");
 
-        this.userName =username ;
+        this.userName = username;
     }
 
     public String getPassword() {
@@ -30,6 +33,8 @@ public class AppUser  {
     }
 
     public void setPassword(String password) {
+
+        if(password == null) throw new IllegalArgumentException("Password cannot be null");
         this.password = password;
     }
 
@@ -39,23 +44,29 @@ public class AppUser  {
     }
 
     public void setAppRole(AppRole appRole) {
+
+        if(appRole == null) throw new IllegalArgumentException("appRole cannot be null");
+
         this.appRole = appRole;
     }
 
 
     @Override  // Ask whether to display app role
     public String toString() {
-        return  ", AppRole='" + appRole + '\'';
+        return ", AppRole='" + appRole + '\'';
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AppUser appUser = (AppUser) o;
+        return userName.equals(appUser.userName) && appRole == appUser.appRole;
     }
 
     @Override
     public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+        return Objects.hash(userName, appRole);
     }
 }

@@ -51,7 +51,7 @@ public class TodoItemTask {
         return todoItem;
     }
 
-    public void setTodoItem(TodoItem todoItem) {   // Ask about object equals() check here
+    public void setTodoItem(TodoItem todoItem) {
 
         if (todoItem == null) throw new IllegalArgumentException("Todo Item cannot be null");
         this.todoItem = todoItem;
@@ -61,7 +61,7 @@ public class TodoItemTask {
         return assignee;
     }
 
-    public void setAssignee(Person assignee) {    // Ask about object equals() check here
+    public void setAssignee(Person assignee) {
 
         if (assignee == null) throw new IllegalArgumentException("assignee cannot be null");
         this.assignee = assignee;
@@ -69,26 +69,27 @@ public class TodoItemTask {
     }
 
 
-    @Override
+    @Override  // Excluded Assignee person object
     public String toString() {
         return "TodoItemTask{" +
                 "id=" + id +
                 ", assigned=" + assigned +
                 ", todoItem=" + todoItem +
-                ", assignee=" + assignee +
                 '}';
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         TodoItemTask that = (TodoItemTask) o;
-        return id == that.id;
+        return id == that.id
+                && assigned == that.assigned &&
+                todoItem.equals(that.todoItem) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, assigned, todoItem, assignee);
+        return Objects.hash(id, assigned, todoItem);
     }
 }
