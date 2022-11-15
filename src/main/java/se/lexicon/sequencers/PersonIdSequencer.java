@@ -20,17 +20,17 @@ public class PersonIdSequencer {  // trying to use singleton pattern
     }
 
 
-    public int getCurrentId() {
+    public static int getCurrentId() {
         return currentId;
     }
 
-    public void setCurrentId(int currentId) {
-        this.currentId = nextId();
+    public static void setCurrentId(int currentId) {
+        currentId = nextId();
     }
 
 
-    int nextId() {
-        if (this.currentId >= this.minLimit && this.currentId < 1000) {
+    static int nextId() {
+        if (currentId >= minLimit && currentId < 1000) {
             currentId++;
             return currentId;
         }

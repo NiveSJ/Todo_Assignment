@@ -23,7 +23,7 @@ public class AppUserDAOCollection implements IAppUserDAO {
 
         AppUser name = findByUserName(appUser.getUserName());
 
-        if (name == null) throw new IllegalArgumentException("Name already present!!");
+        if (name != null) throw new IllegalArgumentException("Name already present!!");
         appUsersObjList.add(appUser);
         return appUser;
 

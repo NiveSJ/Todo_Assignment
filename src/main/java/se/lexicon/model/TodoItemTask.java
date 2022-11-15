@@ -3,28 +3,28 @@ package se.lexicon.model;
 /* boolean assigned is encapsulated and set to true if assignee  is not null
  */
 
+import se.lexicon.sequencers.TodoItemTaskIdSequencer;
+
 import java.util.Objects;
 
-public class TodoItemTask {
+public class TodoItemTask extends TodoItemTaskIdSequencer {
 
     private int id;
     private boolean assigned;
     private TodoItem todoItem;
     private Person assignee;
 
-    public TodoItemTask() {
 
+
+    public TodoItemTask( TodoItem todoItem, Person assignee) {
+        super();
         this.assigned = false;
-    }
-
-    public TodoItemTask(int id, TodoItem todoItem, Person assignee) {
-        this();
-        this.id = id;
+        this.id = getCurrentId();
         setTodoItem(todoItem);
         setAssignee(assignee);
     }
     public TodoItemTask(int id, TodoItem todoItem) {
-        this();
+        this.assigned = false;
         this.id = id;
         setTodoItem(todoItem);
 
