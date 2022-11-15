@@ -5,7 +5,7 @@ import se.lexicon.sequencers.TodoItemIdSequencer;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class TodoItem extends TodoItemIdSequencer {
+public class TodoItem  {
     private int id;
     private String title;
     private String taskDescription;
@@ -16,8 +16,10 @@ public class TodoItem extends TodoItemIdSequencer {
 
 
     public TodoItem(String title, String taskDescription, LocalDate deadline, Person creator) {
-        super();
-        this.id = getCurrentId();
+        TodoItemIdSequencer.nextId();
+        this.id = TodoItemIdSequencer.getCurrentId();
+
+
         setTitle(title);
         this.done = false;
         this.taskDescription = taskDescription;
@@ -29,7 +31,7 @@ public class TodoItem extends TodoItemIdSequencer {
 
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {

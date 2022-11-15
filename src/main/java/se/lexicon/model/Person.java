@@ -4,7 +4,7 @@ import se.lexicon.sequencers.PersonIdSequencer;
 
 import java.util.Objects;
 
-public class Person extends PersonIdSequencer {
+public class Person {
 
     private int id;
     private String firstName;
@@ -14,8 +14,8 @@ public class Person extends PersonIdSequencer {
     private AppUser credentials;
 
     public Person(String firstName, String LastName, String email, AppUser credentials) {
-        super();
-        this.id=getCurrentId();
+        PersonIdSequencer.nextId();
+        this.id=PersonIdSequencer.getCurrentId();
         setFirstName(firstName);
         setLastName(LastName);
         setEmail(email);

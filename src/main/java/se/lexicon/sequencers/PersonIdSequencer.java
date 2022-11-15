@@ -2,41 +2,21 @@ package se.lexicon.sequencers;
 
 public class PersonIdSequencer {  // trying to use singleton pattern
 
-   /* private static PersonIdSequencer personIdSequencer = new PersonIdSequencer();
-
-    public static PersonIdSequencer getPersonIdSequencer() {
-
-        return personIdSequencer;
-    }*/
-
-    private static int currentId;
-    private static int minLimit;
-    private static int maxLimit;
-
-    public PersonIdSequencer() {
-        setCurrentId(currentId);
-        this.minLimit = 0;
-        this.maxLimit = 1000;
-    }
-
+    private static int currentId = 100;
 
     public static int getCurrentId() {
         return currentId;
     }
 
-    public static void setCurrentId(int currentId) {
-        currentId = nextId();
+    private static void setCurrentId(int currentId) {
+        PersonIdSequencer.currentId = currentId;
     }
 
 
-    static int nextId() {
-        if (currentId >= minLimit && currentId < 1000) {
-            currentId++;
-            return currentId;
-        }
-
-        return -1;
-
+    public static int nextId() {
+        int id = ++currentId;
+        setCurrentId(id);
+        return id;
     }
 
 

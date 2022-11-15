@@ -50,11 +50,13 @@ public class AppUser {
         this.appRole = appRole;
     }
 
-
-    @Override  // Ask whether to display app role
+    @Override
     public String toString() {
-        return ", AppRole='" + appRole + '\'';
+        return "AppUser{" +
+                "userName='" + userName + '\'' +
 
+                ", appRole=" + appRole +
+                '}';
     }
 
     @Override

@@ -7,7 +7,7 @@ import se.lexicon.sequencers.TodoItemTaskIdSequencer;
 
 import java.util.Objects;
 
-public class TodoItemTask extends TodoItemTaskIdSequencer {
+public class TodoItemTask  {
 
     private int id;
     private boolean assigned;
@@ -17,15 +17,17 @@ public class TodoItemTask extends TodoItemTaskIdSequencer {
 
 
     public TodoItemTask( TodoItem todoItem, Person assignee) {
-        super();
+        TodoItemTaskIdSequencer.nextId();
+        this.id=TodoItemTaskIdSequencer.getCurrentId();
         this.assigned = false;
-        this.id = getCurrentId();
+        this.id = TodoItemTaskIdSequencer.getCurrentId();
         setTodoItem(todoItem);
         setAssignee(assignee);
     }
-    public TodoItemTask(int id, TodoItem todoItem) {
+    public TodoItemTask(TodoItem todoItem) {
+        TodoItemTaskIdSequencer.nextId();
         this.assigned = false;
-        this.id = id;
+        this.id=TodoItemTaskIdSequencer.getCurrentId();
         setTodoItem(todoItem);
 
     }
