@@ -1,8 +1,10 @@
 package se.lexicon.model;
 
+import se.lexicon.sequencers.PersonIdSequencer;
+
 import java.util.Objects;
 
-public class Person {
+public class Person extends PersonIdSequencer {
 
     private int id;
     private String firstName;
@@ -11,8 +13,9 @@ public class Person {
 
     private AppUser credentials;
 
-    public Person(int id, String firstName, String LastName, String email, AppUser credentials) {
-        this.id = id;
+    public Person(String firstName, String LastName, String email, AppUser credentials) {
+        super();
+        this.id=getCurrentId();
         setFirstName(firstName);
         setLastName(LastName);
         setEmail(email);
@@ -25,7 +28,7 @@ public class Person {
     }
 
     public void setCredentials(AppUser credentials) {
-        if(credentials == null) throw new IllegalArgumentException("Credentials cannot be null");
+        if (credentials == null) throw new IllegalArgumentException("Credentials cannot be null");
 
         this.credentials = credentials;
     }
@@ -35,6 +38,8 @@ public class Person {
     }
 
     public void setId(int id) {
+
+
         this.id = id;
     }
 

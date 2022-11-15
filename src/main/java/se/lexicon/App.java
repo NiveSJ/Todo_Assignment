@@ -22,9 +22,11 @@ public class App {
         appUser.add(new AppUser("Test2", "20wqfj", AppRole.ROLE_APP_USER));
 
 
-        person.add(new Person(1001, "Nivethitha", "Jayanth", "nive@gmail.com", appUser.get(0)));
-        person.add(new Person(1002, "Jayanth", "Solai", "jay@gmail.com", appUser.get(1)));
-        person.add(new Person(1003, "Jayanth", "Solai", "jay@gmail.com", appUser.get(2)));
+        person.add(new Person( "Nivethitha", "Jayanth", "nive@gmail.com", appUser.get(0)));
+        person.add(new Person( "Jayanth", "Solai", "jay@gmail.com", appUser.get(1)));
+        person.add(new Person( "Test", "Test", "Test@gmail.com", appUser.get(2)));
+
+        System.out.println(person);
 
 
         task.add(new TodoItem(2001, "Project Meeting", "Discuss about project setup",

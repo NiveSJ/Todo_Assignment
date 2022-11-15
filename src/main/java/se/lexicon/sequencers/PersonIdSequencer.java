@@ -1,13 +1,20 @@
 package se.lexicon.sequencers;
 
-public class PersonIdSequencer {
+public class PersonIdSequencer {  // trying to use singleton pattern
 
+   /* private static PersonIdSequencer personIdSequencer = new PersonIdSequencer();
 
-    private int currentId;
-    private int minLimit;
-    private int maxLimit;
+    public static PersonIdSequencer getPersonIdSequencer() {
+
+        return personIdSequencer;
+    }*/
+
+    private static int currentId;
+    private static int minLimit;
+    private static int maxLimit;
 
     public PersonIdSequencer() {
+        setCurrentId(currentId);
         this.minLimit = 0;
         this.maxLimit = 1000;
     }
@@ -18,14 +25,15 @@ public class PersonIdSequencer {
     }
 
     public void setCurrentId(int currentId) {
-        this.currentId = currentId;
+        this.currentId = nextId();
     }
 
 
     int nextId() {
-        if (this.currentId >= this.minLimit && this.currentId < 1000){
+        if (this.currentId >= this.minLimit && this.currentId < 1000) {
             currentId++;
-        return currentId;}
+            return currentId;
+        }
 
         return -1;
 
