@@ -3,33 +3,24 @@ package se.lexicon.sequencers;
 public class TodoItemIdSequencer {
 
 
-    private int currentId;
-    private int minLimit;
-    private int maxLimit;
+    private static int currentId = 200;
 
-    public TodoItemIdSequencer() {
-        this.minLimit = 1000;
-        this.maxLimit = 2000;
-    }
-
-
-    public int getCurrentId() {
+    public static int getCurrentId() {
         return currentId;
     }
 
-    public void setCurrentId(int currentId) {
-        this.currentId = currentId;
+    private static void setCurrentId(int currentId) {
+        TodoItemIdSequencer.currentId = currentId;
     }
 
 
-    int nextId() {
-        if (this.currentId >= this.minLimit && this.currentId < 1000){
-            currentId++;
-            return currentId;
-        }
-
-        return -1;
-
+    public static int nextId() {
+        int id = ++currentId;
+        setCurrentId(id);
+        return id;
     }
+
+
+
 
 }
