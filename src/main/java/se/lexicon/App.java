@@ -3,44 +3,52 @@ package se.lexicon;
 import se.lexicon.model.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Hello world!
+ * Moving data to arrayList
+ * Reading from and writing List data to JSON file.
  */
 public class App {
     public static void main(String[] args) {
-        AppUser appUser1 = new AppUser("Test", "20wqfj", AppRole.ROLE_APP_ADMIN);
-        AppUser appUser2 = new AppUser("Test1", "20wqfj", AppRole.ROLE_APP_USER);
-        AppUser appUser3 = new AppUser("Test2", "20wqfj", AppRole.ROLE_APP_USER);
+        List<AppUser> appUser = new ArrayList<>();
+        List<Person> person = new ArrayList<>();
+        List<TodoItem> task = new ArrayList<>();
+        List<TodoItemTask> Todotask = new ArrayList<>();
+
+        appUser.add(new AppUser("Test", "20wqfj", AppRole.ROLE_APP_ADMIN));
+        appUser.add(new AppUser("Test1", "20wqfj", AppRole.ROLE_APP_USER));
+        appUser.add(new AppUser("Test2", "20wqfj", AppRole.ROLE_APP_USER));
 
 
-        Person teamLeader = new Person(1001, "Nivethitha", "Jayanth", "nive@gmail.com",appUser1);
-        Person dev1 = new Person(1002, "Jayanth", "Solai", "jay@gmail.com",appUser2);
-        Person dev2 = new Person(1003, "Jayanth", "Solai", "jay@gmail.com",appUser3);
+        person.add(new Person(1001, "Nivethitha", "Jayanth", "nive@gmail.com", appUser.get(0)));
+        person.add(new Person(1002, "Jayanth", "Solai", "jay@gmail.com", appUser.get(1)));
+        person.add(new Person(1003, "Jayanth", "Solai", "jay@gmail.com", appUser.get(2)));
 
 
-        TodoItem task1 = new TodoItem(2001, "Project Meeting", "Discuss about project setup",
-                LocalDate.parse("2022-11-01"), teamLeader);
+        task.add(new TodoItem(2001, "Project Meeting", "Discuss about project setup",
+                LocalDate.parse("2022-11-01"), person.get(0)));
 
 
-        TodoItem task2 = new TodoItem(2002, "Project Meeting1", "Discuss about project setup",
-                LocalDate.parse("2022-11-10"), teamLeader);
+        task.add(new TodoItem(2002, "Project Meeting1", "Discuss about project setup",
+                LocalDate.parse("2022-11-10"), person.get(0)));
 
 
         System.out.println("############person Information####################");
-        System.out.println(dev1);
-        System.out.println(dev2);
+        System.out.println(person.get(1));
+        System.out.println(person.get(2));
 
         System.out.println("#################Todo Information#################");
 
-        System.out.println(task1);
-        System.out.println(task2);
+        System.out.println(task.get(0));
+        System.out.println(task.get(1));
 
         System.out.println("##################TodoItem task information Information##################");
-        TodoItemTask todoItemTask1 =  new TodoItemTask(3001, task1, dev1);
-        TodoItemTask todoItemTask2 =  new TodoItemTask(3001, task2);
-        System.out.println(todoItemTask1.toString());
-        System.out.println(todoItemTask2.toString());
+        Todotask.add(new TodoItemTask(3001, task.get(0), person.get(1)));
+        Todotask.add(new TodoItemTask(3001, task.get(1)));
+        System.out.println(Todotask.get(0).toString());
+        System.out.println(Todotask.get(1).toString());
 
 
     }
