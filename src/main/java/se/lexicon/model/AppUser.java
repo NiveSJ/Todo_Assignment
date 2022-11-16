@@ -56,7 +56,7 @@ public class AppUser {
                 "userName='" + userName + '\'' +
 
                 ", appRole=" + appRole +
-                '}';
+                '}' + "\n";
     }
 
     @Override

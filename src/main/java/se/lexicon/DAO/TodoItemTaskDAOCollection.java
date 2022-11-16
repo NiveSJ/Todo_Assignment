@@ -1,8 +1,10 @@
 package se.lexicon.DAO;
 
 import se.lexicon.model.Person;
+import se.lexicon.model.TodoItem;
 import se.lexicon.model.TodoItemTask;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -17,13 +19,19 @@ public class TodoItemTaskDAOCollection implements ITodoItemTaskDAO {
 
     @Override
     public TodoItemTask persist(TodoItemTask todoItemTask) {
-        return null;
+
+        TodoItemTask todoTaskId = findById(todoItemTask.getId());
+        if (todoTaskId != null) throw new IllegalArgumentException("Item already present");
+        todoItemTaskList.add(todoItemTask);
+
+        return todoItemTask;
+
     }
 
     @Override
     public TodoItemTask findById(int id) {
         for (TodoItemTask itr1 : todoItemTaskList) {
-            if (itr1.getId() == id) {
+            if (itr1.getId() != 0 && itr1.getId() == id) {
                 return itr1;
             }
 
@@ -33,15 +41,15 @@ public class TodoItemTaskDAOCollection implements ITodoItemTaskDAO {
 
     @Override
     public Collection<TodoItemTask> findAll() {
-        return todoItemTaskList;
+        return new ArrayList<>(todoItemTaskList);
     }
 
     @Override
     public Collection<TodoItemTask> findByAssignedStatus(boolean status) {
-        List<TodoItemTask> assignedList = null;
+        List<TodoItemTask> assignedList = new ArrayList<>();
         for (TodoItemTask itr1 : todoItemTaskList) {
             if (itr1.isAssigned() == true)
-                assignedList = (List<TodoItemTask>) itr1;
+                assignedList.add(itr1);
 
 
         }
@@ -51,10 +59,11 @@ public class TodoItemTaskDAOCollection implements ITodoItemTaskDAO {
 
     @Override
     public Collection<TodoItemTask> findByPersonId(Person personId) {
-        List<TodoItemTask> personList = null;
+        if (personId == null) throw new IllegalArgumentException("Person id is nulll");
+        List<TodoItemTask> personList = new ArrayList<>();
         for (TodoItemTask itr1 : todoItemTaskList) {
             if (itr1.getAssignee().getId() == personId.getId()) {
-                personList = (List<TodoItemTask>) itr1;
+                personList.add(itr1);
 
             }
         }
@@ -65,6 +74,7 @@ public class TodoItemTaskDAOCollection implements ITodoItemTaskDAO {
 
     @Override
     public void remove(int id) {
+        if (id == 0) throw new IllegalArgumentException("Id is null");
         TodoItemTask remId = findById(id);
         if (remId == null) throw new IllegalArgumentException("No such task found to remove");
         todoItemTaskList.remove(remId);

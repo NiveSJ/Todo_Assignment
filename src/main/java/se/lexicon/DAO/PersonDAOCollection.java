@@ -2,6 +2,7 @@ package se.lexicon.DAO;
 
 import se.lexicon.model.Person;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class PersonDAOCollection implements IPersonDAO {
     public Person findById(int id) {
 
         for (Person itr1 : personList) {
-            if (itr1.getId() == id) return itr1;
+            if (itr1.getId() != 0 && itr1.getId() == id) return itr1;
 
         }
 
@@ -38,10 +39,11 @@ public class PersonDAOCollection implements IPersonDAO {
 
     @Override
     public Person findByEmail(String email) {
+        if (email.equals(null)) throw new IllegalArgumentException("Email is null");
 
         for (Person itr1 : personList) {
 
-            if (itr1.getEmail() == email) return itr1;
+            if ((itr1.getEmail() != null) && itr1.getEmail() == email) return itr1;
 
         }
 
@@ -50,11 +52,12 @@ public class PersonDAOCollection implements IPersonDAO {
 
     @Override
     public Collection<Person> findAll() {
-        return personList;
+        return new ArrayList<>(personList);
     }
 
     @Override
     public void remove(int id) {
+        if (id == 0) throw new IllegalArgumentException("Id is null");
         Person perId = findById(id);
         if (perId == null) throw new IllegalArgumentException("Person not available to remove");
         personList.remove(perId);

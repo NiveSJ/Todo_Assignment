@@ -5,14 +5,13 @@ import se.lexicon.sequencers.TodoItemIdSequencer;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class TodoItem  {
+public class TodoItem {
     private int id;
     private String title;
     private String taskDescription;
     private LocalDate deadline;
     private boolean done;
     private Person creator;
-
 
 
     public TodoItem(String title, String taskDescription, LocalDate deadline, Person creator) {
@@ -85,8 +84,8 @@ public class TodoItem  {
     }
 
     public void setCreator(Person creator) {
-        if(creator == null) throw new IllegalArgumentException("Creator was null");
-        if(creator.getCredentials().getAppRole() != AppRole.ROLE_APP_ADMIN)
+        if (creator == null) throw new IllegalArgumentException("Creator was null");
+        if (creator.getCredentials().getAppRole() != AppRole.ROLE_APP_ADMIN)
             throw new IllegalArgumentException("No Permission");
         this.creator = creator;
     }
@@ -112,7 +111,7 @@ public class TodoItem  {
                 ", taskDescription='" + taskDescription + '\'' +
                 ", deadline=" + deadline +
                 ", done=" + done +
-                '}';
+                '}' + "\n";
     }
 
     @Override  // Excluded creator person objects
@@ -123,7 +122,7 @@ public class TodoItem  {
         return id == todoItem.id &&
                 done == todoItem.done && title.equals(todoItem.title) &&
                 taskDescription.equals(todoItem.taskDescription) &&
-                    deadline.equals(todoItem.deadline) ;
+                deadline.equals(todoItem.deadline);
     }
 
     @Override

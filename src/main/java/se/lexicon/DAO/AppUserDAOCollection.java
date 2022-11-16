@@ -2,6 +2,7 @@ package se.lexicon.DAO;
 
 import se.lexicon.model.AppUser;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +20,8 @@ public class AppUserDAOCollection implements IAppUserDAO {
     }
 
     @Override
-    public AppUser persist(AppUser appUser) {  // check whether the name is already present
+    public AppUser persist(AppUser appUser) {
+        if (appUser == null) throw new IllegalArgumentException("App user is  null");
 
         AppUser name = findByUserName(appUser.getUserName());
 
@@ -32,6 +34,7 @@ public class AppUserDAOCollection implements IAppUserDAO {
 
     @Override
     public AppUser findByUserName(String userName) {
+        if (userName.equals(null)) throw new IllegalArgumentException("User name is null");
 
         //Predicate <AppUser> appUserPredicate= (appUser -> appUser.getUserName() == userName );
 
@@ -40,9 +43,7 @@ public class AppUserDAOCollection implements IAppUserDAO {
                 .findFirst();*/
 
         for (AppUser itr1 : appUsersObjList) {
-            if (itr1.getUserName() == userName) {
-                return itr1;
-            }
+            if (!(itr1.getUserName().equals(null)) && itr1.getUserName().equalsIgnoreCase(userName)) return itr1;
 
         }
         return null;
@@ -52,11 +53,12 @@ public class AppUserDAOCollection implements IAppUserDAO {
 
     @Override
     public Collection<AppUser> findAll() {
-        return appUsersObjList;
+        return new ArrayList<>(appUsersObjList);
     }
 
     @Override
     public void remove(String userName) {
+        if (userName.equals(null)) throw new IllegalArgumentException("User name is null");
 
         AppUser name = findByUserName(userName);
         if (name == null) throw new IllegalArgumentException("User name not present to remove");

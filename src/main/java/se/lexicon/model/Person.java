@@ -15,7 +15,7 @@ public class Person {
 
     public Person(String firstName, String LastName, String email, AppUser credentials) {
         PersonIdSequencer.nextId();
-        this.id=PersonIdSequencer.getCurrentId();
+        this.id = PersonIdSequencer.getCurrentId();
         setFirstName(firstName);
         setLastName(LastName);
         setEmail(email);
@@ -79,7 +79,7 @@ public class Person {
                 ", firstName='" + firstName + '\'' +
                 ", LastName='" + LastName + '\'' +
                 ", email='" + email + '\'' +
-                '}';
+                '}' + "\n";
     }
 
     @Override

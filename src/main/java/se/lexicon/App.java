@@ -15,7 +15,6 @@ import java.util.List;
 
 /**
  * Moving data to arrayList
- * Reading from and writing List data to JSON file.
  */
 public class App {
     public static void main(String[] args) {
@@ -33,57 +32,89 @@ public class App {
         List<TodoItem> task = new ArrayList<>();
         List<TodoItemTask> Todotask = new ArrayList<>();
 
-        AppUserDAOCollection appUserDAOCollection = new AppUserDAOCollection(appUser);
 
+        System.out.println("############################Opertions on AppUser########################################");
+
+        AppUserDAOCollection appUserDAOCollection = new AppUserDAOCollection(appUser);
+        // Creation Using Persist
         AppUser createdAppUser = appUserDAOCollection.persist(new AppUser("Test", "20wqfj", AppRole.ROLE_APP_ADMIN));
         AppUser createdAppUser1 = appUserDAOCollection.persist(new AppUser("Test1", "20wqfj", AppRole.ROLE_APP_USER));
         AppUser createdAppUser2 = appUserDAOCollection.persist(new AppUser("Test2", "20wqfj", AppRole.ROLE_APP_USER));
+        AppUser createdAppUser3 = appUserDAOCollection.persist(new AppUser("Test3", "20wqfj", AppRole.ROLE_APP_USER));
+        System.out.println("------FindALL()--------");
+        System.out.println(appUserDAOCollection.findAll());
 
-        System.out.println("------");
-        System.out.println(createdAppUser.toString() + " " + createdAppUser1 + " " + createdAppUser2);
-        System.out.println("------");
+
+        System.out.println("------FindBYUSERNAME(\"Test2\")--------");
+        System.out.println(appUserDAOCollection.findByUserName("Test2"));
+
+
+        System.out.println("-----------------Remove(\"Test3\")-----------");
+        appUserDAOCollection.remove("Test3");
+
+
+        System.out.println("--------------checking removed APPUSER----------------");
+        System.out.println(appUserDAOCollection.findByUserName("Test3"));
+
+
+        System.out.println("\n############################Opertions on Person########################################");
 
         PersonDAOCollection personDAOCollection = new PersonDAOCollection(person);
 
-        Person createdperson1 = personDAOCollection.persist(new Person("Nivethitha", "Jayanth", "nive@gmail.com", appUser.get(0)));
-        Person createdperson2 = personDAOCollection.persist(new Person("Jayanth", "Solai", "jay@gmail.com", appUser.get(1)));
-        Person createdperson3 = personDAOCollection.persist(new Person("Test", "Test", "Test@gmail.com", appUser.get(2)));
+        Person createdperson1 = personDAOCollection.persist(new Person("Nivethitha", "Jayanth", "nive@gmail.com", createdAppUser));
+        Person createdperson2 = personDAOCollection.persist(new Person("Jayanth", "Solai", "jay@gmail.com", createdAppUser1));
+        Person createdperson3 = personDAOCollection.persist(new Person("Test", "Test", "Test@gmail.com", createdAppUser2));
+        Person createdperson4 = personDAOCollection.persist(new Person("Test", "Test", "Test@gmail.com", createdAppUser3));
 
-        System.out.println(createdperson1.toString() + " " + createdperson2 + " " + createdperson3);
+        System.out.println("---Created Person by find all()---");
+        System.out.println(personDAOCollection.findAll());
+        System.out.println("---------------------");
+        System.out.println("---Created Person by find by id()---");
+        System.out.println(personDAOCollection.findById(createdperson3.getId()));
+
+
+        System.out.println("---Created Person by find by email---");
+        System.out.println(personDAOCollection.findByEmail("jay@gmail.com"));
+        System.out.println("---Created Person remove(createdperson4)---");
+        personDAOCollection.remove(createdperson4.getId());
+        System.out.println("--- removed(createdperson4) and not found---");
+        System.out.println(personDAOCollection.findById(createdperson4.getId()));
+
 
         System.out.println("##################### Created Task ###################################");
 
-        System.out.println(TodoItemIdSequencer.nextId());
-        System.out.println(TodoItemIdSequencer.getCurrentId());
+        //System.out.println(TodoItemIdSequencer.nextId());
+        //System.out.println(TodoItemIdSequencer.getCurrentId());
         TodoItemDAOCollection todoItemDAOCollection = new TodoItemDAOCollection(task);
 
 
-        TodoItem todo1=todoItemDAOCollection.persist(new TodoItem("Project Meeting", "Discuss about project setup",
-                LocalDate.parse("2022-11-01"), person.get(0)));
-        System.out.println(todo1.getId());
-
-        Collection<TodoItem> createdTask = todoItemDAOCollection.findAll();
-
-        System.out.println("#################Created Todo Information by find all()#################");
-
-        System.out.println(createdTask);
-        TodoItem todo2=todoItemDAOCollection.persist(new TodoItem("Project Meeting1", "Discuss about project setup",
-                LocalDate.parse("2022-11-10"), person.get(0)));
+        TodoItem todo1 = todoItemDAOCollection.persist(new TodoItem("Project Meeting", "Discuss about project setup",
+                LocalDate.parse("2022-11-01"), createdperson1));
 
 
+        TodoItem todo2 = todoItemDAOCollection.persist(new TodoItem("Project Meeting1", "Discuss about project setup",
+                LocalDate.parse("2022-11-10"), createdperson1));
+        TodoItem todo3 = todoItemDAOCollection.persist(new TodoItem("Project Meeting1", "Discuss about project setup",
+                LocalDate.parse("2022-11-20"), createdperson1));
 
-        //
-        Collection<TodoItem> createdTask1 = todoItemDAOCollection.findAll();
 
-        System.out.println("#################Created Todo Information by find all()#################");
+        System.out.println("-----------------Created Todo Information by find all()---------------------------");
+        System.out.println(todoItemDAOCollection.findAll());
 
-        System.out.println(createdTask1);
+        System.out.println("-----------------Created Todo Information by find byid(todo1.getId())---------------------------");
+        System.out.println(todoItemDAOCollection.findById(todo1.getId()));
+
+        System.out.println("---------------------------------------------------------");
+
 
         System.out.println("##################TodoItem task information Information##################");
         TodoItemTaskDAOCollection todoItemTaskDAOCollection = new TodoItemTaskDAOCollection(Todotask);
-        TodoItemTask todoItemTask=todoItemTaskDAOCollection.persist(new TodoItemTask(todo1, createdperson2));
-        TodoItemTask todoItemTask1=todoItemTaskDAOCollection.persist(new TodoItemTask(todo2, createdperson3));
 
+        TodoItemTask todoItemTask = todoItemTaskDAOCollection.persist(new TodoItemTask(task.get(0), createdperson1));
+        TodoItemTask todoItemTask1 = todoItemTaskDAOCollection.persist(new TodoItemTask(task.get(1), createdperson2));
+
+
+        System.out.println(todoItemTask);
         Collection<TodoItemTask> ItemTask = todoItemTaskDAOCollection.findAll();
 
         System.out.println(ItemTask);

@@ -4,6 +4,7 @@ import se.lexicon.model.Person;
 import se.lexicon.model.TodoItem;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -17,17 +18,19 @@ public class TodoItemDAOCollection implements ITodoItemDAO {
 
     @Override
     public TodoItem persist(TodoItem todoItem) {
+        if (todoItem == null) throw new IllegalArgumentException("TodoItem is null");
         TodoItem todoId = findById(todoItem.getId());
         if (todoId != null) throw new IllegalArgumentException("Item already present");
-        todoItemList.add(todoId);
+        todoItemList.add(todoItem);
 
-        return todoId;
+        return todoItem;
     }
 
     @Override
     public TodoItem findById(int id) {
+        if (id == 0) throw new IllegalArgumentException("Id is null");
         for (TodoItem itr1 : todoItemList) {
-            if (itr1.getId() == id) {
+            if (itr1.getId() != 0 && itr1.getId() == id) {
                 return itr1;
             }
         }
@@ -37,16 +40,16 @@ public class TodoItemDAOCollection implements ITodoItemDAO {
 
     @Override
     public Collection<TodoItem> findAll() {
-        return todoItemList;
+        return new ArrayList<>(todoItemList);
     }
 
     @Override
     public Collection<TodoItem> findAllByDoneStatus(Boolean done) {
-        List<TodoItem> doneList = null;
+        List<TodoItem> doneList = new ArrayList<>();
         for (TodoItem itr1 : todoItemList) {
             if (itr1.isDone()) {
 
-                 doneList = (List<TodoItem>) itr1;
+                doneList.add(itr1);
             }
         }
         return doneList;
@@ -54,13 +57,13 @@ public class TodoItemDAOCollection implements ITodoItemDAO {
 
     @Override
     public Collection<TodoItem> findByTitleContains(String title) {
-
-        List<TodoItem> titleList = null;
+        if (title == null) throw new IllegalArgumentException("Title is null");
+        List<TodoItem> titleList = new ArrayList<>();
 
         for (TodoItem itr1 : todoItemList) {
-            if (itr1.getTitle()== title) {
+            if (!(itr1.getTitle().equals(null)) && itr1.getTitle() == title) {
 
-                titleList = (List<TodoItem>) itr1;
+                titleList.add(itr1);
             }
         }
         return titleList;
@@ -69,15 +72,15 @@ public class TodoItemDAOCollection implements ITodoItemDAO {
 
     @Override
     public Collection<TodoItem> findByPersonId(Person personId) {
-        List<TodoItem> personList = null;
+        if (personId == null) throw new IllegalArgumentException("Person Id is null");
+        List<TodoItem> personList = new ArrayList<>();
 
-        for(TodoItem itr1 : todoItemList) {
-            if (itr1.getCreator().getId() == personId.getId()  ){
+        for (TodoItem itr1 : todoItemList) {
+            if (!(itr1.getCreator().getId() == 0) && itr1.getCreator().getId() == personId.getId()) {
 
-                personList = (List<TodoItem>) itr1;
+                personList.add(itr1);
             }
         }
-
 
 
         return personList;
@@ -85,12 +88,13 @@ public class TodoItemDAOCollection implements ITodoItemDAO {
 
     @Override
     public Collection<TodoItem> findByDeadlineBefore(LocalDate deadline) {
-        List<TodoItem> DeadlineBeforeList = null;
-        for(TodoItem itr1 : todoItemList) {
+        if (deadline == null) throw new IllegalArgumentException("Deadline was null");
+        List<TodoItem> DeadlineBeforeList = new ArrayList<>();
+        for (TodoItem itr1 : todoItemList) {
 
-            if(itr1.getDeadline().isBefore(deadline)){
+            if (!(itr1.getDeadline().equals(null)) && itr1.getDeadline().isBefore(deadline)) {
 
-                DeadlineBeforeList = (List<TodoItem>) itr1;
+                DeadlineBeforeList.add(itr1);
             }
         }
 
@@ -100,12 +104,13 @@ public class TodoItemDAOCollection implements ITodoItemDAO {
 
     @Override
     public Collection<TodoItem> findByDeadlineAfter(LocalDate deadline) {
-        List<TodoItem> DeadlineAfterList = null;
-        for(TodoItem itr1 : todoItemList) {
+        if (deadline.equals(null)) throw new IllegalArgumentException("Date was null");
+        List<TodoItem> DeadlineAfterList = new ArrayList<>();
+        for (TodoItem itr1 : todoItemList) {
 
-            if(itr1.getDeadline().isAfter(deadline)){
+            if (itr1.getDeadline().isAfter(deadline)) {
 
-                DeadlineAfterList = (List<TodoItem>) itr1;
+                DeadlineAfterList.add(itr1);
             }
         }
 
@@ -115,9 +120,10 @@ public class TodoItemDAOCollection implements ITodoItemDAO {
 
     @Override
     public void remove(int id) {
-        TodoItem remve=findById(id);
-        if(remve == null) throw new IllegalArgumentException("Id Not found to remove");
-        todoItemList.remove(remve);
+        if (id == 0) throw new IllegalArgumentException("Id is null");
+        TodoItem removeId = findById(id);
+        if (removeId == null) throw new IllegalArgumentException("Id Not found to remove");
+        todoItemList.remove(removeId);
 
     }
 }

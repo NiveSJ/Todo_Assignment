@@ -3,7 +3,7 @@ package se.lexicon.sequencers;
 public class TodoItemTaskIdSequencer {
 
 
-    private static int currentId = 100;
+    private static int currentId = 300;
 
     public static int getCurrentId() {
         return currentId;
