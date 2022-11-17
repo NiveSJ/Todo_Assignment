@@ -7,7 +7,7 @@ import se.lexicon.sequencers.TodoItemTaskIdSequencer;
 
 import java.util.Objects;
 
-public class TodoItemTask  {
+public class TodoItemTask {
 
     private int id;
     private boolean assigned;
@@ -15,19 +15,19 @@ public class TodoItemTask  {
     private Person assignee;
 
 
-
-    public TodoItemTask( TodoItem todoItem, Person assignee) {
+    public TodoItemTask(TodoItem todoItem, Person assignee) {
         TodoItemTaskIdSequencer.nextId();
-        this.id=TodoItemTaskIdSequencer.getCurrentId();
+        this.id = TodoItemTaskIdSequencer.getCurrentId();
         this.assigned = false;
         this.id = TodoItemTaskIdSequencer.getCurrentId();
         setTodoItem(todoItem);
         setAssignee(assignee);
     }
+
     public TodoItemTask(TodoItem todoItem) {
         TodoItemTaskIdSequencer.nextId();
         this.assigned = false;
-        this.id=TodoItemTaskIdSequencer.getCurrentId();
+        this.id = TodoItemTaskIdSequencer.getCurrentId();
         setTodoItem(todoItem);
 
     }
@@ -77,7 +77,7 @@ public class TodoItemTask  {
                 "id=" + id +
                 ", assigned=" + assigned +
                 ", todoItem=" + todoItem +
-                '}';
+                '}' + "\n";
     }
 
     @Override
@@ -87,7 +87,7 @@ public class TodoItemTask  {
         TodoItemTask that = (TodoItemTask) o;
         return id == that.id
                 && assigned == that.assigned &&
-                todoItem.equals(that.todoItem) ;
+                todoItem.equals(that.todoItem);
     }
 
     @Override

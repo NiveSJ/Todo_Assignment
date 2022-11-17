@@ -59,10 +59,10 @@ public class TodoItemTaskDAOCollection implements ITodoItemTaskDAO {
 
     @Override
     public Collection<TodoItemTask> findByPersonId(Person personId) {
-        if (personId == null) throw new IllegalArgumentException("Person id is nulll");
+        if (personId == null) throw new IllegalArgumentException("Person id is null");
         List<TodoItemTask> personList = new ArrayList<>();
         for (TodoItemTask itr1 : todoItemTaskList) {
-            if (itr1.getAssignee().getId() == personId.getId()) {
+            if (itr1.getAssignee().getId() != 0 && itr1.getAssignee().getId() == personId.getId()) {
                 personList.add(itr1);
 
             }

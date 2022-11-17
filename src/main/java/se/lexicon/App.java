@@ -7,9 +7,12 @@ import se.lexicon.DAO.TodoItemTaskDAOCollection;
 import se.lexicon.model.*;
 import se.lexicon.sequencers.PersonIdSequencer;
 import se.lexicon.sequencers.TodoItemIdSequencer;
+import se.lexicon.sequencers.TodoItemTaskIdSequencer;
+import se.lexicon.utility.ToFileSystem;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -56,6 +59,9 @@ public class App {
         System.out.println("--------------checking removed APPUSER----------------");
         System.out.println(appUserDAOCollection.findByUserName("Test3"));
 
+        ToFileSystem AppusertoJson = new ToFileSystem();
+        AppusertoJson.AppUserListToJson(appUser);
+
 
         System.out.println("\n############################Opertions on Person########################################");
 
@@ -81,7 +87,7 @@ public class App {
         System.out.println(personDAOCollection.findById(createdperson4.getId()));
 
 
-        System.out.println("##################### Created Task ###################################");
+        System.out.println("##################### Operations on Created Task ###################################");
 
         //System.out.println(TodoItemIdSequencer.nextId());
         //System.out.println(TodoItemIdSequencer.getCurrentId());
@@ -91,10 +97,9 @@ public class App {
         TodoItem todo1 = todoItemDAOCollection.persist(new TodoItem("Project Meeting", "Discuss about project setup",
                 LocalDate.parse("2022-11-01"), createdperson1));
 
-
         TodoItem todo2 = todoItemDAOCollection.persist(new TodoItem("Project Meeting1", "Discuss about project setup",
                 LocalDate.parse("2022-11-10"), createdperson1));
-        TodoItem todo3 = todoItemDAOCollection.persist(new TodoItem("Project Meeting1", "Discuss about project setup",
+        TodoItem todo3 = todoItemDAOCollection.persist(new TodoItem("Scrum Meeting", "Daily's Meeting",
                 LocalDate.parse("2022-11-20"), createdperson1));
 
 
@@ -104,20 +109,42 @@ public class App {
         System.out.println("-----------------Created Todo Information by find byid(todo1.getId())---------------------------");
         System.out.println(todoItemDAOCollection.findById(todo1.getId()));
 
-        System.out.println("---------------------------------------------------------");
+        System.out.println("---------------------Find by done status true --------------------------------------------------");
+        System.out.println(todoItemDAOCollection.findAllByDoneStatus(true));
+        System.out.println("-------------------------Deadline after current date----------------------------------------------");
+        System.out.println(todoItemDAOCollection.findByDeadlineAfter(LocalDate.now()));
+        System.out.println("-------------------------Deadline Before current date---------------------------------------------");
+        System.out.println(todoItemDAOCollection.findByDeadlineBefore(LocalDate.now()));
+        System.out.println("-------------------------Find by Person id()------------------------------------------------------");
+        System.out.println(todoItemDAOCollection.findByPersonId(createdperson3));
+
+        System.out.println(todoItemDAOCollection.findByTitleContains("Scrum Meeting"));
+        System.out.println("-------------------------Removed Todo Item 3 and checking whether it exist------------------------");
+        todoItemDAOCollection.remove(todo3.getId());
+
+        System.out.println(todoItemDAOCollection.findById(todo3.getId()));
 
 
-        System.out.println("##################TodoItem task information Information##################");
+        System.out.println("##################TodoItem task information ##################");
+
+        System.out.println(TodoItemTaskIdSequencer.nextId());
+        System.out.println(TodoItemIdSequencer.getCurrentId());
         TodoItemTaskDAOCollection todoItemTaskDAOCollection = new TodoItemTaskDAOCollection(Todotask);
 
-        TodoItemTask todoItemTask = todoItemTaskDAOCollection.persist(new TodoItemTask(task.get(0), createdperson1));
-        TodoItemTask todoItemTask1 = todoItemTaskDAOCollection.persist(new TodoItemTask(task.get(1), createdperson2));
+        TodoItemTask todoItemTask = todoItemTaskDAOCollection.persist(new TodoItemTask(todo1, createdperson1));
+        TodoItemTask todoItemTask1 = todoItemTaskDAOCollection.persist(new TodoItemTask(todo2, createdperson2));
+        TodoItemTask todoItemTask2 = todoItemTaskDAOCollection.persist(new TodoItemTask(todo3));
 
-
-        System.out.println(todoItemTask);
+        System.out.println("-------------------------Todo Item Task find All() ------------------------");
         Collection<TodoItemTask> ItemTask = todoItemTaskDAOCollection.findAll();
-
-        System.out.println(ItemTask);
+        System.out.println("-------------------------Todo Item Task findById() ------------------------");
+        System.out.println(todoItemTaskDAOCollection.findById(todoItemTask.getId()));
+        System.out.println("-------------------------Todo Item Task findByPersonId() ------------------------");
+        System.out.println(todoItemTaskDAOCollection.findByPersonId(todoItemTask1.getAssignee()));
+        System.out.println("-------------------------Todo Item Task findByAssignedStatus() ------------------------");
+        System.out.println(todoItemTaskDAOCollection.findByAssignedStatus(true));
+        System.out.println("-------------------------Todo Item Task remove() ------------------------");
+        todoItemTaskDAOCollection.remove(todoItemTask2.getId());
 
 
     }

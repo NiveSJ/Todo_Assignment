@@ -43,7 +43,7 @@ public class AppUserDAOCollection implements IAppUserDAO {
                 .findFirst();*/
 
         for (AppUser itr1 : appUsersObjList) {
-            if (!(itr1.getUserName().equals(null)) && itr1.getUserName().equalsIgnoreCase(userName)) return itr1;
+            if (itr1.getUserName() != null && itr1.getUserName().equalsIgnoreCase(userName)) return itr1;
 
         }
         return null;
