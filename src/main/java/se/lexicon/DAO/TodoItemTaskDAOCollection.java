@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class TodoItemTaskDAOCollection implements ITodoItemTaskDAO {
-    private List<TodoItemTask> todoItemTaskList;
+    private List<TodoItemTask> todoItemTaskList =new ArrayList<>();
 
     public TodoItemTaskDAOCollection(List<TodoItemTask> todoItemTaskList) {
         this.todoItemTaskList = todoItemTaskList;

@@ -22,13 +22,6 @@ import java.util.List;
 public class App {
     public static void main(String[] args) {
 
-        System.out.println(PersonIdSequencer.nextId()); // 101
-        System.out.println(PersonIdSequencer.getCurrentId()); // 101
-        System.out.println(PersonIdSequencer.nextId()); // 102
-        System.out.println(PersonIdSequencer.getCurrentId()); // 102
-
-        System.out.println("--------------------------");
-
 
         List<AppUser> appUser = new ArrayList<>();
         List<Person> person = new ArrayList<>();
@@ -58,9 +51,6 @@ public class App {
 
         System.out.println("--------------checking removed APPUSER----------------");
         System.out.println(appUserDAOCollection.findByUserName("Test3"));
-
-        ToFileSystem AppusertoJson = new ToFileSystem();
-        AppusertoJson.AppUserListToJson(appUser);
 
 
         System.out.println("\n############################Opertions on Person########################################");
@@ -127,8 +117,7 @@ public class App {
 
         System.out.println("##################TodoItem task information ##################");
 
-        System.out.println(TodoItemTaskIdSequencer.nextId());
-        System.out.println(TodoItemIdSequencer.getCurrentId());
+
         TodoItemTaskDAOCollection todoItemTaskDAOCollection = new TodoItemTaskDAOCollection(Todotask);
 
         TodoItemTask todoItemTask = todoItemTaskDAOCollection.persist(new TodoItemTask(todo1, createdperson1));
@@ -136,15 +125,26 @@ public class App {
         TodoItemTask todoItemTask2 = todoItemTaskDAOCollection.persist(new TodoItemTask(todo3));
 
         System.out.println("-------------------------Todo Item Task find All() ------------------------");
-        Collection<TodoItemTask> ItemTask = todoItemTaskDAOCollection.findAll();
+        System.out.println(todoItemTaskDAOCollection.findAll());
         System.out.println("-------------------------Todo Item Task findById() ------------------------");
         System.out.println(todoItemTaskDAOCollection.findById(todoItemTask.getId()));
         System.out.println("-------------------------Todo Item Task findByPersonId() ------------------------");
-        System.out.println(todoItemTaskDAOCollection.findByPersonId(todoItemTask1.getAssignee()));
+       // System.out.println(todoItemTaskDAOCollection.findByPersonId(todoItemTask1.getAssignee()));
         System.out.println("-------------------------Todo Item Task findByAssignedStatus() ------------------------");
         System.out.println(todoItemTaskDAOCollection.findByAssignedStatus(true));
         System.out.println("-------------------------Todo Item Task remove() ------------------------");
         todoItemTaskDAOCollection.remove(todoItemTask2.getId());
+
+        System.out.println(todoItemTaskDAOCollection.findById(todoItemTask2.getId()));
+
+        // Storing Array list to Json file
+
+        ToFileSystem ListToJson = new ToFileSystem();
+
+        ListToJson.AppUserListToJson(appUser);
+        ListToJson.PersonListToJson(person);
+        ListToJson.TodoItemListToJson(task);
+        ListToJson.TodoItemTaskListToJson(Todotask);
 
 
     }

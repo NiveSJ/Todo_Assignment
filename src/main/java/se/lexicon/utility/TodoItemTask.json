@@ -1,0 +1,70 @@
+[
+         {
+                  "todoItem": {
+                           "creator": {
+                                    "lastName": "Jayanth",
+                                    "firstName": "Nivethitha",
+                                    "credentials": {
+                                             "password": "20wqfj",
+                                             "appRole": "ROLE_APP_ADMIN",
+                                             "userName": "Test"
+                                    },
+                                    "id": 101,
+                                    "email": "nive@gmail.com"
+                           },
+                           "overdue": true,
+                           "taskDescription": "Discuss about project setup",
+                           "id": 201,
+                           "deadline": "2022-11-01",
+                           "title": "Project Meeting",
+                           "done": false
+                  },
+                  "assigned": true,
+                  "id": 302,
+                  "assignee": {
+                           "lastName": "Jayanth",
+                           "firstName": "Nivethitha",
+                           "credentials": {
+                                    "password": "20wqfj",
+                                    "appRole": "ROLE_APP_ADMIN",
+                                    "userName": "Test"
+                           },
+                           "id": 101,
+                           "email": "nive@gmail.com"
+                  }
+         },
+         {
+                  "todoItem": {
+                           "creator": {
+                                    "lastName": "Jayanth",
+                                    "firstName": "Nivethitha",
+                                    "credentials": {
+                                             "password": "20wqfj",
+                                             "appRole": "ROLE_APP_ADMIN",
+                                             "userName": "Test"
+                                    },
+                                    "id": 101,
+                                    "email": "nive@gmail.com"
+                           },
+                           "overdue": true,
+                           "taskDescription": "Discuss about project setup",
+                           "id": 202,
+                           "deadline": "2022-11-10",
+                           "title": "Project Meeting1",
+                           "done": false
+                  },
+                  "assigned": true,
+                  "id": 303,
+                  "assignee": {
+                           "lastName": "Solai",
+                           "firstName": "Jayanth",
+                           "credentials": {
+                                    "password": "20wqfj",
+                                    "appRole": "ROLE_APP_USER",
+                                    "userName": "Test1"
+                           },
+                           "id": 102,
+                           "email": "jay@gmail.com"
+                  }
+         }
+]
