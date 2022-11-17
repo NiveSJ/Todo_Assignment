@@ -76,7 +76,7 @@ public class TodoItemDAOCollection implements ITodoItemDAO {
         List<TodoItem> personList = new ArrayList<>();
 
         for (TodoItem itr1 : todoItemList) {
-            if (!(itr1.getCreator().getId() == 0) && itr1.getCreator().getId() == personId.getId()) {
+            if ((itr1.getCreator().getId() != 0) && itr1.getCreator().getId() == personId.getId()) {
 
                 personList.add(itr1);
             }

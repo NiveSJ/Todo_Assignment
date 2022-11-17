@@ -1,8 +1,8 @@
 [
          {
                   "creator": {
-                           "lastName": "Jayanth",
                            "firstName": "Nivethitha",
+                           "lastName": "Jayanth",
                            "credentials": {
                                     "password": "20wqfj",
                                     "appRole": "ROLE_APP_ADMIN",
@@ -20,8 +20,8 @@
          },
          {
                   "creator": {
-                           "lastName": "Jayanth",
                            "firstName": "Nivethitha",
+                           "lastName": "Jayanth",
                            "credentials": {
                                     "password": "20wqfj",
                                     "appRole": "ROLE_APP_ADMIN",
