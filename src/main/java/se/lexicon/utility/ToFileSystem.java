@@ -1,17 +1,16 @@
 package se.lexicon.utility;
 
 import org.json.JSONArray;
-import se.lexicon.model.AppUser;
-import se.lexicon.model.Person;
-import se.lexicon.model.TodoItem;
-import se.lexicon.model.TodoItemTask;
+import se.lexicon.AppUser;
+import se.lexicon.Person;
+import se.lexicon.TodoItem;
+import se.lexicon.TodoItemTask;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-import static java.awt.Event.ENTER;
 import static java.awt.Event.TAB;
 
 public class ToFileSystem {

@@ -1,13 +1,10 @@
 package se.lexicon.DAO;
 
-import se.lexicon.model.AppUser;
+import se.lexicon.AppUser;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class AppUserDAOCollection implements IAppUserDAO {
 

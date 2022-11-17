@@ -1,7 +1,6 @@
 package se.lexicon.DAO;
 
-import se.lexicon.model.Person;
-import se.lexicon.model.TodoItem;
+import se.lexicon.TodoItem;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -18,7 +17,8 @@ public interface ITodoItemDAO {
 
     Collection<TodoItem> findByTitleContains(String title);
 
-    Collection<TodoItem> findByPersonId(Person personId);
+
+    Collection<TodoItem> findByPersonId(int personId);
 
     Collection<TodoItem> findByDeadlineBefore(LocalDate deadline);
 

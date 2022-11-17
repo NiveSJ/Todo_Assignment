@@ -1,10 +1,9 @@
-package se.lexicon.model;
-import se.lexicon.model.Person;
-import se.lexicon.model.TodoItem;
+package se.lexicon;
 
 
 import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
+import se.lexicon.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 

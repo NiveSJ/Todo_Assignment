@@ -4,16 +4,11 @@ import se.lexicon.DAO.AppUserDAOCollection;
 import se.lexicon.DAO.PersonDAOCollection;
 import se.lexicon.DAO.TodoItemDAOCollection;
 import se.lexicon.DAO.TodoItemTaskDAOCollection;
-import se.lexicon.model.*;
-import se.lexicon.sequencers.PersonIdSequencer;
-import se.lexicon.sequencers.TodoItemIdSequencer;
-import se.lexicon.sequencers.TodoItemTaskIdSequencer;
+import se.lexicon.*;
 import se.lexicon.utility.ToFileSystem;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -106,7 +101,7 @@ public class App {
         System.out.println("-------------------------Deadline Before current date---------------------------------------------");
         System.out.println(todoItemDAOCollection.findByDeadlineBefore(LocalDate.now()));
         System.out.println("-------------------------Find by Person id()------------------------------------------------------");
-        System.out.println(todoItemDAOCollection.findByPersonId(createdperson3));
+        System.out.println(todoItemDAOCollection.findByPersonId(createdperson3.getId()));
 
         System.out.println(todoItemDAOCollection.findByTitleContains("Scrum Meeting"));
         System.out.println("-------------------------Removed Todo Item 3 and checking whether it exist------------------------");
@@ -130,7 +125,7 @@ public class App {
         System.out.println("-------------------------Todo Item Task findById() ------------------------");
         System.out.println(todoItemTaskDAOCollection.findById(todoItemTask.getId()));
         System.out.println("-------------------------Todo Item Task findByPersonId() ------------------------");
-        System.out.println(todoItemTaskDAOCollection.findByPersonId(todoItemTask.getAssignee()));
+        System.out.println(todoItemTaskDAOCollection.findByPersonId(todoItemTask.getAssignee().getId()));
         System.out.println("-------------------------Todo Item Task findByAssignedStatus() ------------------------");
         System.out.println(todoItemTaskDAOCollection.findByAssignedStatus(true));
         System.out.println("-------------------------Todo Item Task remove() ------------------------");

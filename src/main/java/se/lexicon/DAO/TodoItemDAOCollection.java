@@ -1,7 +1,6 @@
 package se.lexicon.DAO;
 
-import se.lexicon.model.Person;
-import se.lexicon.model.TodoItem;
+import se.lexicon.TodoItem;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -71,12 +70,12 @@ public class TodoItemDAOCollection implements ITodoItemDAO {
     }
 
     @Override
-    public Collection<TodoItem> findByPersonId(Person personId) {
-        if (personId == null) throw new IllegalArgumentException("Person Id is null");
+    public Collection<TodoItem> findByPersonId(int personId) {
+        if (personId == 0) throw new IllegalArgumentException("Person Id is null");
         List<TodoItem> personList = new ArrayList<>();
 
         for (TodoItem itr1 : todoItemList) {
-            if ((itr1.getCreator().getId() != 0) && itr1.getCreator().getId() == personId.getId()) {
+            if ((itr1.getCreator().getId() != 0) && itr1.getCreator().getId() == personId) {
 
                 personList.add(itr1);
             }

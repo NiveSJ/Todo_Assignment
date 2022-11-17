@@ -1,4 +1,4 @@
-package se.lexicon.model;
+package se.lexicon;
 
 /* boolean assigned is encapsulated and set to true if assignee  is not null
  */

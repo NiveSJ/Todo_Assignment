@@ -1,8 +1,6 @@
 package se.lexicon.DAO;
 
-import se.lexicon.model.Person;
-
-import se.lexicon.model.TodoItemTask;
+import se.lexicon.TodoItemTask;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -58,12 +56,12 @@ public class TodoItemTaskDAOCollection implements ITodoItemTaskDAO {
 
 
     @Override
-    public Collection<TodoItemTask> findByPersonId(Person personId) {
-        if (personId == null) throw new IllegalArgumentException("Person id is null");
+    public Collection<TodoItemTask> findByPersonId(int personId) {
+        if (personId == 0) throw new IllegalArgumentException("Person id is null");
         List<TodoItemTask> perlist = new ArrayList<>();
         for (TodoItemTask itr1 : todoItemTaskList) {
             System.out.println(itr1.getAssignee().getId());
-            if (itr1.getAssignee().getId() != 0 && itr1.getAssignee().getId() == personId.getId()) {
+            if (itr1.getAssignee().getId() != 0 && itr1.getAssignee().getId() == personId) {
                 perlist.add(itr1);
 
             }

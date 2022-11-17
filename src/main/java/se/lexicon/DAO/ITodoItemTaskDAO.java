@@ -1,7 +1,6 @@
 package se.lexicon.DAO;
 
-import se.lexicon.model.Person;
-import se.lexicon.model.TodoItemTask;
+import se.lexicon.TodoItemTask;
 
 import java.util.Collection;
 
@@ -16,7 +15,7 @@ public interface ITodoItemTaskDAO {
     Collection<TodoItemTask> findByAssignedStatus(boolean status);
 
 
-    Collection<TodoItemTask> findByPersonId(Person personId);
+    Collection<TodoItemTask> findByPersonId(int personId);
 
 
     void remove(int id);

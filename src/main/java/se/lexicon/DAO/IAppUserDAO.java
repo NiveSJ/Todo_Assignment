@@ -1,9 +1,8 @@
 package se.lexicon.DAO;
 
-import se.lexicon.model.AppUser;
+import se.lexicon.AppUser;
 
 import java.util.Collection;
-import java.util.List;
 
 public interface IAppUserDAO {
 

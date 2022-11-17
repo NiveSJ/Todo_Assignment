@@ -1,4 +1,4 @@
-package se.lexicon.model;
+package se.lexicon;
 
 import se.lexicon.sequencers.PersonIdSequencer;
 
