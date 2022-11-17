@@ -2,13 +2,16 @@ package se.lexicon;
 
 
 import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 import se.lexicon.AppRole;
 import se.lexicon.AppUser;
 import se.lexicon.Person;
 import se.lexicon.TodoItem;
+import se.lexicon.sequencers.TodoItemIdSequencer;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 public class TodoItemTest {
 
 
@@ -18,25 +21,26 @@ public class TodoItemTest {
         AppUser appUser2 = new AppUser("Test", "20wqfj", AppRole.ROLE_APP_USER);
 
         Person person[] = new Person[2];
-        person[0] = new Person(1001, "Nivethitha", "Jayanth", "nive@gmail.com",appUser1);
-        person[1] = new Person(1001, "Nivethitha", "Jayanth", "nive@gmail.com",appUser2);
+        person[0] = new Person("Nivethitha", "Jayanth", "nive@gmail.com", appUser1);
+        person[1] = new Person("Nivethitha", "Jayanth", "nive@gmail.com", appUser2);
 
         TodoItem todoItem[] = new TodoItem[1];
-        todoItem[0] = new TodoItem(2001, "Project Meeting", "Discuss",
+        todoItem[0] = new TodoItem("Project Meeting", "Discuss",
                 LocalDate.parse("2022-11-01"), person[0]);
 
 
         //id getter
         int id = todoItem[0].getId();
-        assertEquals(2001, id);
-    //
+        assertEquals(TodoItemIdSequencer.getCurrentId(), id);
+        //
         Person personcheck = todoItem[0].getCreator();
         assertEquals(person[0], personcheck);
         todoItem[0].setCreator(person[0]);
-        assertEquals(todoItem[0].getCreator(),person[0]);
+        assertEquals(todoItem[0].getCreator(), person[0]);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            todoItem[0].setCreator(person[1]); });
+            todoItem[0].setCreator(person[1]);
+        });
 
 
         String desc = todoItem[0].getTaskDescription();

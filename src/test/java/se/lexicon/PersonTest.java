@@ -17,7 +17,7 @@ public class PersonTest {
     public void persontest() {
 
         AppUser appUser1 = new AppUser("Test", "20wqfj", AppRole.ROLE_APP_ADMIN);
-        Person person = new Person(1001, "Nivethitha", "Jayanth", "nive@gmail.com",appUser1);
+        Person person = new Person( "Nivethitha", "Jayanth", "nive@gmail.com",appUser1);
        // person[1] = new Person(1001, " ", " ", " ");
 
         String firstName = person.getFirstName();
