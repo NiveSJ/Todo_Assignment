@@ -1,10 +1,7 @@
 package se.lexicon;
 
-import se.lexicon.DAO.AppUserDAOCollection;
-import se.lexicon.DAO.PersonDAOCollection;
-import se.lexicon.DAO.TodoItemDAOCollection;
-import se.lexicon.DAO.TodoItemTaskDAOCollection;
-import se.lexicon.*;
+import se.lexicon.DAO.*;
+import se.lexicon.utility.FromFileSystem;
 import se.lexicon.utility.ToFileSystem;
 
 import java.time.LocalDate;
@@ -12,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Moving data to arrayList
+ * Todo Assignment
  */
 public class App {
     public static void main(String[] args) {
@@ -21,12 +18,22 @@ public class App {
         List<AppUser> appUser = new ArrayList<>();
         List<Person> person = new ArrayList<>();
         List<TodoItem> task = new ArrayList<>();
-        List<TodoItemTask> Todotask = new ArrayList<>();
+        List<TodoItemTask> todoTask = new ArrayList<>();
+
+        // Reading from file and Placing it in List
+
+       /* FromFileSystem FS = new FromFileSystem();
+        List<AppUser> user = FS.parseAppUser();
+
+        for (Object use : user) {
+
+            System.out.println(use + "\n");
+        }*/
 
 
         System.out.println("############################Opertions on AppUser########################################");
 
-        AppUserDAOCollection appUserDAOCollection = new AppUserDAOCollection(appUser);
+        IAppUserDAO appUserDAOCollection = new AppUserDAOCollection(appUser);
         // Creation Using Persist
         AppUser createdAppUser = appUserDAOCollection.persist(new AppUser("Test", "20wqfj", AppRole.ROLE_APP_ADMIN));
         AppUser createdAppUser1 = appUserDAOCollection.persist(new AppUser("Test1", "20wqfj", AppRole.ROLE_APP_USER));
@@ -50,7 +57,7 @@ public class App {
 
         System.out.println("\n############################Opertions on Person########################################");
 
-        PersonDAOCollection personDAOCollection = new PersonDAOCollection(person);
+        IPersonDAO personDAOCollection = new PersonDAOCollection(person);
 
         Person createdperson1 = personDAOCollection.persist(new Person("Nivethitha", "Jayanth", "nive@gmail.com", createdAppUser));
         Person createdperson2 = personDAOCollection.persist(new Person("Jayanth", "Solai", "jay@gmail.com", createdAppUser1));
@@ -76,7 +83,7 @@ public class App {
 
         //System.out.println(TodoItemIdSequencer.nextId());
         //System.out.println(TodoItemIdSequencer.getCurrentId());
-        TodoItemDAOCollection todoItemDAOCollection = new TodoItemDAOCollection(task);
+        ITodoItemDAO todoItemDAOCollection = new TodoItemDAOCollection(task);
 
 
         TodoItem todo1 = todoItemDAOCollection.persist(new TodoItem("Project Meeting", "Discuss about project setup",
@@ -113,11 +120,11 @@ public class App {
         System.out.println("##################TodoItem task information ##################");
 
 
-        TodoItemTaskDAOCollection todoItemTaskDAOCollection = new TodoItemTaskDAOCollection(Todotask);
+        ITodoItemTaskDAO todoItemTaskDAOCollection = new TodoItemTaskDAOCollection(todoTask);
 
         TodoItemTask todoItemTask = todoItemTaskDAOCollection.persist(new TodoItemTask(todo1, createdperson1));
         TodoItemTask todoItemTask1 = todoItemTaskDAOCollection.persist(new TodoItemTask(todo2, createdperson2));
-       // TodoItemTask todoItemTask2 = todoItemTaskDAOCollection.persist(new TodoItemTask(todo3));
+        // TodoItemTask todoItemTask2 = todoItemTaskDAOCollection.persist(new TodoItemTask(todo3));
         System.out.println(todoItemTask1.getAssignee());
 
         System.out.println("-------------------------Todo Item Task find All() ------------------------");
@@ -135,12 +142,13 @@ public class App {
 
         // Storing Array list to Json file
 
+
         ToFileSystem ListToJson = new ToFileSystem();
 
         ListToJson.AppUserListToJson(appUser);
         ListToJson.PersonListToJson(person);
         ListToJson.TodoItemListToJson(task);
-        ListToJson.TodoItemTaskListToJson(Todotask);
+        ListToJson.TodoItemTaskListToJson(todoTask);
 
 
     }

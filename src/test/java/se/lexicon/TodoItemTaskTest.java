@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 import se.lexicon.*;
 import se.lexicon.sequencers.PersonIdSequencer;
+import se.lexicon.sequencers.TodoItemTaskIdSequencer;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,7 +26,7 @@ public class TodoItemTaskTest {
 
 
         int id = todoItemTask.getId();
-        assertEquals(PersonIdSequencer.getCurrentId(), id);
+        assertEquals(TodoItemTaskIdSequencer.getCurrentId(), id);
 
         TodoItem todo1 = todoItemTask.getTodoItem();
         assertEquals(todoItem, todo1);

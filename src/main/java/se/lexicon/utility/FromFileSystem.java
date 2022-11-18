@@ -41,9 +41,9 @@ public class FromFileSystem {
 
     public List<AppUser> parseAppUser() {
         JSONParser parser = new JSONParser();
-        ArrayList<AppUser> listdata = null;
+        List<Object> listdata = new ArrayList<>();
         try {
-            listdata = new ArrayList<AppUser>();
+            listdata = new ArrayList<Object>();
             Object obj = parser.parse(new FileReader("src/main/java/se/lexicon/utility/AppUser.json"));
             JSONArray Fromfile = (JSONArray) obj;
             if (Fromfile != null) {
@@ -52,7 +52,9 @@ public class FromFileSystem {
                 for (int i = 0; i < Fromfile.size(); i++) {
 
                     //Adding each element of JSON array into ArrayList
-                    listdata.add((AppUser) Fromfile.get(i));
+                    listdata.add(Fromfile.get(i));
+
+
                 }
             }
 
@@ -60,7 +62,7 @@ public class FromFileSystem {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return listdata;
+        return (List<AppUser>) (Object) listdata;
     }
 
     public List<TodoItem> parseTodoItem() {

@@ -91,30 +91,29 @@ public class TodoItemDAOCollection implements ITodoItemDAO {
         List<TodoItem> DeadlineBeforeList = new ArrayList<>();
         for (TodoItem itr1 : todoItemList) {
 
-            if (!(itr1.getDeadline().equals(null)) && itr1.getDeadline().isBefore(deadline)) {
+            if (!(itr1.getDeadline().equals(null)) && (itr1.getDeadline().isBefore(deadline)
+                    || itr1.getDeadline().equals(deadline))) {
 
                 DeadlineBeforeList.add(itr1);
             }
         }
-
-
         return DeadlineBeforeList;
+
     }
 
     @Override
-    public Collection<TodoItem> findByDeadlineAfter(LocalDate deadline) {
-        if (deadline.equals(null)) throw new IllegalArgumentException("Date was null");
-        List<TodoItem> DeadlineAfterList = new ArrayList<>();
-        for (TodoItem itr1 : todoItemList) {
+    public Collection<TodoItem> findByDeadlineAfter(LocalDate date) {  // 2020-01-01
+        if (date == null) throw new IllegalArgumentException("Date was null");
+        List<TodoItem> filteredList = new ArrayList<>();
+        for (TodoItem todoItem : todoItemList) {
 
-            if (itr1.getDeadline().isAfter(deadline)) {
-
-                DeadlineAfterList.add(itr1);
+            if (todoItem.getDeadline().isAfter(date) || todoItem.getDeadline().equals(date)) { // 2020-01-02
+                filteredList.add(todoItem);
             }
         }
 
+        return filteredList;
 
-        return DeadlineAfterList;
     }
 
     @Override
