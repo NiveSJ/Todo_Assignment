@@ -14,8 +14,8 @@
                   "overdue": true,
                   "taskDescription": "Discuss about project setup",
                   "id": 201,
-                  "title": "Project Meeting",
                   "deadline": "2022-11-01",
+                  "title": "Project Meeting",
                   "done": false
          },
          "assigned": true,
