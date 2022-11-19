@@ -1,8 +1,6 @@
-#Todo Assignment part1
+#Todo Assignment
 
 ##Concpets Used
-
-Oops concept of java
 
 ¤ Classes
 
@@ -11,6 +9,14 @@ Oops concept of java
 ¤ Encapsulation
 
 ¤ Data Hiding
+
+¤ Created DAO Interface and Its implementation classes
+
+¤ Created Sequencers for Unique Id 
+
+¤ Created Utility Package to read and write from Json file
+
+¤ Used ArrayList to store Person, AppUser, TodoItem and TodoItemTask Information
 
 
 

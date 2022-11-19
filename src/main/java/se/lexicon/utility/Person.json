@@ -1,7 +1,7 @@
 [
          {
-                  "lastName": "Jayanth",
                   "firstName": "Nivethitha",
+                  "lastName": "Jayanth",
                   "credentials": {
                            "password": "20wqfj",
                            "appRole": "ROLE_APP_ADMIN",
@@ -11,8 +11,8 @@
                   "email": "nive@gmail.com"
          },
          {
-                  "lastName": "Solai",
                   "firstName": "Jayanth",
+                  "lastName": "Solai",
                   "credentials": {
                            "password": "20wqfj",
                            "appRole": "ROLE_APP_USER",
@@ -22,8 +22,8 @@
                   "email": "jay@gmail.com"
          },
          {
-                  "lastName": "Test",
                   "firstName": "Test",
+                  "lastName": "Test",
                   "credentials": {
                            "password": "20wqfj",
                            "appRole": "ROLE_APP_USER",
