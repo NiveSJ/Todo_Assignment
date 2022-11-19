@@ -60,7 +60,7 @@ public class TodoItemTaskDAOCollection implements ITodoItemTaskDAO {
         if (personId == 0) throw new IllegalArgumentException("Person id is null");
         List<TodoItemTask> perlist = new ArrayList<>();
         for (TodoItemTask itr1 : todoItemTaskList) {
-            System.out.println(itr1.getAssignee().getId());
+            // System.out.println(itr1.getAssignee().getId());
             if (itr1.getAssignee().getId() != 0 && itr1.getAssignee().getId() == personId) {
                 perlist.add(itr1);
 

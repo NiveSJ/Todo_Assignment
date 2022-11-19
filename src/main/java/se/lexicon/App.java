@@ -93,7 +93,7 @@ public class App {
         TodoItem todo2 = todoItemDAOCollection.persist(new TodoItem("Project Meeting1", "Discuss about project setup",
                 LocalDate.parse("2022-11-10"), createdperson1));
         TodoItem todo3 = todoItemDAOCollection.persist(new TodoItem("Scrum Meeting", "Daily's Meeting",
-                LocalDate.parse("2022-11-20"), createdperson1));
+                LocalDate.parse("2022-11-23"), createdperson1));
 
 
         System.out.println("-----------------Created Todo Information by find all()---------------------------");
@@ -127,7 +127,7 @@ public class App {
         TodoItemTask todoItemTask = todoItemTaskDAOCollection.persist(new TodoItemTask(todo1, createdperson1));
         TodoItemTask todoItemTask1 = todoItemTaskDAOCollection.persist(new TodoItemTask(todo2, createdperson2));
         // TodoItemTask todoItemTask2 = todoItemTaskDAOCollection.persist(new TodoItemTask(todo3));
-        System.out.println(todoItemTask1.getAssignee());
+
 
         System.out.println("-------------------------Todo Item Task find All() ------------------------");
         System.out.println(todoItemTaskDAOCollection.findAll());
