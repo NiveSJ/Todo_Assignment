@@ -2,11 +2,12 @@ package se.lexicon.DAO;
 
 import se.lexicon.AppUser;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class AppUserDAOCollection implements IAppUserDAO {
+public class AppUserDAOCollection<T> implements IAppUserDAO {
 
     private List<AppUser> appUsersObjList;
 

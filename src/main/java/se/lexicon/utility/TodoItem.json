@@ -1,8 +1,8 @@
 [
          {
                   "creator": {
-                           "firstName": "Nivethitha",
                            "lastName": "Jayanth",
+                           "firstName": "Nivethitha",
                            "credentials": {
                                     "password": "20wqfj",
                                     "appRole": "ROLE_APP_ADMIN",
@@ -11,17 +11,16 @@
                            "id": 101,
                            "email": "nive@gmail.com"
                   },
-                  "overdue": true,
                   "taskDescription": "Discuss about project setup",
                   "id": 201,
-                  "deadline": "2022-11-01",
                   "title": "Project Meeting",
+                  "deadline": "2022-11-01",
                   "done": false
          },
          {
                   "creator": {
-                           "firstName": "Nivethitha",
                            "lastName": "Jayanth",
+                           "firstName": "Nivethitha",
                            "credentials": {
                                     "password": "20wqfj",
                                     "appRole": "ROLE_APP_ADMIN",
@@ -30,11 +29,10 @@
                            "id": 101,
                            "email": "nive@gmail.com"
                   },
-                  "overdue": true,
                   "taskDescription": "Discuss about project setup",
                   "id": 202,
-                  "deadline": "2022-11-10",
                   "title": "Project Meeting1",
+                  "deadline": "2022-11-10",
                   "done": false
          }
 ]

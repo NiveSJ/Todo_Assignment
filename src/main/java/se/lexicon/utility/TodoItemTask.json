@@ -1,8 +1,8 @@
 [{
          "todoItem": {
                   "creator": {
-                           "firstName": "Nivethitha",
                            "lastName": "Jayanth",
+                           "firstName": "Nivethitha",
                            "credentials": {
                                     "password": "20wqfj",
                                     "appRole": "ROLE_APP_ADMIN",
@@ -11,17 +11,17 @@
                            "id": 101,
                            "email": "nive@gmail.com"
                   },
-                  "overdue": true,
                   "taskDescription": "Discuss about project setup",
                   "id": 201,
-                  "deadline": "2022-11-01",
                   "title": "Project Meeting",
+                  "deadline": "2022-11-01",
                   "done": false
          },
          "assigned": true,
+         "id": 301,
          "assignee": {
-                  "firstName": "Nivethitha",
                   "lastName": "Jayanth",
+                  "firstName": "Nivethitha",
                   "credentials": {
                            "password": "20wqfj",
                            "appRole": "ROLE_APP_ADMIN",
@@ -29,6 +29,5 @@
                   },
                   "id": 101,
                   "email": "nive@gmail.com"
-         },
-         "id": 301
+         }
 }]

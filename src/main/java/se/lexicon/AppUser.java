@@ -9,6 +9,8 @@ public class AppUser {
 
     private AppRole appRole;
 
+    public AppUser() {
+    }
 
     public AppUser(String username, String password, AppRole appRole) {
 
@@ -23,7 +25,7 @@ public class AppUser {
     }
 
     public void setUserName(String username) {
-        if(username == null) throw new IllegalArgumentException("username cannot be null");
+        if (username == null) throw new IllegalArgumentException("username cannot be null");
 
         this.userName = username;
     }
@@ -34,7 +36,7 @@ public class AppUser {
 
     public void setPassword(String password) {
 
-        if(password == null) throw new IllegalArgumentException("Password cannot be null");
+        if (password == null) throw new IllegalArgumentException("Password cannot be null");
         this.password = password;
     }
 
@@ -45,7 +47,7 @@ public class AppUser {
 
     public void setAppRole(AppRole appRole) {
 
-        if(appRole == null) throw new IllegalArgumentException("appRole cannot be null");
+        if (appRole == null) throw new IllegalArgumentException("appRole cannot be null");
 
         this.appRole = appRole;
     }

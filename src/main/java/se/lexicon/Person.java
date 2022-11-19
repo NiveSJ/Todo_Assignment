@@ -13,6 +13,9 @@ public class Person {
 
     private AppUser credentials;
 
+    public Person() {
+    }
+
     public Person(String firstName, String LastName, String email, AppUser credentials) {
         PersonIdSequencer.nextId();
         this.id = PersonIdSequencer.getCurrentId();

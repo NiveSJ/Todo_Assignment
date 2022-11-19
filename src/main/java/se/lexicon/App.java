@@ -4,6 +4,7 @@ import se.lexicon.DAO.*;
 import se.lexicon.utility.FromFileSystem;
 import se.lexicon.utility.ToFileSystem;
 
+import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +24,9 @@ public class App {
         // Reading from file and Placing it in List
 
        /* FromFileSystem FS = new FromFileSystem();
-        List<AppUser> user = FS.parseAppUser();
+        List<Type> user = FS.parsePerson();
 
-        for (Object use : user) {
+        for (Type use : user) {
 
             System.out.println(use + "\n");
         }*/
@@ -108,7 +109,8 @@ public class App {
         System.out.println("-------------------------Deadline Before current date---------------------------------------------");
         System.out.println(todoItemDAOCollection.findByDeadlineBefore(LocalDate.now()));
         System.out.println("-------------------------Find by Person id()------------------------------------------------------");
-        System.out.println(todoItemDAOCollection.findByPersonId(createdperson3.getId()));
+        System.out.println(todoItemDAOCollection.findByPersonId(createdperson1.getId()));
+        System.out.println("-------------------------Find by Title------------------------------------------------------");
 
         System.out.println(todoItemDAOCollection.findByTitleContains("Scrum Meeting"));
         System.out.println("-------------------------Removed Todo Item 3 and checking whether it exist------------------------");
@@ -149,6 +151,8 @@ public class App {
         ListToJson.PersonListToJson(person);
         ListToJson.TodoItemListToJson(task);
         ListToJson.TodoItemTaskListToJson(todoTask);
+
+        System.out.println("All Data written to corresponding Json file");
 
 
     }

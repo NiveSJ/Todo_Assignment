@@ -13,6 +13,8 @@ public class TodoItem {
     private boolean done;
     private Person creator;
 
+    public TodoItem() {
+    }
 
     public TodoItem(String title, String taskDescription, LocalDate deadline, Person creator) {
         TodoItemIdSequencer.nextId();

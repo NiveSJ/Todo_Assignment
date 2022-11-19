@@ -1,116 +1,88 @@
 package se.lexicon.utility;
 
 import java.io.*;
+
 import java.util.*;
 
-import org.json.simple.*;
-import org.json.simple.parser.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;// in play 2.3
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jdk.internal.org.objectweb.asm.TypeReference;
 import se.lexicon.AppUser;
 import se.lexicon.Person;
 import se.lexicon.TodoItem;
 import se.lexicon.TodoItemTask;
 
 public class FromFileSystem {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+
+        List<AppUser> list = parseAppUser();
+        System.out.println(list);
+
+        List<Person> list1 = parsePerson();
+        System.out.println(list1);
+
+        // List<TodoItem> list2 = parseTodoItem();
+        //  System.out.println(list2);
     }
 
+    public static List<AppUser> parseAppUser() throws IOException {
 
-    public List<Person> parsePerson() {
-        JSONParser parser = new JSONParser();
-        ArrayList<Person> listdata = null;
-        try {
-            listdata = new ArrayList<Person>();
-            Object obj = parser.parse(new FileReader("src/main/java/se/lexicon/utility/Person.json"));
-            JSONArray Fromfile = (JSONArray) obj;
-            if (Fromfile != null) {
+        String pathJSONFile = "src/main/java/se/lexicon/utility/AppUser.json";
+        ObjectMapper mapper = new ObjectMapper();
 
-                //Iterating JSON array
-                for (int i = 0; i < Fromfile.size(); i++) {
+        File jsonFile = new File(pathJSONFile);
+        List<AppUser> person1 = new ArrayList<>();
 
-                    //Adding each element of JSON array into ArrayList
-                    listdata.add((Person) Fromfile.get(i));
-                }
-            }
+        person1 = mapper.readValue(jsonFile,
+                mapper.getTypeFactory().constructCollectionType(List.class, AppUser.class));
+       /* List<Person> person = objectMapper.readValue(
+                new File(""),
+                new TypeReference<List<Person>>() {
+                }.getType());*/
 
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return listdata;
+        return person1;
     }
 
-    public List<AppUser> parseAppUser() {
-        JSONParser parser = new JSONParser();
-        List<Object> listdata = new ArrayList<>();
-        try {
-            listdata = new ArrayList<Object>();
-            Object obj = parser.parse(new FileReader("src/main/java/se/lexicon/utility/AppUser.json"));
-            JSONArray Fromfile = (JSONArray) obj;
-            if (Fromfile != null) {
+    public static List<Person> parsePerson() throws IOException {
 
-                //Iterating JSON array
-                for (int i = 0; i < Fromfile.size(); i++) {
+        String pathJSONFile = "src/main/java/se/lexicon/utility/Person.json";
+        ObjectMapper mapper = new ObjectMapper();
 
-                    //Adding each element of JSON array into ArrayList
-                    listdata.add(Fromfile.get(i));
+        File jsonFile = new File(pathJSONFile);
+        List<Person> person1 = new ArrayList<>();
 
-
-                }
-            }
+        person1 = mapper.readValue(jsonFile,
+                mapper.getTypeFactory().constructCollectionType(List.class, Person.class));
+       /* List<Person> person = objectMapper.readValue(
+                new File(""),
+                new TypeReference<List<Person>>() {
+                }.getType());*/
 
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return (List<AppUser>) (Object) listdata;
+        return person1;
     }
 
-    public List<TodoItem> parseTodoItem() {
-        JSONParser parser = new JSONParser();
-        ArrayList<TodoItem> listdata = null;
-        try {
-            listdata = new ArrayList<TodoItem>();
-            Object obj = parser.parse(new FileReader("src/main/java/se/lexicon/utility/TodoItem.json"));
-            JSONArray Fromfile = (JSONArray) obj;
-            if (Fromfile != null) {
+    public static List<TodoItem> parseTodoItem() throws IOException {
 
-                //Iterating JSON array
-                for (int i = 0; i < Fromfile.size(); i++) {
+        String pathJSONFile = "src/main/java/se/lexicon/utility/TodoItem.json";
+        ObjectMapper mapper = new ObjectMapper();
 
-                    //Adding each element of JSON array into ArrayList
-                    listdata.add((TodoItem) Fromfile.get(i));
-                }
-            }
+        File jsonFile = new File(pathJSONFile);
+        List<TodoItem> person1 = new ArrayList<>();
+
+        person1 = mapper.readValue(jsonFile,
+                mapper.getTypeFactory().constructCollectionType(List.class, TodoItem.class));
+       /* List<Person> person = objectMapper.readValue(
+                new File(""),
+                new TypeReference<List<Person>>() {
+                }.getType());*/
 
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return listdata;
+        return person1;
     }
 
-    public List<TodoItemTask> parseTodoItemTask() {
-        JSONParser parser = new JSONParser();
-        ArrayList<TodoItemTask> listdata = null;
-        try {
-            listdata = new ArrayList<TodoItemTask>();
-            Object obj = parser.parse(new FileReader("src/main/java/se/lexicon/utility/TodoItemTask.json"));
-            JSONArray Fromfile = (JSONArray) obj;
-            if (Fromfile != null) {
-
-                //Iterating JSON array
-                for (int i = 0; i < Fromfile.size(); i++) {
-
-                    //Adding each element of JSON array into ArrayList
-                    listdata.add((TodoItemTask) Fromfile.get(i));
-                }
-            }
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return listdata;
-    }
 
 }
