@@ -4,6 +4,7 @@ import se.lexicon.Person;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class PersonDAOCollection implements IPersonDAO {
@@ -43,7 +44,7 @@ public class PersonDAOCollection implements IPersonDAO {
 
         for (Person itr1 : personList) {
 
-            if ((itr1.getEmail() != null) && itr1.getEmail() == email) return itr1;
+            if (!(itr1.getEmail().equals(null)) && itr1.getEmail().equalsIgnoreCase(email)) return itr1;
 
         }
 

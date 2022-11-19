@@ -60,7 +60,7 @@ public class TodoItemDAOCollection implements ITodoItemDAO {
         List<TodoItem> titleList = new ArrayList<>();
 
         for (TodoItem itr1 : todoItemList) {
-            if (!(itr1.getTitle().equals(null)) && itr1.getTitle() == title) {
+            if (!(itr1.getTitle().equals(null)) && itr1.getTitle().equalsIgnoreCase(title)) {
 
                 titleList.add(itr1);
             }
@@ -91,7 +91,7 @@ public class TodoItemDAOCollection implements ITodoItemDAO {
         List<TodoItem> DeadlineBeforeList = new ArrayList<>();
         for (TodoItem itr1 : todoItemList) {
 
-            if (!(itr1.getDeadline().equals(null)) && (itr1.getDeadline().isBefore(deadline)
+            if ((itr1.getDeadline() != (null)) && (itr1.getDeadline().isBefore(deadline)
                     || itr1.getDeadline().equals(deadline))) {
 
                 DeadlineBeforeList.add(itr1);
@@ -107,7 +107,8 @@ public class TodoItemDAOCollection implements ITodoItemDAO {
         List<TodoItem> filteredList = new ArrayList<>();
         for (TodoItem todoItem : todoItemList) {
 
-            if (todoItem.getDeadline().isAfter(date) || todoItem.getDeadline().equals(date)) { // 2020-01-02
+            if (todoItem.getDeadline() != null && todoItem.getDeadline().isAfter(date)
+                    || todoItem.getDeadline().equals(date)) { // 2020-01-02
                 filteredList.add(todoItem);
             }
         }

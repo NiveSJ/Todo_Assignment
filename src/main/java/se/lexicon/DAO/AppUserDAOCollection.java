@@ -2,7 +2,6 @@ package se.lexicon.DAO;
 
 import se.lexicon.AppUser;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -41,7 +40,7 @@ public class AppUserDAOCollection<T> implements IAppUserDAO {
                 .findFirst();*/
 
         for (AppUser itr1 : appUsersObjList) {
-            if (itr1.getUserName() != null && itr1.getUserName().equalsIgnoreCase(userName)) return itr1;
+            if (!(itr1.getUserName().equals(null)) && itr1.getUserName().equalsIgnoreCase(userName)) return itr1;
 
         }
         return null;
@@ -59,7 +58,7 @@ public class AppUserDAOCollection<T> implements IAppUserDAO {
         if (userName.equals(null)) throw new IllegalArgumentException("User name is null");
 
         AppUser name = findByUserName(userName);
-        if (name == null) throw new IllegalArgumentException("User name not present to remove");
+        if (name.equals(null)) throw new IllegalArgumentException("User name not present to remove");
         appUsersObjList.remove(name);
 
 
