@@ -29,13 +29,6 @@ public class AppUserDAOCollection implements IAppUserDAO {
 
         return optional.orElse(null);
 
-       /* for (AppUser itr1 : appUserList) {
-            if (!(itr1.getUserName().equals(null)) && itr1.getUserName().
-                    equalsIgnoreCase(username)) return itr1;
-
-        }*/
-
-
     }
 
     @Override

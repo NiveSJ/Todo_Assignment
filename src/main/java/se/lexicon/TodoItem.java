@@ -91,14 +91,7 @@ public class TodoItem {
     }
 
     public void setDone(boolean done) {
-        boolean value = isOverdue();
-        if (value)
-
-            this.done = false;
-
-        else
-            this.done = true;
-
+        this.done = done;
     }
 
     public Person getCreator() {
