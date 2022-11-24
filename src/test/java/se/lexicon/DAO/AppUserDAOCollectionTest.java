@@ -3,6 +3,7 @@ package se.lexicon.DAO;
 import org.junit.jupiter.api.Test;
 import se.lexicon.AppRole;
 import se.lexicon.AppUser;
+import se.lexicon.DAO.impl.AppUserDAOCollection;
 
 import java.util.ArrayList;
 import java.util.Collection;

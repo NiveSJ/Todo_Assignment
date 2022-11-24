@@ -2,28 +2,54 @@ package se.lexicon;
 
 import se.lexicon.sequencers.PersonIdSequencer;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Person {
 
-    private int id;
+    private Integer id;
     private String firstName;
     private String LastName;
     private String email;
 
+
+    private List<TodoItem> todoItems;
+
     private AppUser credentials;
 
-    public Person() {
+    public Person() { // for Json file throws error if a default constructor not present
     }
 
-    public Person(String firstName, String LastName, String email, AppUser credentials) {
-        PersonIdSequencer.nextId();
-        this.id = PersonIdSequencer.getCurrentId();
+    public Person(Integer id, String firstName, String LastName, String email, AppUser credentials, List<TodoItem> todoItems) {
+        setId(id);
         setFirstName(firstName);
         setLastName(LastName);
         setEmail(email);
         setCredentials(credentials);
+        setTodoItems(todoItems);
 
+
+    }
+
+
+    public Person(String firstName, String LastName, String email) {
+
+        setFirstName(firstName);
+        setLastName(LastName);
+        setEmail(email);
+        setCredentials(credentials);
+        this.todoItems = new ArrayList<>();
+
+    }
+
+
+    public List<TodoItem> getTodoItems() {
+        return todoItems;
+    }
+
+    public void setTodoItems(List<TodoItem> todoItems) {
+        this.todoItems = todoItems;
     }
 
     public AppUser getCredentials() {

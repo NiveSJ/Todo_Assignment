@@ -21,14 +21,14 @@
          "assigned": true,
          "id": 301,
          "assignee": {
-                  "firstName": "Nivethitha",
-                  "lastName": "Jayanth",
+                  "firstName": "Jayanth",
+                  "lastName": "Solai",
                   "credentials": {
                            "password": "20wqfj",
-                           "appRole": "ROLE_APP_ADMIN",
-                           "userName": "Test"
+                           "appRole": "ROLE_APP_USER",
+                           "userName": "Test1"
                   },
-                  "id": 101,
-                  "email": "nive@gmail.com"
+                  "id": 102,
+                  "email": "jay@gmail.com"
          }
 }]

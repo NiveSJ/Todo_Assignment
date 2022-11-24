@@ -3,6 +3,9 @@ package se.lexicon.DAO;
 import org.junit.jupiter.api.Test;
 import se.lexicon.AppRole;
 import se.lexicon.AppUser;
+import se.lexicon.DAO.impl.AppUserDAOCollection;
+import se.lexicon.DAO.impl.PersonDAOCollection;
+import se.lexicon.DAO.impl.TodoItemDAOCollection;
 import se.lexicon.Person;
 import se.lexicon.TodoItem;
 

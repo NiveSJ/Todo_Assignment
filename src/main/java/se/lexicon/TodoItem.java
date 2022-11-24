@@ -3,24 +3,27 @@ package se.lexicon;
 import se.lexicon.sequencers.TodoItemIdSequencer;
 
 import java.time.LocalDate;
+
 import java.util.Objects;
 
 public class TodoItem {
-    private int id;
+
+
+    private Integer id;
     private String title;
     private String taskDescription;
     private LocalDate deadline;
     private boolean done;
     private Person creator;
 
+    private Person assignee;
+
     public TodoItem() {
     }
 
-    public TodoItem(String title, String taskDescription, LocalDate deadline, Person creator) {
-        TodoItemIdSequencer.nextId();
-        this.id = TodoItemIdSequencer.getCurrentId();
+    public TodoItem(Integer id, String title, String taskDescription, LocalDate deadline, Person creator) {
 
-
+        setId(id);
         setTitle(title);
         this.done = false;
         this.taskDescription = taskDescription;
@@ -30,6 +33,12 @@ public class TodoItem {
 
     }
 
+    public TodoItem(String title, String description, LocalDate deadline) {
+        setTitle(title);
+        this.taskDescription = taskDescription;
+        setDeadline(deadline);
+    }
+
 
     public int getId() {
         return this.id;
@@ -37,6 +46,17 @@ public class TodoItem {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Person getAssignee() {
+        return assignee;
+    }
+
+    public void setAssignee(Person assignee) {
+
+        if (assignee == null) throw new IllegalArgumentException("assignee cannot be null");
+        this.assignee = assignee;
+
     }
 
     public String getTitle() {

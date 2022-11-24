@@ -2,6 +2,9 @@ package se.lexicon.DAO;
 
 import org.junit.jupiter.api.Test;
 import se.lexicon.*;
+import se.lexicon.DAO.impl.AppUserDAOCollection;
+import se.lexicon.DAO.impl.PersonDAOCollection;
+import se.lexicon.DAO.impl.TodoItemDAOCollection;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

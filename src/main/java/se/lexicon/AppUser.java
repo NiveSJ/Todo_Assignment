@@ -4,12 +4,30 @@ import java.util.Objects;
 
 public class AppUser {
 
+    private Integer id;
     private String userName;
     private String password;
-
     private AppRole appRole;
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    private boolean active;
+
     public AppUser() {
+    }
+
+    public AppUser(Integer id, String username, String password, boolean active, AppRole appRole) {
+        setId(id);
+        setUserName(username);
+        setPassword(password);
+        setAppRole(appRole);
+        setActive(active);
     }
 
     public AppUser(String username, String password, AppRole appRole) {
@@ -19,6 +37,15 @@ public class AppUser {
         setAppRole(appRole);
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        if (id == null) throw new RuntimeException("id was null");
+        this.id = id;
+    }
+
 
     public String getUserName() {
         return userName;
@@ -26,7 +53,6 @@ public class AppUser {
 
     public void setUserName(String username) {
         if (username == null) throw new IllegalArgumentException("username cannot be null");
-
         this.userName = username;
     }
 
@@ -55,6 +81,7 @@ public class AppUser {
     @Override
     public String toString() {
         return "AppUser{" +
+                "Id="+ id + '\'' +
                 "userName='" + userName + '\'' +
 
                 ", appRole=" + appRole +

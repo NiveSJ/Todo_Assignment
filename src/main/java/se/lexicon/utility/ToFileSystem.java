@@ -4,7 +4,6 @@ import org.json.JSONArray;
 import se.lexicon.AppUser;
 import se.lexicon.Person;
 import se.lexicon.TodoItem;
-import se.lexicon.TodoItemTask;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -18,7 +17,7 @@ public class ToFileSystem {
     private static String AppUserJsonFilePath = "src/main/java/se/lexicon/utility/AppUser.json";
     private static String PersonJsonFilePath = "src/main/java/se/lexicon/utility/Person.json";
     private static String TodoItemJsonFilePath = "src/main/java/se/lexicon/utility/TodoItem.json";
-    private static String TodoItemTaskJsonFilePath = "src/main/java/se/lexicon/utility/TodoItemTask.json";
+
 
     public void AppUserListToJson(List<AppUser> appUser) {
 
@@ -57,22 +56,6 @@ public class ToFileSystem {
         JSONArray AppUserListToJsonArray = new JSONArray(todoItem.toArray());
         try {
             FileWriter writer = new FileWriter(new File(TodoItemJsonFilePath));
-
-            writer.write(AppUserListToJsonArray.toString(TAB));
-            writer.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-    }
-
-    public void TodoItemTaskListToJson(List<TodoItemTask> todoItemTask) {
-
-        JSONArray AppUserListToJsonArray = new JSONArray(todoItemTask.toArray());
-        try {
-            FileWriter writer = new FileWriter(new File(TodoItemTaskJsonFilePath));
 
             writer.write(AppUserListToJsonArray.toString(TAB));
             writer.close();

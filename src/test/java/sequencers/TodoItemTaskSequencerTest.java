@@ -1,8 +1,6 @@
 package sequencers;
 
 import org.junit.jupiter.api.Test;
-import se.lexicon.sequencers.TodoItemIdSequencer;
-import se.lexicon.sequencers.TodoItemTaskIdSequencer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
