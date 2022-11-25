@@ -11,7 +11,7 @@ public interface IBaseDAO<T> {
 
     boolean deleteById(Integer id);
 
-    void update(T model);
+    void update(String username, T model);
 
     List<T> findAll();
 

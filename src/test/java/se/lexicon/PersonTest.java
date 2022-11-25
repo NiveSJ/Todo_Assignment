@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PersonTest {
 
-    @Test
+   /* @Test
     public void persontest() {
 
         AppUser appUser1 = new AppUser("Test", "20wqfj", AppRole.ROLE_APP_ADMIN);
@@ -43,5 +43,5 @@ public class PersonTest {
             person.setEmail(null); });
 
 
-    }
+    }*/
 }

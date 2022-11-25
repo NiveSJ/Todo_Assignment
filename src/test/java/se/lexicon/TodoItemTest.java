@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TodoItemTest {
 
-
+/*
     @Test
     public void overdueTest() {
         AppUser appUser1 = new AppUser("Test", "20wqfj", AppRole.ROLE_APP_ADMIN);
@@ -60,6 +60,6 @@ public class TodoItemTest {
         assertEquals(true, value);
 
 
-    }
+    }*/
 
 }

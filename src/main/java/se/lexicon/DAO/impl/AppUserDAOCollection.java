@@ -87,7 +87,7 @@ public class AppUserDAOCollection implements IAppUserDAO {
     }
 
     @Override
-    public void update(AppUser model) {
+    public void update(String username, AppUser model) {
 
     }
 

@@ -13,7 +13,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TodoItemDAOCollectionTest {
-    @Test
+   /* @Test
     public void personDAOCollectionTest() {
         List<AppUser> appUser = new ArrayList<>();
         List<Person> person = new ArrayList<>();
@@ -76,7 +76,7 @@ public class TodoItemDAOCollectionTest {
         assertEquals(null, Task);
 
 
-    }
+    } */
 
 
 }

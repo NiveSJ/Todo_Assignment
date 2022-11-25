@@ -6,7 +6,7 @@ import se.lexicon.sequencers.PersonIdSequencer;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PersonSequencerTest {
-
+/*
    @Test
    public void personSequencerTest(){
 
@@ -20,8 +20,7 @@ public class PersonSequencerTest {
 
 
 
-    }
-
+    }*/
 
 
 }

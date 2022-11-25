@@ -3,45 +3,35 @@ package se.lexicon.DAO;
 import org.junit.jupiter.api.Test;
 import se.lexicon.DAO.impl.AppUserDAOCollection;
 import se.lexicon.DAO.impl.PersonDAOCollection;
+import se.lexicon.model.AppRole;
+import se.lexicon.model.AppUser;
+import se.lexicon.model.Person;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PersonDAOCollectionTest {
     @Test
     public void personDAOCollectionTest() {
-        List<AppUser> appUser = new ArrayList<>();
-        List<Person> person = new ArrayList<>();
+        AppUser user1 = new AppUser("Nive", "12345", AppRole.ROLE_APP_USER);
+        AppUser user2 = new AppUser("Anika", "12345", AppRole.ROLE_APP_USER);
+        AppUserDAOCollection.getInstance().create(user1);
+        AppUserDAOCollection.getInstance().create(user2);
 
-        IPersonDAO personDAOCollection = new PersonDAOCollection(person);
-        IAppUserDAO appUserDAOCollection = new AppUserDAOCollection(appUser);
+        Person person1 = new Person("Nive", "Jay", "Nive@gmail.com", user1);
+        Person person2 = new Person("Anika", "Jay", "Anika@gmail.com", user2);
 
-        AppUser createdAppUser = appUserDAOCollection.persist(new AppUser("Test", "20wqfj", AppRole.ROLE_APP_ADMIN));
+        PersonDAOCollection.getInstance().create(person1);
+        PersonDAOCollection.getInstance().create(person2);
+        System.out.println(PersonDAOCollection.getInstance().findAll());
 
-        Person createdPerson1 = personDAOCollection.persist(new Person("Nivethitha", "Jayanth", "nive@gmail.com", createdAppUser));
+        PersonDAOCollection.getInstance().update("Anika",
+                new Person("Ananya", "Jay", "Ananya@gmail.com", user1));
 
-        // Checking persisted person
-        assertEquals(person.get(0), createdPerson1);
+        Optional<Person> per = PersonDAOCollection.getInstance().findByUsername("Ananya");
+        System.out.println(per);
 
-        // Checking find all since i have added 1 person i have given person.get(0)
-        Collection<Person> allPerson = personDAOCollection.findAll();
 
-        for (Person persn : person)
-            assertEquals(person.get(0), persn);
-
-        Person id = personDAOCollection.findById(createdPerson1.getId());
-        assertEquals(person.get(0), id);
-
-        Person email = personDAOCollection.findByEmail("nive@gmail.com");
-        assertEquals(person.get(0), email);
-
-        personDAOCollection.remove(createdPerson1.getId());
-
-        Person per = personDAOCollection.findById(createdPerson1.getId());
-
-        assertEquals(null, per);
     }
 }

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AppUserTest {
-
+/*
     AppUser appUser1 = new AppUser("Test", "Asdfg", AppRole.ROLE_APP_ADMIN);
 
     @Test
@@ -31,7 +31,7 @@ public class AppUserTest {
 
 
 
-    }
+    }*/
 
 
 }

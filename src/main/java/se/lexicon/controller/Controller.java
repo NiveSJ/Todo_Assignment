@@ -42,6 +42,9 @@ public class Controller {
                 case DISPLAY_TASK:
                     doDisplayTodoItems();
                     break;
+                case UPDATE_PERSON:
+                    doUpdatePerson();
+                    break;
                 case EXIT:
                     System.exit(0);
             }
@@ -80,13 +83,8 @@ public class Controller {
 
         System.out.println("At do create todo " + personData);
         Person foundPerson = personDao.findById(personData.getId());
-
-
         todoItemData.setAssignee(foundPerson);
-
-
         TodoItem createdTodoItem = todoItemDao.create(todoItemData);
-
         ui.displayTodoItemInformation(createdTodoItem);
 
     }
@@ -94,6 +92,15 @@ public class Controller {
     public void doDisplayTodoItems() {
         List<TodoItem> todoItemList = todoItemDao.findAll();
         ui.displayTodoItemInformation(todoItemList);
+    }
+
+    public void doUpdatePerson() {
+        String username = ui.usernameUpdate();
+        Person toUpdate = ui.personUpdate();
+        personDao.update(username, toUpdate);
+
+        System.out.println(personDao.findByUsername(username));
+
     }
 
 

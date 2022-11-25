@@ -36,7 +36,6 @@ public class PersonDAOCollection implements IPersonDAO {
         Optional<Person> checkUsername = findByUsername(person.getCredentials().getUserName());
         if (checkUsername.isPresent()) throw new IllegalArgumentException("UserName already present!!");
 
-
         person.setId(PersonIdSequencer.nextId());
         personList.add(person);
         return person;
@@ -47,7 +46,7 @@ public class PersonDAOCollection implements IPersonDAO {
     @Override
     public Person findById(Integer id) {
 
-        //if (id == null) throw new IllegalArgumentException("Person is  null");
+
         Optional<Person> optional = personList.stream().filter(person ->
                 person.getId().equals(id)).findFirst();
         return optional.orElse(null);
@@ -62,20 +61,18 @@ public class PersonDAOCollection implements IPersonDAO {
     }
 
     @Override
-    public void update(Person model) {
+    public void update(String username, Person model) {
         if (model == null) throw new IllegalArgumentException("Person to update is null");
 
-        // personList.stream().filter(person -> person.getId() == model.getId()).anyMatch()
+      personList.stream().filter(person -> findByUsername(username).isPresent()).
+              forEach(person -> {
+                    person.setEmail(model.getEmail());
+                    person.setFirstName(model.getFirstName());
+                    person.setLastName(model.getLastName());
+                    person.setCredentials(model.getCredentials());
+              });
 
-        for (Person person : personList) {
-            if (person.getId() == (model.getId())) {
-                person.setEmail(model.getEmail());
-                person.setFirstName(model.getFirstName());
-                person.setLastName(model.getLastName());
-                person.setCredentials(model.getCredentials());
-                break;
-            }
-        }
+        System.out.println(PersonDAOCollection.getInstance().findByUsername(model.getCredentials().getUserName()));
 
 
     }
@@ -87,7 +84,7 @@ public class PersonDAOCollection implements IPersonDAO {
     }
 
     @Override
-    public  Optional<Person> findByUsername(String username) {
+    public Optional<Person> findByUsername(String username) {
 
 
         Optional<Person> optional = personList.stream().filter(person ->

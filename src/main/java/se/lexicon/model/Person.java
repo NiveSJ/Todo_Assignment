@@ -32,7 +32,7 @@ public class Person {
 
 
     public Person(String firstName, String LastName, String email, AppUser credentials) {
-        this.id=id;
+        this.id = id;
         setFirstName(firstName);
         setLastName(LastName);
         setEmail(email);
@@ -46,6 +46,9 @@ public class Person {
     }
 
     public void setTodoItems(List<TodoItem> todoItems) {
+
+
+        if (this.todoItems == null) todoItems = new ArrayList<>();
         this.todoItems = todoItems;
     }
 

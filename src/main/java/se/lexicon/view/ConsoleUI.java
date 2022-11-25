@@ -1,10 +1,13 @@
 package se.lexicon.view;
 
+import se.lexicon.DAO.impl.PersonDAOCollection;
+import se.lexicon.DAO.impl.TodoItemDAOCollection;
 import se.lexicon.model.AppRole;
 import se.lexicon.model.AppUser;
 import se.lexicon.model.Person;
 import se.lexicon.model.TodoItem;
 
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
@@ -16,7 +19,8 @@ public class ConsoleUI {
         System.out.println("1.Register");
         System.out.println("2.Create Task");
         System.out.println("3.Display all task");
-        System.out.println("4.Exit");
+        System.out.println("4.Update Person");
+        System.out.println("5.Exit");
 
         System.out.println("Enter a number to perform operation");
 
@@ -29,6 +33,8 @@ public class ConsoleUI {
 
             case 3:
                 return MainMenu.DISPLAY_TASK;
+            case 4:
+                return MainMenu.UPDATE_PERSON;
             default:
                 return MainMenu.EXIT;
         }
@@ -97,7 +103,6 @@ public class ConsoleUI {
 
         personData.setId(personId);
 
-
         todoItemData.setAssignee(personData);
 
         return todoItemData;
@@ -114,5 +119,20 @@ public class ConsoleUI {
             displayTodoItemInformation(todoItem);
         }
     }
+
+
+    public String usernameUpdate() {
+        System.out.println("Enter username to update");
+        String username = getString();
+        return username;
+    }
+
+    public Person personUpdate() {
+        Person updatePerson = getPersonInfo();
+        return updatePerson;
+
+
+    }
+
 
 }

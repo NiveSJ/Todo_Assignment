@@ -7,7 +7,6 @@ import se.lexicon.sequencers.TodoItemIdSequencer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class TodoItemDAOCollection implements ITodoItemDAO {
@@ -29,13 +28,10 @@ public class TodoItemDAOCollection implements ITodoItemDAO {
     @Override
     public TodoItem create(TodoItem todoItem) {
 
-        if (todoItem == null) throw new IllegalArgumentException("App user is  null");
+        if (todoItem == null) throw new IllegalArgumentException("Todo Item is null");
 
-        TodoItem name = findById(todoItem.getId());
-
-        if (name != null) throw new IllegalArgumentException("Name already present!!");
         todoItem.setId(TodoItemIdSequencer.nextId());
-        todoItemList.add(name);
+        todoItemList.add(todoItem);
         return todoItem;
 
 
@@ -56,7 +52,7 @@ public class TodoItemDAOCollection implements ITodoItemDAO {
     }
 
     @Override
-    public void update(TodoItem model) {
+    public void update(String username, TodoItem model) {
 
         if (model == null) throw new IllegalArgumentException("toUpdate data was null");
 
