@@ -1,9 +1,9 @@
 package se.lexicon.DAO.impl;
 
-import se.lexicon.AppRole;
-import se.lexicon.AppUser;
 import se.lexicon.DAO.IAppUserDAO;
-import se.lexicon.sequencers.PersonIdSequencer;
+import se.lexicon.model.AppRole;
+import se.lexicon.model.AppUser;
+import se.lexicon.sequencers.AppUserIdSequencer;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -12,20 +12,25 @@ import java.util.stream.Collectors;
 
 public class AppUserDAOCollection implements IAppUserDAO {
 
-    List<AppUser> appUserList = new ArrayList<>();
+    private List<AppUser> appUserList;
+    private static AppUserDAOCollection instance;
 
-    public AppUserDAOCollection(List<AppUser> appUser) {
-        this.appUserList = appUser;
+    private AppUserDAOCollection() {
 
+        this.appUserList = new ArrayList<>();
+    }
 
+    public static AppUserDAOCollection getInstance() {
+        if (instance == null) instance = new AppUserDAOCollection();
+        return instance;
     }
 
     @Override
     public AppUser findByUsername(String username) {
         if (username.equals(null)) throw new IllegalArgumentException("User name is null");
 
-        Optional<AppUser> optional = appUserList.stream().filter(appUser -> true && appUser.getUserName().
-                equalsIgnoreCase(username)).findFirst();
+        Optional<AppUser> optional = appUserList.stream().
+                filter(appUser -> appUser.getUserName().equalsIgnoreCase(username)).findFirst();
 
         return optional.orElse(null);
 
@@ -36,12 +41,12 @@ public class AppUserDAOCollection implements IAppUserDAO {
 
         if (role == null) throw new IllegalArgumentException("Approle is null");
 
-        List<AppUser> filteredlist = appUserList.stream().
+        return appUserList.stream().
                 filter(appUser -> appUser.getAppRole().equals(role)).collect(Collectors.toList());
-        return filteredlist;
 
 
     }
+
 
     @Override
     public AppUser create(AppUser appUser) {
@@ -50,7 +55,7 @@ public class AppUserDAOCollection implements IAppUserDAO {
         AppUser name = findByUsername(appUser.getUserName());
 
         if (name != null) throw new IllegalArgumentException("Name already present!!");
-        appUser.setId(PersonIdSequencer.nextId());
+        appUser.setId(AppUserIdSequencer.nextId());
         appUserList.add(appUser);
         return appUser;
     }
@@ -62,7 +67,7 @@ public class AppUserDAOCollection implements IAppUserDAO {
         //Predicate <AppUser> appUserPredicate= (appUser -> appUser.getUserName() == userName );
 
         Optional<AppUser> optional = appUserList.stream().
-                filter(appUser -> appUser.getId().equals(id))
+                filter(appUser -> appUser.getId() == id)
                 .findFirst();
 
 
@@ -76,7 +81,7 @@ public class AppUserDAOCollection implements IAppUserDAO {
 
     @Override
     public boolean deleteById(Integer id) {
-       boolean remove = appUserList.removeIf(appUser -> appUser.getId()== id);
+        boolean remove = appUserList.removeIf(appUser -> appUser.getId() == id);
 
         return remove;
     }
@@ -87,13 +92,10 @@ public class AppUserDAOCollection implements IAppUserDAO {
     }
 
     @Override
-    public Consumer<AppUser> findAll() {
+    public List<AppUser> findAll() {
 
 
-        Consumer<AppUser> finduser = (print) -> System.out.println(print);
-        appUserList.forEach(finduser);
-        return finduser;
-
+        return new ArrayList<>(appUserList);
 
     }
 }

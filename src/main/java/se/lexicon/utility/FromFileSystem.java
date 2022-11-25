@@ -6,12 +6,12 @@ import java.util.*;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;// in play 2.3
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import se.lexicon.AppUser;
-import se.lexicon.Person;
-import se.lexicon.TodoItem;
+import se.lexicon.model.AppUser;
+import se.lexicon.model.Person;
+import se.lexicon.model.TodoItem;
 
 public class FromFileSystem {
     public static void main(String[] args) throws IOException {
@@ -38,10 +38,6 @@ public class FromFileSystem {
 
         appuser = mapper.readValue(jsonFile,
                 mapper.getTypeFactory().constructCollectionType(List.class, AppUser.class));
-       /* List<Person> person = objectMapper.readValue(
-                new File(""),
-                new TypeReference<List<Person>>() {
-                }.getType());*/
 
 
         return appuser;

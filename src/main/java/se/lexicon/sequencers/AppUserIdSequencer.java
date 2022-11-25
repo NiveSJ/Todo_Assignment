@@ -1,16 +1,15 @@
 package se.lexicon.sequencers;
 
-public class TodoItemIdSequencer {
+public class AppUserIdSequencer {
 
-
-    private static int currentId = 300;
+    private static int currentId = 100;
 
     public static int getCurrentId() {
         return currentId;
     }
 
     private static void setCurrentId(int currentId) {
-        TodoItemIdSequencer.currentId = currentId;
+        AppUserIdSequencer.currentId = currentId;
     }
 
 
@@ -19,8 +18,6 @@ public class TodoItemIdSequencer {
         setCurrentId(id);
         return id;
     }
-
-
 
 
 }

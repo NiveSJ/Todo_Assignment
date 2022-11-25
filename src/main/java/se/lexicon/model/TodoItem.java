@@ -1,9 +1,6 @@
-package se.lexicon;
-
-import se.lexicon.sequencers.TodoItemIdSequencer;
+package se.lexicon.model;
 
 import java.time.LocalDate;
-
 import java.util.Objects;
 
 public class TodoItem {
@@ -14,14 +11,14 @@ public class TodoItem {
     private String taskDescription;
     private LocalDate deadline;
     private boolean done;
-    private Person creator;
+
 
     private Person assignee;
 
     public TodoItem() {
     }
 
-    public TodoItem(Integer id, String title, String taskDescription, LocalDate deadline, Person creator) {
+    public TodoItem(Integer id, String title, String taskDescription, LocalDate deadline, Person assignee) {
 
         setId(id);
         setTitle(title);
@@ -29,7 +26,7 @@ public class TodoItem {
         this.taskDescription = taskDescription;
         setDeadline(deadline);
         setDone(done);
-        setCreator(creator);
+        setAssignee(assignee);
 
     }
 
@@ -54,7 +51,7 @@ public class TodoItem {
 
     public void setAssignee(Person assignee) {
 
-        if (assignee == null) throw new IllegalArgumentException("assignee cannot be null");
+
         this.assignee = assignee;
 
     }
@@ -94,7 +91,7 @@ public class TodoItem {
         this.done = done;
     }
 
-    public Person getCreator() {
+  /*  public Person getCreator() {
         return creator;
     }
 
@@ -103,7 +100,7 @@ public class TodoItem {
         if (creator.getCredentials().getAppRole() != AppRole.ROLE_APP_ADMIN)
             throw new IllegalArgumentException("No Permission");
         this.creator = creator;
-    }
+    }*/
 
     public boolean isOverdue() {
 

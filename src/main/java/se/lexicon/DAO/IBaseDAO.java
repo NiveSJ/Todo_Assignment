@@ -13,7 +13,7 @@ public interface IBaseDAO<T> {
 
     void update(T model);
 
-    Consumer<T> findAll();
+    List<T> findAll();
 
 
 }

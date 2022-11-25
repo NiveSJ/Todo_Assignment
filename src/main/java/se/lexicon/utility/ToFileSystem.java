@@ -1,9 +1,9 @@
 package se.lexicon.utility;
 
 import org.json.JSONArray;
-import se.lexicon.AppUser;
-import se.lexicon.Person;
-import se.lexicon.TodoItem;
+import se.lexicon.model.AppUser;
+import se.lexicon.model.Person;
+import se.lexicon.model.TodoItem;
 
 import java.io.File;
 import java.io.FileWriter;

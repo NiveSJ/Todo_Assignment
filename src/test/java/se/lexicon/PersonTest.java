@@ -3,9 +3,6 @@ package se.lexicon;
 
 
 import org.junit.jupiter.api.Test;
-import se.lexicon.AppRole;
-import se.lexicon.AppUser;
-import se.lexicon.Person;
 
 import static org.junit.jupiter.api.Assertions.*;
 

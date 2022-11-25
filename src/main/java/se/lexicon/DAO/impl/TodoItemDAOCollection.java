@@ -1,14 +1,10 @@
 package se.lexicon.DAO.impl;
 
 import se.lexicon.DAO.ITodoItemDAO;
-import se.lexicon.Person;
-import se.lexicon.TodoItem;
-import se.lexicon.sequencers.PersonIdSequencer;
+import se.lexicon.model.TodoItem;
 import se.lexicon.sequencers.TodoItemIdSequencer;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -16,7 +12,19 @@ import java.util.stream.Collectors;
 
 public class TodoItemDAOCollection implements ITodoItemDAO {
 
-    List<TodoItem> todoItemList;
+    private List<TodoItem> todoItemList;
+    private static TodoItemDAOCollection instance;
+
+    private TodoItemDAOCollection() {
+
+        this.todoItemList = new ArrayList<>();
+    }
+
+    public static TodoItemDAOCollection getInstance() {
+        if (instance == null) instance = new TodoItemDAOCollection();
+        return instance;
+    }
+
 
     @Override
     public TodoItem create(TodoItem todoItem) {
@@ -52,12 +60,15 @@ public class TodoItemDAOCollection implements ITodoItemDAO {
 
         if (model == null) throw new IllegalArgumentException("toUpdate data was null");
 
-        todoItemList.stream().filter(todoItem -> todoItem.getId()== model.getId()).
-                map(todoItem -> {
-            todoItem.setTitle(model.getTitle()); todoItem.setAssignee(model.getAssignee());
-            todoItem.setDeadline(model.getDeadline());
-            todoItem.setTaskDescription(model.getTaskDescription());todoItem.setDone(model.isDone());
-            return todoItem; });
+        todoItemList.stream().filter(todoItem -> todoItem.getId() == model.getId()).
+                forEach(todoItem -> {
+                            todoItem.setTitle(model.getTitle());
+                            todoItem.setAssignee(model.getAssignee());
+                            todoItem.setDeadline(model.getDeadline());
+                            todoItem.setTaskDescription(model.getTaskDescription());
+                            todoItem.setDone(model.isDone());
+                        }
+                );
     }
 
 
@@ -75,14 +86,9 @@ public class TodoItemDAOCollection implements ITodoItemDAO {
         }*/
 
 
-
-
     @Override
-    public Consumer<TodoItem> findAll() {
-
-        Consumer<TodoItem> findtodo = (print) -> System.out.println(print);
-        todoItemList.forEach(findtodo);
-        return findtodo;
+    public List<TodoItem> findAll() {
+        return new ArrayList<>(todoItemList);
 
     }
 

@@ -4,10 +4,6 @@ package se.lexicon;
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
-import se.lexicon.AppRole;
-import se.lexicon.AppUser;
-import se.lexicon.Person;
-import se.lexicon.TodoItem;
 import se.lexicon.sequencers.TodoItemIdSequencer;
 
 import static org.junit.jupiter.api.Assertions.*;

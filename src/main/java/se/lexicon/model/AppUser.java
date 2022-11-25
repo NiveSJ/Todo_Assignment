@@ -1,4 +1,4 @@
-package se.lexicon;
+package se.lexicon.model;
 
 import java.util.Objects;
 
@@ -31,6 +31,7 @@ public class AppUser {
     }
 
     public AppUser(String username, String password, AppRole appRole) {
+        this.id=id;
 
         setUserName(username);
         setPassword(password);

@@ -1,6 +1,4 @@
-package se.lexicon;
-
-import se.lexicon.sequencers.PersonIdSequencer;
+package se.lexicon.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +31,8 @@ public class Person {
     }
 
 
-    public Person(String firstName, String LastName, String email) {
-
+    public Person(String firstName, String LastName, String email, AppUser credentials) {
+        this.id=id;
         setFirstName(firstName);
         setLastName(LastName);
         setEmail(email);
@@ -42,7 +40,6 @@ public class Person {
         this.todoItems = new ArrayList<>();
 
     }
-
 
     public List<TodoItem> getTodoItems() {
         return todoItems;
@@ -62,7 +59,7 @@ public class Person {
         this.credentials = credentials;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

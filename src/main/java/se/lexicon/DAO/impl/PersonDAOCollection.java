@@ -2,7 +2,7 @@ package se.lexicon.DAO.impl;
 
 
 import se.lexicon.DAO.IPersonDAO;
-import se.lexicon.Person;
+import se.lexicon.model.Person;
 import se.lexicon.sequencers.PersonIdSequencer;
 
 import java.util.*;
@@ -11,10 +11,18 @@ import java.util.stream.Collectors;
 
 public class PersonDAOCollection implements IPersonDAO {
 
-    List<Person> personList ;
+    private List<Person> personList;
+    private static PersonDAOCollection instance;
 
-    public PersonDAOCollection(List<Person> personList) {
-        this.personList = personList;
+    private PersonDAOCollection() {
+        this.personList = new ArrayList<>();
+
+    }
+
+    public static PersonDAOCollection getInstance() {
+
+        if (instance == null) instance = new PersonDAOCollection();
+        return instance;
 
     }
 
@@ -22,22 +30,26 @@ public class PersonDAOCollection implements IPersonDAO {
     public Person create(Person person) {
 
 
-        if (person == null) throw new IllegalArgumentException("App user is  null");
+        if (person == null) throw new IllegalArgumentException("Person is null");
 
-        Person name = findById(person.getId());
+        if (person.getCredentials() == null) throw new RuntimeException("UserCredentials was null");
+        Optional<Person> checkUsername = findByUsername(person.getCredentials().getUserName());
+        if (checkUsername.isPresent()) throw new IllegalArgumentException("UserName already present!!");
 
-        if (name != null) throw new IllegalArgumentException("Name already present!!");
+
         person.setId(PersonIdSequencer.nextId());
-        personList.add(name);
+        personList.add(person);
         return person;
 
     }
 
+
     @Override
     public Person findById(Integer id) {
 
-        if (id == null) throw new IllegalArgumentException("App user is  null");
-        Optional<Person> optional = personList.stream().filter(person -> person.getId() == id).findFirst();
+        //if (id == null) throw new IllegalArgumentException("Person is  null");
+        Optional<Person> optional = personList.stream().filter(person ->
+                person.getId().equals(id)).findFirst();
         return optional.orElse(null);
 
     }
@@ -69,23 +81,20 @@ public class PersonDAOCollection implements IPersonDAO {
     }
 
     @Override
-    public Consumer<Person> findAll() {
+    public List<Person> findAll() {
 
-        Consumer<Person> finduser = (print) -> System.out.println(print);
-        personList.forEach(finduser);
-        return finduser;
-
+        return new ArrayList<>(personList);
     }
 
     @Override
-    public List<Person> findByUsername(String username) {
+    public  Optional<Person> findByUsername(String username) {
 
 
-        List<Person> filList = personList.stream().filter(person ->
-                person.getCredentials().getUserName().equalsIgnoreCase(username)).
-                collect(Collectors.toList());
+        Optional<Person> optional = personList.stream().filter(person ->
+                        person.getCredentials().getUserName().equalsIgnoreCase(username)).
+                findFirst();
 
-        return filList;
+        return optional;
     }
 
 
