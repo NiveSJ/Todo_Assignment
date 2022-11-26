@@ -3,6 +3,7 @@ package se.lexicon.controller;
 import se.lexicon.DAO.impl.AppUserDAOCollection;
 import se.lexicon.DAO.impl.PersonDAOCollection;
 import se.lexicon.DAO.impl.TodoItemDAOCollection;
+import se.lexicon.MyOwnRuntimeException;
 import se.lexicon.model.AppUser;
 import se.lexicon.model.Person;
 import se.lexicon.model.TodoItem;
@@ -28,7 +29,7 @@ public class Controller {
 
     }
 
-    public void doMainMenu() {
+    public void doMainMenu() throws MyOwnRuntimeException {
 
         while (true) {
             MainMenu action = ui.displayMenu();
@@ -51,7 +52,7 @@ public class Controller {
         }
     }
 
-    public void doRegister() {
+    public void doRegister() throws MyOwnRuntimeException {
         Person personData = ui.getPersonInfo();
 
         System.out.println("Person id seq " + PersonIdSequencer.nextId());

@@ -12,7 +12,7 @@ import java.util.*;
  * Todo Assignment
  */
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MyOwnRuntimeException {
 
         Controller controller = new Controller();
         controller.doMainMenu();

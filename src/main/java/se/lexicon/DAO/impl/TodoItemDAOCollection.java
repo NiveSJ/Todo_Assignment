@@ -1,12 +1,15 @@
 package se.lexicon.DAO.impl;
 
 import se.lexicon.DAO.ITodoItemDAO;
+import se.lexicon.model.Person;
 import se.lexicon.model.TodoItem;
 import se.lexicon.sequencers.TodoItemIdSequencer;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class TodoItemDAOCollection implements ITodoItemDAO {
@@ -51,12 +54,12 @@ public class TodoItemDAOCollection implements ITodoItemDAO {
 
     }
 
-    @Override
-    public void update(String username, TodoItem model) {
+
+    public void update(Integer Id, TodoItem model) {
 
         if (model == null) throw new IllegalArgumentException("toUpdate data was null");
 
-        todoItemList.stream().filter(todoItem -> todoItem.getId() == model.getId()).
+        todoItemList.stream().filter(todoItem -> todoItem.getId() == Id).
                 forEach(todoItem -> {
                             todoItem.setTitle(model.getTitle());
                             todoItem.setAssignee(model.getAssignee());
@@ -90,10 +93,10 @@ public class TodoItemDAOCollection implements ITodoItemDAO {
 
     @Override
     public List<TodoItem> findAllAvailable() {
-
+        Predicate<TodoItem> predicate= (todoItem -> todoItem.getAssignee() == null) ;
 
         List<TodoItem> todo = todoItemList.stream().
-                filter(todoItem -> todoItem.getAssignee().equals(null)).collect(Collectors.toList());
+                filter(predicate).collect(Collectors.toList());
         return todo;
     }
 
@@ -102,8 +105,11 @@ public class TodoItemDAOCollection implements ITodoItemDAO {
 
         //Expired and incomplete
 
-        List<TodoItem> filteredlist = todoItemList.stream().filter(todoItem -> todoItem.isOverdue() &&
-                !todoItem.isDone()).collect(Collectors.toList());
+        List<TodoItem> filteredlist = todoItemList.stream().filter(todoItem ->
+                todoItem.getDeadline().isBefore(LocalDate.now())&&
+                        todoItem.isDone() == false).collect(Collectors.toList());
+
+        System.out.println(filteredlist);
         return filteredlist;
     }
 }

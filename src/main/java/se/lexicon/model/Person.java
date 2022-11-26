@@ -1,9 +1,12 @@
 package se.lexicon.model;
 
+import lombok.Data;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Data
 public class Person {
 
     private Integer id;
@@ -44,7 +47,7 @@ public class Person {
     public List<TodoItem> getTodoItems() {
         return todoItems;
     }
-
+/*
     public void setTodoItems(List<TodoItem> todoItems) {
 
 
@@ -123,5 +126,5 @@ public class Person {
     @Override
     public int hashCode() {
         return Objects.hash(id, firstName, LastName, email);
-    }
+    }*/
 }

@@ -32,8 +32,9 @@ public class TodoItem {
 
     public TodoItem(String title, String description, LocalDate deadline) {
         setTitle(title);
-        this.taskDescription = taskDescription;
+        this.taskDescription = description;
         setDeadline(deadline);
+        this.assignee = new Person();
     }
 
 

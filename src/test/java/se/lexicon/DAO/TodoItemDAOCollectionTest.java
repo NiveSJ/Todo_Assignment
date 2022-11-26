@@ -4,79 +4,59 @@ import org.junit.jupiter.api.Test;
 import se.lexicon.DAO.impl.AppUserDAOCollection;
 import se.lexicon.DAO.impl.PersonDAOCollection;
 import se.lexicon.DAO.impl.TodoItemDAOCollection;
+import se.lexicon.MyOwnRuntimeException;
+import se.lexicon.model.AppRole;
+import se.lexicon.model.AppUser;
+import se.lexicon.model.Person;
+import se.lexicon.model.TodoItem;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TodoItemDAOCollectionTest {
-   /* @Test
-    public void personDAOCollectionTest() {
-        List<AppUser> appUser = new ArrayList<>();
-        List<Person> person = new ArrayList<>();
-        List<TodoItem> Item = new ArrayList<>();
-
-        ITodoItemDAO todoItemDAOCollection = new TodoItemDAOCollection(Item);
-        IPersonDAO personDAOCollection = new PersonDAOCollection(person);
-        IAppUserDAO appUserDAOCollection = new AppUserDAOCollection(appUser);
-
-        AppUser createdAppUser = appUserDAOCollection.persist(new AppUser("Test", "20wqfj", AppRole.ROLE_APP_ADMIN));
-
-        Person createdPerson1 = personDAOCollection.persist(new Person("Nivethitha", "Jayanth", "nive@gmail.com", createdAppUser));
-
-        TodoItem todo1 = todoItemDAOCollection.persist(new TodoItem("Project Meeting", "Discuss about project setup",
-                LocalDate.parse("2022-11-01"), createdPerson1));
-
-        // Checking persisted person
-        assertEquals(Item.get(0), todo1);
 
 
-        Collection<TodoItem> item1 = todoItemDAOCollection.findAll();
+    IAppUserDAO appuser = AppUserDAOCollection.getInstance();
+    IPersonDAO person = PersonDAOCollection.getInstance();
+    ITodoItemDAO todoItemDAO = TodoItemDAOCollection.getInstance();
 
-        for (TodoItem item : item1)
-            assertEquals(Item.get(0), item);
+    @Test
+    public void personDAOCollectionTest() throws MyOwnRuntimeException {
 
-        TodoItem id = todoItemDAOCollection.findById(todo1.getId());
-        assertEquals(Item.get(0), id);
+        AppUser user1 = new AppUser("Nive", "12345", AppRole.ROLE_APP_USER);
+        AppUser user2 = new AppUser("Anika", "12345", AppRole.ROLE_APP_USER);
+        AppUser user3 = new AppUser("Ananya", "12345", AppRole.ROLE_APP_USER);
+        AppUserDAOCollection.getInstance().create(user1);
+        AppUserDAOCollection.getInstance().create(user2);
 
-        Collection<TodoItem> personById = todoItemDAOCollection.findByPersonId(todo1.getCreator().getId());
+        Person person1 = new Person("Nive", "Jay", "Nive@gmail.com", user1);
+        Person person2 = new Person("Anika", "Jay", "Anika@gmail.com", user2);
 
-        for (TodoItem item : personById)
+        PersonDAOCollection.getInstance().create(person1);
+        PersonDAOCollection.getInstance().create(person2);
 
-            assertEquals(Item.get(0), item);
+        TodoItem item1 = new TodoItem("Scrum", "Meeting", LocalDate.parse("2022-11-10"));
+        TodoItem item2 = new TodoItem("Project Meeting", "Meeting", LocalDate.parse("2022-12-02"));
+        TodoItem item3 = new TodoItem("Project Meeting1", "Meeting1", LocalDate.parse("2022-12-02"));
 
-       Collection<TodoItem> tasks = todoItemDAOCollection.findByDeadlineAfter(LocalDate.parse("2022-11-01"));
+        todoItemDAO.create(item1);
+        todoItemDAO.create(item2);
+        todoItemDAO.create(item3);
 
-        for (TodoItem item : tasks)
-            assertEquals(Item.get(0),item);
+        System.out.println(todoItemDAO.findAll());
 
-
-
-        Collection<TodoItem> task1 = todoItemDAOCollection.findByDeadlineBefore(LocalDate.now());
-        for (TodoItem item : task1)
-            assertEquals(Item.get(0), item);
-
-        Collection<TodoItem> task2 = todoItemDAOCollection.findAllByDoneStatus(true);
-
-        for (TodoItem item : task2)
-            assertEquals(Item.get(0), item);
-
-        Collection<TodoItem> task3 = todoItemDAOCollection.findByTitleContains("Project Meeting");
-        for (TodoItem item : task3)
-            assertEquals(Item.get(0), item);
+        System.out.println(item1.getAssignee());
 
 
-        todoItemDAOCollection.remove(todo1.getId());
+        List<TodoItem> list1 = todoItemDAO.findAllAvailable();
+        System.out.println(list1);
 
-        TodoItem Task = todoItemDAOCollection.findById(todo1.getId());
-
-        assertEquals(null, Task);
+        List<TodoItem> list2 = todoItemDAO.findExpiredAndInCompleted();
 
 
-    } */
+    }
 
 
 }

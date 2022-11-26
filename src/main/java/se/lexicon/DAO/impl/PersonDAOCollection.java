@@ -2,12 +2,11 @@ package se.lexicon.DAO.impl;
 
 
 import se.lexicon.DAO.IPersonDAO;
+import se.lexicon.MyOwnRuntimeException;
 import se.lexicon.model.Person;
 import se.lexicon.sequencers.PersonIdSequencer;
 
 import java.util.*;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 public class PersonDAOCollection implements IPersonDAO {
 
@@ -27,12 +26,13 @@ public class PersonDAOCollection implements IPersonDAO {
     }
 
     @Override
-    public Person create(Person person) {
+    public Person create(Person person) throws MyOwnRuntimeException {
 
 
         if (person == null) throw new IllegalArgumentException("Person is null");
 
-        if (person.getCredentials() == null) throw new RuntimeException("UserCredentials was null");
+        if (person.getCredentials() == null) throw new MyOwnRuntimeException("UserCredentials was null");
+
         Optional<Person> checkUsername = findByUsername(person.getCredentials().getUserName());
         if (checkUsername.isPresent()) throw new IllegalArgumentException("UserName already present!!");
 
@@ -60,21 +60,23 @@ public class PersonDAOCollection implements IPersonDAO {
         return remove;
     }
 
-    @Override
-    public void update(String username, Person model) {
-        if (model == null) throw new IllegalArgumentException("Person to update is null");
 
-      personList.stream().filter(person -> findByUsername(username).isPresent()).
-              forEach(person -> {
-                    person.setEmail(model.getEmail());
-                    person.setFirstName(model.getFirstName());
-                    person.setLastName(model.getLastName());
-                    person.setCredentials(model.getCredentials());
-              });
+    public Optional<Person> update(String username, Person model) {
+        if (model == null) throw new IllegalArgumentException("model to update is null");
 
-        System.out.println(PersonDAOCollection.getInstance().findByUsername(model.getCredentials().getUserName()));
+        if (username == null) throw new IllegalArgumentException("username is null");
 
+        Optional<Person> person1 = personList.stream().filter(person -> person.getCredentials().getUserName().
+                equalsIgnoreCase(username)).findFirst();
 
+        if (person1.isPresent()) {
+            person1.get().setEmail(model.getEmail());
+            person1.get().setFirstName(model.getFirstName());
+            person1.get().setLastName(model.getLastName());
+            person1.get().setCredentials(model.getCredentials());
+        }
+
+        return person1;
     }
 
     @Override
