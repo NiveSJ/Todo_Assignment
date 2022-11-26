@@ -61,7 +61,7 @@ public class PersonDAOCollection implements IPersonDAO {
     }
 
 
-    public Optional<Person> update(String username, Person model) {
+    public Person update(String username, Person model) {
         if (model == null) throw new IllegalArgumentException("model to update is null");
 
         if (username == null) throw new IllegalArgumentException("username is null");
@@ -69,14 +69,22 @@ public class PersonDAOCollection implements IPersonDAO {
         Optional<Person> person1 = personList.stream().filter(person -> person.getCredentials().getUserName().
                 equalsIgnoreCase(username)).findFirst();
 
+        Person newPerson = new Person();
+
         if (person1.isPresent()) {
-            person1.get().setEmail(model.getEmail());
+
+            newPerson = person1.get();
+
+            newPerson = model;
+        }
+
+          /*  person1.get().setEmail(model.getEmail());
             person1.get().setFirstName(model.getFirstName());
             person1.get().setLastName(model.getLastName());
             person1.get().setCredentials(model.getCredentials());
-        }
+        }*/
 
-        return person1;
+        return newPerson;
     }
 
     @Override
