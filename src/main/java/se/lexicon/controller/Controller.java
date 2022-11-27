@@ -3,7 +3,7 @@ package se.lexicon.controller;
 import se.lexicon.DAO.impl.AppUserDAOCollection;
 import se.lexicon.DAO.impl.PersonDAOCollection;
 import se.lexicon.DAO.impl.TodoItemDAOCollection;
-import se.lexicon.MyOwnRuntimeException;
+import se.lexicon.exceptions.MyOwnRuntimeException;
 import se.lexicon.model.AppUser;
 import se.lexicon.model.Person;
 import se.lexicon.model.TodoItem;
@@ -11,9 +11,7 @@ import se.lexicon.sequencers.PersonIdSequencer;
 import se.lexicon.view.ConsoleUI;
 import se.lexicon.view.MainMenu;
 
-import java.sql.SQLOutput;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class Controller {
     ConsoleUI ui;

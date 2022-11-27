@@ -2,7 +2,7 @@ package se.lexicon.DAO.impl;
 
 
 import se.lexicon.DAO.IPersonDAO;
-import se.lexicon.MyOwnRuntimeException;
+import se.lexicon.exceptions.MyOwnRuntimeException;
 import se.lexicon.model.Person;
 import se.lexicon.sequencers.PersonIdSequencer;
 

@@ -87,10 +87,6 @@ public class AppUserDAOCollection implements IAppUserDAO {
     }
 
 
-    public void update(String username, AppUser model) {
-
-    }
-
     @Override
     public List<AppUser> findAll() {
 

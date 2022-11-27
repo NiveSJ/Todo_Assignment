@@ -3,12 +3,10 @@ package se.lexicon.DAO;
 import org.junit.jupiter.api.Test;
 import se.lexicon.DAO.impl.AppUserDAOCollection;
 import se.lexicon.DAO.impl.PersonDAOCollection;
-import se.lexicon.MyOwnRuntimeException;
+import se.lexicon.exceptions.MyOwnRuntimeException;
 import se.lexicon.model.AppRole;
 import se.lexicon.model.AppUser;
 import se.lexicon.model.Person;
-
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

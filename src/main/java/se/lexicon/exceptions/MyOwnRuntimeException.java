@@ -1,4 +1,4 @@
-package se.lexicon;
+package se.lexicon.exceptions;
 
 public class MyOwnRuntimeException extends Exception {
 
