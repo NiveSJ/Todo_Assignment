@@ -1,5 +1,6 @@
 package se.lexicon.DAO;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import se.lexicon.DAO.impl.AppUserDAOCollection;
 import se.lexicon.DAO.impl.PersonDAOCollection;
@@ -46,7 +47,7 @@ class TodoItemDAOCollectionTest {
 
 
         List<TodoItem> list1 = todoItemDAO.findAllAvailable();
-        System.out.println(list1);
+        Assertions.assertEquals(1, list1.size());
 
     }
 

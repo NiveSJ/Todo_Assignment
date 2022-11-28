@@ -34,7 +34,6 @@ public class TodoItem {
         setTitle(title);
         this.taskDescription = description;
         setDeadline(deadline);
-        this.assignee = new Person();
     }
 
 
@@ -51,10 +50,7 @@ public class TodoItem {
     }
 
     public void setAssignee(Person assignee) {
-
-
         this.assignee = assignee;
-
     }
 
     public String getTitle() {

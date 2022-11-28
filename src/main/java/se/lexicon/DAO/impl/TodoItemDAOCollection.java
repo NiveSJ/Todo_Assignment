@@ -7,8 +7,8 @@ import se.lexicon.sequencers.TodoItemIdSequencer;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class TodoItemDAOCollection implements ITodoItemDAO {
@@ -81,8 +81,7 @@ public class TodoItemDAOCollection implements ITodoItemDAO {
         // Objects.isNull(todoItem.getAssignee())
 
         return todoItemList.stream().
-                filter(todoItem -> (todoItem.getAssignee().getId())== null)
-                .collect(Collectors.toList());
+                filter(todoItem -> todoItem.getAssignee() == null).collect(Collectors.toList());
     }
 
     @Override
