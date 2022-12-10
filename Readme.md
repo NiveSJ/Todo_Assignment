@@ -18,5 +18,7 @@
 
 ¤ Used ArrayList to store Person, AppUser, TodoItem and TodoItemTask Information
 
+Used Streams and lambda for CRUD operations.
+
 
 
