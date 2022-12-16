@@ -29,11 +29,9 @@ class TodoItemDAOCollectionTest {
 
 
         List<TodoItem> personAll = todoItemDAO.findAll();
+        Assertions.assertEquals(1, personAll.size());
 
-        for (TodoItem item : personAll) {
-            assertEquals(todoItemDAO.findById(item.getId()), item);
 
-        }
 
 
         // List<TodoItem> list2 = todoItemDAO.findExpiredAndInCompleted();

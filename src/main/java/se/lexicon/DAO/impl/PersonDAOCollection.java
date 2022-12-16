@@ -5,7 +5,10 @@ import se.lexicon.DAO.IPersonDAO;
 import se.lexicon.exceptions.MyOwnRuntimeException;
 import se.lexicon.model.Person;
 import se.lexicon.sequencers.PersonIdSequencer;
+import se.lexicon.utility.FromFileSystem;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class PersonDAOCollection implements IPersonDAO {
@@ -13,12 +16,12 @@ public class PersonDAOCollection implements IPersonDAO {
     private List<Person> personList;
     private static PersonDAOCollection instance;
 
-    private PersonDAOCollection() {
-        this.personList = new ArrayList<>();
+    private PersonDAOCollection() throws IOException {
+        this.personList = FromFileSystem.getInstance().parsePerson();
 
     }
 
-    public static PersonDAOCollection getInstance() {
+    public static PersonDAOCollection getInstance() throws IOException {
 
         if (instance == null) instance = new PersonDAOCollection();
         return instance;
@@ -68,6 +71,7 @@ public class PersonDAOCollection implements IPersonDAO {
 
         Optional<Person> person1 = personList.stream().filter(person -> person.getCredentials().getUserName().
                 equalsIgnoreCase(username)).findFirst();
+
 
         Person newPerson = new Person();
 

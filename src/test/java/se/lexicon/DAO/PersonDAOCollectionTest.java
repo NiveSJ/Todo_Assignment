@@ -9,7 +9,6 @@ import se.lexicon.model.AppUser;
 import se.lexicon.model.Person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PersonDAOCollectionTest {
 

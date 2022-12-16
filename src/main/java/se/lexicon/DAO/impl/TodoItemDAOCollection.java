@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class TodoItemDAOCollection implements ITodoItemDAO {
@@ -48,17 +47,17 @@ public class TodoItemDAOCollection implements ITodoItemDAO {
 
     @Override
     public boolean deleteById(Integer id) {
-        boolean remove = todoItemList.removeIf(todoItem -> todoItem.getId() == id);
-        return remove;
+        return todoItemList.removeIf(todoItem -> todoItem.getId() == id);
+
 
     }
 
 
-    public void update(Integer Id, TodoItem model) {
+    public void update(Integer id, TodoItem model) {
 
         if (model == null) throw new IllegalArgumentException("toUpdate data was null");
 
-        todoItemList.stream().filter(todoItem -> todoItem.getId() == Id).
+        todoItemList.stream().filter(todoItem -> todoItem.getId() == id).
                 forEach(todoItem -> {
                             todoItem.setTitle(model.getTitle());
                             todoItem.setAssignee(model.getAssignee());
