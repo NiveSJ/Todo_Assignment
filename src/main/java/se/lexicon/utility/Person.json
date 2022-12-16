@@ -1,0 +1,35 @@
+[
+         {
+                  "firstName": "Nivethitha",
+                  "lastName": "Jayanth",
+                  "credentials": {
+                           "password": "20wqfj",
+                           "appRole": "ROLE_APP_ADMIN",
+                           "userName": "Test"
+                  },
+                  "id": 101,
+                  "email": "nive@gmail.com"
+         },
+         {
+                  "firstName": "Jayanth",
+                  "lastName": "Solai",
+                  "credentials": {
+                           "password": "20wqfj",
+                           "appRole": "ROLE_APP_USER",
+                           "userName": "Test1"
+                  },
+                  "id": 102,
+                  "email": "jay@gmail.com"
+         },
+         {
+                  "firstName": "Test",
+                  "lastName": "Test",
+                  "credentials": {
+                           "password": "20wqfj",
+                           "appRole": "ROLE_APP_USER",
+                           "userName": "Test2"
+                  },
+                  "id": 103,
+                  "email": "Test@gmail.com"
+         }
+]

@@ -1,0 +1,17 @@
+[
+         {
+                  "password": "20wqfj",
+                  "appRole": "ROLE_APP_ADMIN",
+                  "userName": "Test"
+         },
+         {
+                  "password": "20wqfj",
+                  "appRole": "ROLE_APP_USER",
+                  "userName": "Test1"
+         },
+         {
+                  "password": "20wqfj",
+                  "appRole": "ROLE_APP_USER",
+                  "userName": "Test2"
+         }
+]
