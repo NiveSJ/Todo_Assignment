@@ -81,7 +81,7 @@ public class FromFileSystem {
         List<Person> people = new ArrayList<>();
         ObjectMapper objectMapper = new ObjectMapper(); // Json Object mapper
         objectMapper.registerModule(new JavaTimeModule());
-        File file = new File("resources/people.json");
+        File file = new File("resources/Ipeople.json");
         try {
             people = objectMapper.readValue(file, new TypeReference<List<Person>>() {
             });
