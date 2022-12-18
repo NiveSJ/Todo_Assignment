@@ -1,13 +1,10 @@
 package se.lexicon.view;
 
-import se.lexicon.DAO.impl.PersonDAOCollection;
-import se.lexicon.DAO.impl.TodoItemDAOCollection;
 import se.lexicon.model.AppRole;
 import se.lexicon.model.AppUser;
 import se.lexicon.model.Person;
 import se.lexicon.model.TodoItem;
 
-import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
