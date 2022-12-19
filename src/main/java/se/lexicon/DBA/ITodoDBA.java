@@ -1,5 +1,6 @@
 package se.lexicon.DBA;
 
+import se.lexicon.exception.DBConnectionException;
 import se.lexicon.model.Person;
 import se.lexicon.model.TodoItem;
 
@@ -7,7 +8,7 @@ import java.util.Collection;
 
 public interface ITodoDBA extends IBaseDBA<TodoItem> {
 
-    TodoItem create(TodoItem todoItem);
+    TodoItem create(TodoItem todoItem) ;
 
     Collection<TodoItem> findAll();
 

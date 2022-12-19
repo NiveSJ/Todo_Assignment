@@ -1,10 +1,12 @@
 package se.lexicon.DBA;
 
+import se.lexicon.exception.DBConnectionException;
+
 import java.util.Collection;
 
 public interface IBaseDBA<T> {
 
-    T create(T t);
+    T create(T t) ;
 
     Collection<T> findAll();
 

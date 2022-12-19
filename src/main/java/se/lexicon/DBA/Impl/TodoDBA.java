@@ -6,10 +6,7 @@ import se.lexicon.exception.DBConnectionException;
 import se.lexicon.model.Person;
 import se.lexicon.model.TodoItem;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Collection;
 
 public class TodoDBA implements ITodoDBA {
@@ -17,25 +14,35 @@ public class TodoDBA implements ITodoDBA {
     public TodoItem create(TodoItem todoItem) {
         String query = "Insert into todoit.todo_item(title,description, deadline,done,assignee_id) values (?,?,?,?,?); ";
 
-        try (Connection connection = SQLConnection.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query);){
+        try (
+                Connection connection = SQLConnection.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(query, 1);) {
 
-            preparedStatement.setString(1,todoItem.getTitle());
-            preparedStatement.setString(2,todoItem.getTaskDescription());
+            preparedStatement.setString(1, todoItem.getTitle());
+            preparedStatement.setString(2, todoItem.getTaskDescription());
             preparedStatement.setDate(3, Date.valueOf(todoItem.getDeadline()));
-            preparedStatement.setBoolean(4,todoItem.isDone());
-            preparedStatement.setInt(5,todoItem.getAssignee().get);
+            preparedStatement.setBoolean(4, todoItem.isDone());
+            preparedStatement.setInt(5, todoItem.getAssignee().getId());
 
+            int AffectedRows = preparedStatement.executeUpdate();
 
+            try (ResultSet resultSet = preparedStatement.getGeneratedKeys();) {
+
+                if (resultSet.next()) {
+                    todoItem.setId(resultSet.getInt(1));
+                }
+            }
 
         } catch (DBConnectionException | SQLException e) {
-            throw new RuntimeException(e);
+            System.err.println(e.getMessage());
         }
+        return todoItem;
     }
 
     @Override
     public Collection<TodoItem> findAll() {
-        return null;
+        String query = "select * from todoit.todo_item";
+
     }
 
     @Override
