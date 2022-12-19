@@ -5,7 +5,7 @@ import se.lexicon.model.TodoItem;
 
 import java.util.Collection;
 
-public interface ITodoDBAI extends IBaseDBA<TodoItem> {
+public interface ITodoDBA extends IBaseDBA<TodoItem> {
 
     TodoItem create(TodoItem todoItem);
 

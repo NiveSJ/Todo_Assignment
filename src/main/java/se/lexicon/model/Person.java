@@ -6,36 +6,93 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Data
+
 public class Person {
 
-    private Integer id;
+
     private String firstName;
     private String LastName;
     private String email;
 
+    @Override
+    public String toString() {
+        return "Person{" +
+                "firstName='" + firstName + '\'' +
+                ", LastName='" + LastName + '\'' +
+                ", email='" + email + '\'' +
+                ", todoItems=" + todoItems +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Person)) return false;
+        Person person = (Person) o;
+        return Objects.equals(firstName, person.firstName) && Objects.equals(LastName, person.LastName) && Objects.equals(email, person.email) && Objects.equals(todoItems, person.todoItems);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, LastName, email, todoItems);
+    }
 
     private List<TodoItem> todoItems;
 
-    private AppUser credentials;
-
-    public Person() { // for Json file throws error if a default constructor not present
+    public String getFirstName() {
+        return firstName;
     }
 
-    public Person(Integer id, String firstName, String LastName, String email, AppUser credentials, List<TodoItem> todoItems) {
-        setId(id);
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return LastName;
+    }
+
+    public void setLastName(String lastName) {
+        LastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public List<TodoItem> getTodoItems() {
+        return todoItems;
+    }
+
+    public void setTodoItems(List<TodoItem> todoItems) {
+        this.todoItems = todoItems;
+    }
+
+    private AppUser credentials;
+
+
+    public Person(String firstName, String LastName, String email, AppUser credentials, List<TodoItem> todoItems) {
         setFirstName(firstName);
         setLastName(LastName);
         setEmail(email);
         setCredentials(credentials);
         setTodoItems(todoItems);
 
-
     }
 
+    public AppUser getCredentials() {
+        return credentials;
+    }
+
+    public void setCredentials(AppUser credentials) {
+        this.credentials = credentials;
+    }
 
     public Person(String firstName, String LastName, String email, AppUser credentials) {
-        this.id = id;
+
         setFirstName(firstName);
         setLastName(LastName);
         setEmail(email);
@@ -44,87 +101,5 @@ public class Person {
 
     }
 
-    public List<TodoItem> getTodoItems() {
-        return todoItems;
-    }
-/*
-    public void setTodoItems(List<TodoItem> todoItems) {
 
-
-        if (this.todoItems == null) todoItems = new ArrayList<>();
-        this.todoItems = todoItems;
-    }
-
-    public AppUser getCredentials() {
-        return credentials;
-    }
-
-    public void setCredentials(AppUser credentials) {
-        if (credentials == null) throw new IllegalArgumentException("Credentials cannot be null");
-
-        this.credentials = credentials;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-
-
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        if (firstName == null) throw new IllegalArgumentException("First name cannot be null");
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return LastName;
-    }
-
-    public void setLastName(String LastName) {
-        if (LastName == null) throw new IllegalArgumentException("Last name cannot be null");
-        this.LastName = LastName;
-    }
-
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        if (email == null) throw new IllegalArgumentException("Email cannot be null");
-        this.email = email;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", LastName='" + LastName + '\'' +
-                ", email='" + email + '\'' +
-                '}' + "\n";
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Person person = (Person) o;
-        return id == person.id && firstName.equals(person.firstName)
-                && LastName.equals(person.LastName) && email.equals(person.email);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName, LastName, email);
-    }*/
 }
