@@ -18,7 +18,7 @@ public class AppUser {
     }
 
     private boolean active;
-    
+
     public AppUser(String username, String password, AppRole appRole) {
 
         setUserName(username);

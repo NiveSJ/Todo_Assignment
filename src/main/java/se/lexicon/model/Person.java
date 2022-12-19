@@ -9,11 +9,13 @@ import java.util.Objects;
 
 public class Person {
 
+    private Integer id;
 
     private String firstName;
     private String LastName;
-    private String email;
+    private List<TodoItem> todoItems;
 
+    private AppUser credentials;
     @Override
     public String toString() {
         return "Person{" +
@@ -37,7 +39,7 @@ public class Person {
         return Objects.hash(firstName, LastName, email, todoItems);
     }
 
-    private List<TodoItem> todoItems;
+
 
     public String getFirstName() {
         return firstName;
@@ -71,7 +73,7 @@ public class Person {
         this.todoItems = todoItems;
     }
 
-    private AppUser credentials;
+
 
 
     public Person(String firstName, String LastName, String email, AppUser credentials, List<TodoItem> todoItems) {
