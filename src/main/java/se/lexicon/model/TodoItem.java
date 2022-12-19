@@ -18,9 +18,9 @@ public class TodoItem {
     public TodoItem() {
     }
 
-    public TodoItem(Integer id, String title, String taskDescription, LocalDate deadline, Person assignee) {
+    public TodoItem(String title, String taskDescription, LocalDate deadline, Person assignee) {
 
-        setId(id);
+
         setTitle(title);
         this.done = false;
         this.taskDescription = taskDescription;
@@ -89,16 +89,6 @@ public class TodoItem {
         this.done = done;
     }
 
-  /*  public Person getCreator() {
-        return creator;
-    }
-
-    public void setCreator(Person creator) {
-        if (creator == null) throw new IllegalArgumentException("Creator was null");
-        if (creator.getCredentials().getAppRole() != AppRole.ROLE_APP_ADMIN)
-            throw new IllegalArgumentException("No Permission");
-        this.creator = creator;
-    }*/
 
     public boolean isOverdue() {
 

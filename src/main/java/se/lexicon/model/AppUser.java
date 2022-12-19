@@ -18,24 +18,13 @@ public class AppUser {
     }
 
     private boolean active;
-
-    public AppUser() {
-    }
-
-    public AppUser(Integer id, String username, String password, boolean active, AppRole appRole) {
-        setId(id);
-        setUserName(username);
-        setPassword(password);
-        setAppRole(appRole);
-        setActive(active);
-    }
-
+    
     public AppUser(String username, String password, AppRole appRole) {
-        this.id=id;
 
         setUserName(username);
         setPassword(password);
         setAppRole(appRole);
+
     }
 
     public Integer getId() {
@@ -82,7 +71,7 @@ public class AppUser {
     @Override
     public String toString() {
         return "AppUser{" +
-                "Id="+ id + '\'' +
+                "Id=" + id + '\'' +
                 "userName='" + userName + '\'' +
 
                 ", appRole=" + appRole +

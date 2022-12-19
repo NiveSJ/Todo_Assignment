@@ -57,7 +57,7 @@ public class ConsoleUI {
         System.out.println("Password:");
         String pwd = getString();
 
-        AppUser user1 = new AppUser(username, pwd, AppRole.ROLE_APP_USER);
+        //AppUser user1 = new AppUser(username, pwd, AppRole.ROLE_APP_USER);
 
         System.out.println("FirstName:");
         String fn = getString();

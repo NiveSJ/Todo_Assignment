@@ -4,7 +4,7 @@ import se.lexicon.model.Person;
 
 import java.util.Collection;
 
-public interface Ipeople extends IBaseDBA<Person> {
+public interface IpeopleDBA extends IBaseDBA<Person> {
 
     Person create(Person person);
 
