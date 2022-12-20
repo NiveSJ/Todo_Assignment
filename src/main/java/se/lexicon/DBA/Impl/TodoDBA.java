@@ -6,9 +6,7 @@ import se.lexicon.exception.DBConnectionException;
 import se.lexicon.model.Person;
 import se.lexicon.model.TodoItem;
 
-import javax.swing.plaf.nimbus.State;
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -129,7 +127,7 @@ public class TodoDBA implements ITodoDBA {
     @Override
     public TodoItem update(TodoItem todoItem) {
 
-        String query = "update todoit.todo_item set title = ?, description=?, deadline = ?, done = ?, assignee_id =? ";
+        String query = "update todoit.todo_item set title = ?, description=?, deadline = ?, done = ?, assignee_id =? where todo_id=? ";
 
         try (Connection connection = SQLConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query);) {
@@ -140,6 +138,7 @@ public class TodoDBA implements ITodoDBA {
             preparedStatement.setDate(3, Date.valueOf((todoItem.getDeadline())));
             preparedStatement.setBoolean(4, todoItem.isDone());
             preparedStatement.setInt(5, todoItem.getAssignee().getId());
+            preparedStatement.setInt(6,todoItem.getId());
 
             try (ResultSet rowsAffected = preparedStatement.executeQuery();) {
                 System.out.println("Number of rows Affected with update:" + rowsAffected);
