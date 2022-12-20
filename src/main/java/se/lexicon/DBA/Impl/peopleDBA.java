@@ -14,18 +14,6 @@ import java.util.List;
 public class peopleDBA implements IpeopleDBA {
 
 
-    private static peopleDBA instance;
-
-    private peopleDBA() {
-    }
-
-    public static peopleDBA getInstance() {
-        if (instance == null) instance = new peopleDBA();
-
-        return instance;
-
-    }
-
     @Override
     public Person create(Person person) {
         String qry = "select * from todoit.person where first_name = ? ";
@@ -41,14 +29,15 @@ public class peopleDBA implements IpeopleDBA {
             preparedStatement1.setString(1, person.getFirstName());
 
 
-            try(ResultSet rs = preparedStatement1.executeQuery();){
+            try (ResultSet rs = preparedStatement1.executeQuery();) {
 
-            if (rs.next()) {
-                return null;
-            }}
+                if (rs.next()) {
+                    return null;
+                }
+            }
             preparedStatement.setString(1, person.getFirstName());
             preparedStatement.setString(2, person.getLastName());
-            int rows_affected= preparedStatement.executeUpdate();
+            int rows_affected = preparedStatement.executeUpdate();
 
             try (ResultSet resultSet = preparedStatement.getGeneratedKeys();) {
 
@@ -83,11 +72,8 @@ public class peopleDBA implements IpeopleDBA {
 
                 while (rs.next()) {
 
-                    person.setId(rs.getInt("person_id"));
-                    person.setFirstName(rs.getString("first_name"));
-                    person.setFirstName(rs.getString("last_name"));
-
-                    personList.add(person);
+                    personList.add(new Person(rs.getInt("person_id"),
+                            rs.getString("first_name"), rs.getString("last_name")));
 
                 }
             }
@@ -116,9 +102,10 @@ public class peopleDBA implements IpeopleDBA {
 
                 while (rs.next()) {
 
-                    person.setId(rs.getInt("person_id"));
-                    person.setFirstName(rs.getString("first_name"));
-                    person.setFirstName(rs.getString("last_name"));
+                    person = new Person(rs.getInt("person_id"),
+                            rs.getString("first_name"), rs.getString("last_name"));
+
+
 
                 }
             }
@@ -197,11 +184,8 @@ public class peopleDBA implements IpeopleDBA {
 
 
                 while (rs.next()) {
-
-                    person.setId(rs.getInt("person_id"));
-                    person.setFirstName(rs.getString("first_name"));
-                    person.setFirstName(rs.getString("last_name"));
-                    personList.add(person);
+                    personList.add(new Person(rs.getInt("person_id"),
+                            rs.getString("first_name"),rs.getString("last_name")));
 
                 }
             }

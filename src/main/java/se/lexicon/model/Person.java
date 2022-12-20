@@ -18,8 +18,13 @@ public class Person {
     }
 
 
-
     public Person(String firstName, String LastName) {
+        setFirstName(firstName);
+        setLastName(LastName);
+    }
+
+    public Person(Integer id, String firstName, String LastName) {
+        setId(id);
         setFirstName(firstName);
         setLastName(LastName);
     }
@@ -49,8 +54,6 @@ public class Person {
     public void setTodoItems(List<TodoItem> todoItems) {
         this.todoItems = todoItems;
     }
-
-
 
 
     public AppUser getCredentials() {

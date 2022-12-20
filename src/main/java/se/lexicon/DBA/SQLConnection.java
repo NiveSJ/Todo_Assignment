@@ -10,7 +10,7 @@ public class SQLConnection {
 
     private static final String DB_USER = "root";
     private static final String DB_PWD = "Nive";
-    private static final String DB_URL = "jdbc:mysql://127.0.0.1/world";
+    private static final String DB_URL = "jdbc:mysql://127.0.0.1/todoit";
 
 
     public static Connection getConnection() throws DBConnectionException {

@@ -23,7 +23,7 @@ public class Controller {
 
     public Controller() {
         ui = new ConsoleUI();
-        personDBA = peopleDBA.getInstance();
+
         todoDBA = todoDBA.getInstance();
 
 

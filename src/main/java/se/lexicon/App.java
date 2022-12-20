@@ -3,8 +3,7 @@ package se.lexicon;
 import se.lexicon.DBA.Impl.peopleDBA;
 import se.lexicon.model.Person;
 
-import java.sql.Connection;
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Todo Assignment
@@ -12,14 +11,19 @@ import java.util.List;
 public class App {
     public static void main(String[] args) {
 
-        Person per = new Person("Nivethitha", "Jay");
+           peopleDBA peopleDBA= new peopleDBA();
+       /*   Person per = new Person("Nivethitha", "Jay");
 
-       Person person =peopleDBA.getInstance().create(per);
-        if (person== null)
+        Person person = peopleDB.create(per);
+        if (person == null)
 
-        System.out.println("Person already exist cannot create");
+            System.out.println("Person already exist cannot create");
 
-        peopleDBA.getInstance().findByName("Test Test").forEach(System.out::println);
+        peopleDB.findByName("Test Test").forEach(System.out::println);*/
+        peopleDBA.findAll().forEach(System.out::println);
+        System.out.println("Find by name\n");
+        peopleDBA.findByName("Test Test").forEach(System.out::println);
+
 
 
     }
