@@ -168,7 +168,7 @@ public class peopleDBA implements IpeopleDBA {
         Person person = new Person();
         List<Person> personList = new ArrayList<>();
 
-        String query = "select * from todoit.person where concat (first_name,\" \", last_name) = ?;";
+        String query = "select * from todoit.person where concat (first_name,\" \", last_name) = ?";
 
         try (Connection connection = SQLConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query);) {
