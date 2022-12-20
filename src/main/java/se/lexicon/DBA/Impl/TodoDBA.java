@@ -6,8 +6,12 @@ import se.lexicon.exception.DBConnectionException;
 import se.lexicon.model.Person;
 import se.lexicon.model.TodoItem;
 
+import javax.swing.plaf.nimbus.State;
 import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class TodoDBA implements ITodoDBA {
     @Override
@@ -16,7 +20,8 @@ public class TodoDBA implements ITodoDBA {
 
         try (
                 Connection connection = SQLConnection.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query, 1);) {
+                PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);) {
+            connection.setAutoCommit(false);
 
             preparedStatement.setString(1, todoItem.getTitle());
             preparedStatement.setString(2, todoItem.getTaskDescription());
@@ -32,6 +37,7 @@ public class TodoDBA implements ITodoDBA {
                     todoItem.setId(resultSet.getInt(1));
                 }
             }
+            connection.commit();
 
         } catch (DBConnectionException | SQLException e) {
             System.err.println(e.getMessage());
@@ -41,42 +47,318 @@ public class TodoDBA implements ITodoDBA {
 
     @Override
     public Collection<TodoItem> findAll() {
-        String query = "select * from todoit.todo_item";
 
+        ArrayList<TodoItem> todoItemsList = new ArrayList<>();
+        TodoItem todoItem = new TodoItem();
+        Person person = new Person();
+
+        String query = "select * from todoit.todo_item as todo,todoit.person as person where person.person_id = todo.assignee_id ";
+
+        try (Connection connection = SQLConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+
+            try (ResultSet rs = preparedStatement.executeQuery();) {
+
+                while (rs.next()) {
+
+                    todoItem.setId(rs.getInt("todo_id"));
+                    todoItem.setTitle(rs.getString("title"));
+                    todoItem.setTaskDescription(rs.getString("description"));
+                    todoItem.setDeadline((rs.getDate("deadline").toLocalDate()));
+                    todoItem.setDone(rs.getBoolean("done"));
+
+
+                    person.setId(rs.getInt("person_id"));
+                    person.setFirstName(rs.getString("first_name"));
+                    person.setFirstName(rs.getString("last_name"));
+
+                    todoItem.setAssignee(person);
+                    todoItemsList.add(todoItem);
+
+                }
+            }
+
+
+        } catch (DBConnectionException | SQLException e) {
+            System.err.println(e.getMessage());
+        }
+
+        return todoItemsList;
     }
 
     @Override
     public TodoItem findById(int id) {
-        return null;
+        TodoItem todoItem = new TodoItem();
+        Person person = new Person();
+
+
+        String query = " select * from todoit.todo_item as todo,todoit.person as person where todo_id = ? and person.person_id = todo.assignee_id  ";
+
+        try (Connection connection = SQLConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+
+            preparedStatement.setInt(1, id);
+
+            try (ResultSet rs = preparedStatement.executeQuery();) {
+
+                while (rs.next()) {
+
+                    todoItem.setId(rs.getInt("todo_id"));
+                    todoItem.setTitle(rs.getString("title"));
+                    todoItem.setTaskDescription(rs.getString("description"));
+                    todoItem.setDeadline((rs.getDate("deadline").toLocalDate()));
+                    todoItem.setDone(rs.getBoolean("done"));
+
+                    person.setId(rs.getInt("person_id"));
+                    person.setFirstName(rs.getString("first_name"));
+                    person.setFirstName(rs.getString("last_name"));
+
+                    todoItem.setAssignee(person);
+                }
+            }
+
+        } catch (DBConnectionException | SQLException e) {
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+        }
+
+
+        return todoItem;
     }
 
     @Override
     public TodoItem update(TodoItem todoItem) {
-        return null;
+
+        String query = "update todoit.todo_item set title = ?, description=?, deadline = ?, done = ?, assignee_id =? ";
+
+        try (Connection connection = SQLConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+            connection.setAutoCommit(false);
+            // set parameters
+            preparedStatement.setString(1, todoItem.getTitle());
+            preparedStatement.setString(2, todoItem.getTaskDescription());
+            preparedStatement.setDate(3, Date.valueOf((todoItem.getDeadline())));
+            preparedStatement.setBoolean(4, todoItem.isDone());
+            preparedStatement.setInt(5, todoItem.getAssignee().getId());
+
+            try (ResultSet rowsAffected = preparedStatement.executeQuery();) {
+                System.out.println("Number of rows Affected with update:" + rowsAffected);
+            }
+            connection.commit();
+
+        } catch (DBConnectionException | SQLException e) {
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+
+        }
+
+
+        return todoItem;
     }
 
     @Override
     public boolean deleteById(int id) {
-        return false;
+
+        String query = "delete  from todoit.todo_item where todo_id = ? ";
+
+        try (Connection connection = SQLConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+
+            preparedStatement.setInt(1, id);
+
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                System.out.println("Number of rows Deleted" + rs);
+            }
+
+
+        } catch (DBConnectionException | SQLException e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+
+
+        return true;
     }
 
     @Override
     public Collection<TodoItem> findByDoneStatus(boolean status) {
-        return null;
+        TodoItem todoItem = new TodoItem();
+        Person person = new Person();
+        ArrayList<TodoItem> todoItemsList = new ArrayList<>();
+
+
+        String query = "select * from todoit.todo_item as todo,todoit.person as person where person.person_id = ? and todo.done = ? ";
+
+        try (Connection connection = SQLConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+
+            preparedStatement.setBoolean(1, true);
+
+            try (ResultSet rs = preparedStatement.executeQuery();) {
+
+                while (rs.next()) {
+
+                    todoItem.setId(rs.getInt("todo_id"));
+                    todoItem.setTitle(rs.getString("title"));
+                    todoItem.setTaskDescription(rs.getString("description"));
+                    todoItem.setDeadline((rs.getDate("deadline").toLocalDate()));
+                    todoItem.setDone(rs.getBoolean("done"));
+
+                    person.setId(rs.getInt("person_id"));
+                    person.setFirstName(rs.getString("first_name"));
+                    person.setFirstName(rs.getString("last_name"));
+
+                    todoItem.setAssignee(person);
+                    todoItemsList.add(todoItem);
+
+                }
+            }
+
+        } catch (DBConnectionException | SQLException e) {
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+        }
+
+        return todoItemsList;
     }
 
     @Override
     public Collection<TodoItem> findByAssignee(int id) {
-        return null;
+
+        List<TodoItem> todoItemsList = new ArrayList<>();
+        TodoItem todoItem = new TodoItem();
+        Person person = new Person();
+
+        String query = "select * from todoit.todo_item as todo,todoit.person as person where " +
+                "person.person_id = todo.assignee_id and todo_id=?;";
+
+        try (Connection connection = SQLConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+
+            preparedStatement.setInt(1, id);
+
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+
+                while (rs.next()) {
+
+                    todoItem.setId(rs.getInt("todo_id"));
+                    todoItem.setTitle(rs.getString("title"));
+                    todoItem.setTaskDescription(rs.getString("description"));
+                    todoItem.setDeadline((rs.getDate("deadline").toLocalDate()));
+                    todoItem.setDone(rs.getBoolean("done"));
+
+                    person.setId(rs.getInt("person_id"));
+                    person.setFirstName(rs.getString("first_name"));
+                    person.setFirstName(rs.getString("last_name"));
+
+                    todoItem.setAssignee(person);
+                    todoItemsList.add(todoItem);
+
+                }
+
+            }
+
+
+        } catch (DBConnectionException | SQLException e) {
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+        }
+
+
+        return todoItemsList;
     }
 
     @Override
     public Collection<TodoItem> findByAssignee(Person person) {
-        return null;
+
+        List<TodoItem> todoItemsList = new ArrayList<>();
+        TodoItem todoItem = new TodoItem();
+
+
+        String query = "select * from todoit.todo_item as todo,todoit.person as person where " +
+                "person.person_id = ? ";
+
+        try (Connection connection = SQLConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+
+            preparedStatement.setInt(1, person.getId());
+
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+
+                while (rs.next()) {
+
+                    todoItem.setId(rs.getInt("todo_id"));
+                    todoItem.setTitle(rs.getString("title"));
+                    todoItem.setTaskDescription(rs.getString("description"));
+                    todoItem.setDeadline((rs.getDate("deadline").toLocalDate()));
+                    todoItem.setDone(rs.getBoolean("done"));
+
+                    person.setId(rs.getInt("person_id"));
+                    person.setFirstName(rs.getString("first_name"));
+                    person.setFirstName(rs.getString("last_name"));
+
+                    todoItem.setAssignee(person);
+                    todoItemsList.add(todoItem);
+
+                }
+
+            }
+
+
+        } catch (DBConnectionException | SQLException e) {
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+        }
+
+
+        return todoItemsList;
+
+
     }
 
     @Override
     public Collection<TodoItem> findByUnassignedTodoItem() {
-        return null;
+
+        List<TodoItem> todoItemsList = new ArrayList<>();
+        TodoItem todoItem = new TodoItem();
+        Person person = new Person();
+
+        String query = "select * from todoit.todo_item as todo,todoit.person as person where " +
+                "person.person_id is NULL";
+
+        try (Connection connection = SQLConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+
+
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+
+                while (rs.next()) {
+
+                    todoItem.setId(rs.getInt("todo_id"));
+                    todoItem.setTitle(rs.getString("title"));
+                    todoItem.setTaskDescription(rs.getString("description"));
+                    todoItem.setDeadline((rs.getDate("deadline").toLocalDate()));
+                    todoItem.setDone(rs.getBoolean("done"));
+
+                    person.setId(rs.getInt("person_id"));
+                    person.setFirstName(rs.getString("first_name"));
+                    person.setFirstName(rs.getString("last_name"));
+
+                    todoItem.setAssignee(person);
+                    todoItemsList.add(todoItem);
+
+                }
+
+            }
+
+
+        } catch (DBConnectionException | SQLException e) {
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+        }
+
+
+        return todoItemsList;
+
     }
 }

@@ -68,9 +68,9 @@ public class ConsoleUI {
         System.out.println("Email:");
         String email = getString();
 
-        Person person1 = new Person(fn, ln, email, user1);
+      //  Person person1 = new Person(fn, ln, email, user1);
 
-        return person1;
+     //   return person1;
     }
 
     public void displayPersonInformation(Person person) {

@@ -1,6 +1,5 @@
 package se.lexicon.model;
 
-import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,35 +9,23 @@ import java.util.Objects;
 public class Person {
 
     private Integer id;
-
     private String firstName;
     private String LastName;
     private List<TodoItem> todoItems;
-
     private AppUser credentials;
-    @Override
-    public String toString() {
-        return "Person{" +
-                "firstName='" + firstName + '\'' +
-                ", LastName='" + LastName + '\'' +
-                ", email='" + email + '\'' +
-                ", todoItems=" + todoItems +
-                '}';
+
+    public Person() {
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Person)) return false;
-        Person person = (Person) o;
-        return Objects.equals(firstName, person.firstName) && Objects.equals(LastName, person.LastName) && Objects.equals(email, person.email) && Objects.equals(todoItems, person.todoItems);
-    }
+    public Person(String firstName, String LastName, AppUser credentials) {
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(firstName, LastName, email, todoItems);
-    }
+        setFirstName(firstName);
+        setLastName(LastName);
 
+        setCredentials(credentials);
+        this.todoItems = new ArrayList<>();
+
+    }
 
 
     public String getFirstName() {
@@ -57,13 +44,6 @@ public class Person {
         LastName = lastName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public List<TodoItem> getTodoItems() {
         return todoItems;
@@ -74,12 +54,9 @@ public class Person {
     }
 
 
-
-
     public Person(String firstName, String LastName, String email, AppUser credentials, List<TodoItem> todoItems) {
         setFirstName(firstName);
         setLastName(LastName);
-        setEmail(email);
         setCredentials(credentials);
         setTodoItems(todoItems);
 
@@ -93,15 +70,6 @@ public class Person {
         this.credentials = credentials;
     }
 
-    public Person(String firstName, String LastName, String email, AppUser credentials) {
-
-        setFirstName(firstName);
-        setLastName(LastName);
-        setEmail(email);
-        setCredentials(credentials);
-        this.todoItems = new ArrayList<>();
-
-    }
 
     public Integer getId() {
         return id;
@@ -110,4 +78,28 @@ public class Person {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "firstName='" + firstName + '\'' +
+                ", LastName='" + LastName + '\'' +
+                ", todoItems=" + todoItems +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Person)) return false;
+        Person person = (Person) o;
+        return Objects.equals(firstName, person.firstName) && Objects.equals(LastName, person.LastName) && Objects.equals(todoItems, person.todoItems);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, LastName, todoItems);
+    }
+
+
 }
