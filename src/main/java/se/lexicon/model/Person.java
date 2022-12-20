@@ -17,14 +17,11 @@ public class Person {
     public Person() {
     }
 
-    public Person(String firstName, String LastName, AppUser credentials) {
 
+
+    public Person(String firstName, String LastName) {
         setFirstName(firstName);
         setLastName(LastName);
-
-        setCredentials(credentials);
-        this.todoItems = new ArrayList<>();
-
     }
 
 
@@ -54,13 +51,7 @@ public class Person {
     }
 
 
-    public Person(String firstName, String LastName, String email, AppUser credentials, List<TodoItem> todoItems) {
-        setFirstName(firstName);
-        setLastName(LastName);
-        setCredentials(credentials);
-        setTodoItems(todoItems);
 
-    }
 
     public AppUser getCredentials() {
         return credentials;
@@ -82,9 +73,9 @@ public class Person {
     @Override
     public String toString() {
         return "Person{" +
-                "firstName='" + firstName + '\'' +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
                 ", LastName='" + LastName + '\'' +
-                ", todoItems=" + todoItems +
                 '}';
     }
 

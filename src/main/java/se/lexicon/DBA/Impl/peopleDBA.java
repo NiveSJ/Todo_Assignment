@@ -14,22 +14,41 @@ import java.util.List;
 public class peopleDBA implements IpeopleDBA {
 
 
+    private static peopleDBA instance;
+
+    private peopleDBA() {
+    }
+
+    public static peopleDBA getInstance() {
+        if (instance == null) instance = new peopleDBA();
+
+        return instance;
+
+    }
+
     @Override
     public Person create(Person person) {
-
+        String qry = "select * from todoit.person where first_name = ? ";
         String query = "insert into todoit.person(first_name,last_name) values(?,?); ";
 
         try (
                 Connection connection = SQLConnection.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query,
-                        Statement.RETURN_GENERATED_KEYS);) {
+                        Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement preparedStatement1 = connection.prepareStatement(qry);) {
             connection.setAutoCommit(false);
 
+            preparedStatement1.setString(1, person.getFirstName());
+
+
+            try(ResultSet rs = preparedStatement1.executeQuery();){
+
+            if (rs.next()) {
+                return null;
+            }}
             preparedStatement.setString(1, person.getFirstName());
             preparedStatement.setString(2, person.getLastName());
-
-
-            int AffectedRows = preparedStatement.executeUpdate();
+            int rows_affected= preparedStatement.executeUpdate();
 
             try (ResultSet resultSet = preparedStatement.getGeneratedKeys();) {
 
@@ -42,6 +61,7 @@ public class peopleDBA implements IpeopleDBA {
 
         } catch (DBConnectionException | SQLException e) {
             System.err.println(e.getMessage());
+            e.printStackTrace();
         }
         return person;
 
@@ -66,7 +86,6 @@ public class peopleDBA implements IpeopleDBA {
                     person.setId(rs.getInt("person_id"));
                     person.setFirstName(rs.getString("first_name"));
                     person.setFirstName(rs.getString("last_name"));
-
 
                     personList.add(person);
 
@@ -125,9 +144,9 @@ public class peopleDBA implements IpeopleDBA {
             preparedStatement.setInt(3, person.getId());
 
 
-            try (ResultSet rowsAffected = preparedStatement.executeQuery();) {
-                System.out.println("Number of rows Affected with update:" + rowsAffected);
-            }
+            int rowsAffected = preparedStatement.executeUpdate();
+            System.out.println("Number of rows Affected with update:" + rowsAffected);
+
             connection.commit();
 
         } catch (DBConnectionException | SQLException e) {

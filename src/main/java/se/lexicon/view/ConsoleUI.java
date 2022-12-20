@@ -50,14 +50,16 @@ public class ConsoleUI {
     }
 
     public Person getPersonInfo() {
-
+/*
         System.out.println("Username:");
         String username = getString();
 
         System.out.println("Password:");
         String pwd = getString();
 
-        //AppUser user1 = new AppUser(username, pwd, AppRole.ROLE_APP_USER);
+        //AppUser user1 = new AppUser(username, pwd, AppRole.ROLE_APP_USER);*/
+
+
 
         System.out.println("FirstName:");
         String fn = getString();
@@ -65,12 +67,10 @@ public class ConsoleUI {
         System.out.println("LastName:");
         String ln = getString();
 
-        System.out.println("Email:");
-        String email = getString();
 
-      //  Person person1 = new Person(fn, ln, email, user1);
+        Person person1 = new Person(fn, ln);
 
-     //   return person1;
+        return person1;
     }
 
     public void displayPersonInformation(Person person) {

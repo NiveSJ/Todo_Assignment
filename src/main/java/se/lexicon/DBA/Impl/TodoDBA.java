@@ -12,6 +12,19 @@ import java.util.Collection;
 import java.util.List;
 
 public class TodoDBA implements ITodoDBA {
+
+    private static TodoDBA instance;
+
+    private TodoDBA() {
+    }
+
+    public static TodoDBA getInstance() {
+        if (instance == null) instance = new TodoDBA();
+
+        return instance;
+
+    }
+
     @Override
     public TodoItem create(TodoItem todoItem) {
         String query = "Insert into todoit.todo_item(title,description, deadline,done,assignee_id) values (?,?,?,?,?); ";
@@ -138,7 +151,7 @@ public class TodoDBA implements ITodoDBA {
             preparedStatement.setDate(3, Date.valueOf((todoItem.getDeadline())));
             preparedStatement.setBoolean(4, todoItem.isDone());
             preparedStatement.setInt(5, todoItem.getAssignee().getId());
-            preparedStatement.setInt(6,todoItem.getId());
+            preparedStatement.setInt(6, todoItem.getId());
 
             try (ResultSet rowsAffected = preparedStatement.executeQuery();) {
                 System.out.println("Number of rows Affected with update:" + rowsAffected);
