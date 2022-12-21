@@ -60,8 +60,8 @@ public class TodoDBA implements ITodoDBA {
     public Collection<TodoItem> findAll() {
 
         ArrayList<TodoItem> todoItemsList = new ArrayList<>();
-        TodoItem todoItem = new TodoItem();
-        Person person = new Person();
+        TodoItem todoItem;
+
 
         String query = "select * from todoit.todo_item as todo,todoit.person as person where person.person_id = todo.assignee_id ";
 
@@ -72,19 +72,12 @@ public class TodoDBA implements ITodoDBA {
 
                 while (rs.next()) {
 
-                    todoItem.setId(rs.getInt("todo_id"));
-                    todoItem.setTitle(rs.getString("title"));
-                    todoItem.setTaskDescription(rs.getString("description"));
-                    todoItem.setDeadline((rs.getDate("deadline").toLocalDate()));
-                    todoItem.setDone(rs.getBoolean("done"));
 
-
-                    person.setId(rs.getInt("person_id"));
-                    person.setFirstName(rs.getString("first_name"));
-                    person.setFirstName(rs.getString("last_name"));
-
-                    todoItem.setAssignee(person);
-                    todoItemsList.add(todoItem);
+                    todoItemsList.add(new
+                            TodoItem(rs.getInt("todo_id"), rs.getString("title"),
+                            rs.getString("description"), rs.getDate("deadline").toLocalDate(),
+                            rs.getBoolean("done"), new Person(rs.getInt("person_id"),
+                            rs.getString("first_name"), rs.getString("last_name"))));
 
                 }
             }
@@ -114,17 +107,10 @@ public class TodoDBA implements ITodoDBA {
 
                 while (rs.next()) {
 
-                    todoItem.setId(rs.getInt("todo_id"));
-                    todoItem.setTitle(rs.getString("title"));
-                    todoItem.setTaskDescription(rs.getString("description"));
-                    todoItem.setDeadline((rs.getDate("deadline").toLocalDate()));
-                    todoItem.setDone(rs.getBoolean("done"));
-
-                    person.setId(rs.getInt("person_id"));
-                    person.setFirstName(rs.getString("first_name"));
-                    person.setFirstName(rs.getString("last_name"));
-
-                    todoItem.setAssignee(person);
+                    todoItem = new TodoItem(rs.getInt("todo_id"), rs.getString("title"),
+                            rs.getString("description"), rs.getDate("deadline").toLocalDate(),
+                            rs.getBoolean("done"), new Person(rs.getInt("person_id"),
+                            rs.getString("first_name"), rs.getString("last_name")));
                 }
             }
 
@@ -210,18 +196,11 @@ public class TodoDBA implements ITodoDBA {
 
                 while (rs.next()) {
 
-                    todoItem.setId(rs.getInt("todo_id"));
-                    todoItem.setTitle(rs.getString("title"));
-                    todoItem.setTaskDescription(rs.getString("description"));
-                    todoItem.setDeadline((rs.getDate("deadline").toLocalDate()));
-                    todoItem.setDone(rs.getBoolean("done"));
-
-                    person.setId(rs.getInt("person_id"));
-                    person.setFirstName(rs.getString("first_name"));
-                    person.setFirstName(rs.getString("last_name"));
-
-                    todoItem.setAssignee(person);
-                    todoItemsList.add(todoItem);
+                    todoItemsList.add(new
+                            TodoItem(rs.getInt("todo_id"), rs.getString("title"),
+                            rs.getString("description"), rs.getDate("deadline").toLocalDate(),
+                            rs.getBoolean("done"), new Person(rs.getInt("person_id"),
+                            rs.getString("first_name"), rs.getString("last_name"))));
 
                 }
             }
@@ -253,18 +232,11 @@ public class TodoDBA implements ITodoDBA {
 
                 while (rs.next()) {
 
-                    todoItem.setId(rs.getInt("todo_id"));
-                    todoItem.setTitle(rs.getString("title"));
-                    todoItem.setTaskDescription(rs.getString("description"));
-                    todoItem.setDeadline((rs.getDate("deadline").toLocalDate()));
-                    todoItem.setDone(rs.getBoolean("done"));
-
-                    person.setId(rs.getInt("person_id"));
-                    person.setFirstName(rs.getString("first_name"));
-                    person.setFirstName(rs.getString("last_name"));
-
-                    todoItem.setAssignee(person);
-                    todoItemsList.add(todoItem);
+                    todoItemsList.add(new
+                            TodoItem(rs.getInt("todo_id"), rs.getString("title"),
+                            rs.getString("description"), rs.getDate("deadline").toLocalDate(),
+                            rs.getBoolean("done"), new Person(rs.getInt("person_id"),
+                            rs.getString("first_name"), rs.getString("last_name"))));
 
                 }
 
@@ -299,18 +271,11 @@ public class TodoDBA implements ITodoDBA {
 
                 while (rs.next()) {
 
-                    todoItem.setId(rs.getInt("todo_id"));
-                    todoItem.setTitle(rs.getString("title"));
-                    todoItem.setTaskDescription(rs.getString("description"));
-                    todoItem.setDeadline((rs.getDate("deadline").toLocalDate()));
-                    todoItem.setDone(rs.getBoolean("done"));
-
-                    person.setId(rs.getInt("person_id"));
-                    person.setFirstName(rs.getString("first_name"));
-                    person.setFirstName(rs.getString("last_name"));
-
-                    todoItem.setAssignee(person);
-                    todoItemsList.add(todoItem);
+                    todoItemsList.add(new
+                            TodoItem(rs.getInt("todo_id"), rs.getString("title"),
+                            rs.getString("description"), rs.getDate("deadline").toLocalDate(),
+                            rs.getBoolean("done"), new Person(rs.getInt("person_id"),
+                            rs.getString("first_name"), rs.getString("last_name"))));
 
                 }
 
@@ -345,19 +310,11 @@ public class TodoDBA implements ITodoDBA {
             try (ResultSet rs = preparedStatement.executeQuery()) {
 
                 while (rs.next()) {
-
-                    todoItem.setId(rs.getInt("todo_id"));
-                    todoItem.setTitle(rs.getString("title"));
-                    todoItem.setTaskDescription(rs.getString("description"));
-                    todoItem.setDeadline((rs.getDate("deadline").toLocalDate()));
-                    todoItem.setDone(rs.getBoolean("done"));
-
-                    person.setId(rs.getInt("person_id"));
-                    person.setFirstName(rs.getString("first_name"));
-                    person.setFirstName(rs.getString("last_name"));
-
-                    todoItem.setAssignee(person);
-                    todoItemsList.add(todoItem);
+                    todoItemsList.add(new
+                            TodoItem(rs.getInt("todo_id"), rs.getString("title"),
+                            rs.getString("description"), rs.getDate("deadline").toLocalDate(),
+                            rs.getBoolean("done"), new Person(rs.getInt("person_id"),
+                            rs.getString("first_name"), rs.getString("last_name"))));
 
                 }
 

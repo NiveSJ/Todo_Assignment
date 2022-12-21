@@ -18,6 +18,17 @@ public class TodoItem {
     public TodoItem() {
     }
 
+    public TodoItem(Integer id, String title, String taskDescription, LocalDate deadline,boolean done, Person assignee) {
+        setId(id);
+        setTitle(title);
+        this.done = false;
+        this.taskDescription = taskDescription;
+        setDeadline(deadline);
+        setDone(done);
+        setAssignee(assignee);
+
+    }
+
     public TodoItem(String title, String taskDescription, LocalDate deadline, Person assignee) {
 
 
