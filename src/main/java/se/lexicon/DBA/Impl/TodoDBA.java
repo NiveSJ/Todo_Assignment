@@ -13,17 +13,7 @@ import java.util.List;
 
 public class TodoDBA implements ITodoDBA {
 
-    private static TodoDBA instance;
 
-    private TodoDBA() {
-    }
-
-    public static TodoDBA getInstance() {
-        if (instance == null) instance = new TodoDBA();
-
-        return instance;
-
-    }
 
     @Override
     public TodoItem create(TodoItem todoItem) {
@@ -164,9 +154,9 @@ public class TodoDBA implements ITodoDBA {
 
             preparedStatement.setInt(1, id);
 
-            try (ResultSet rs = preparedStatement.executeQuery()) {
-                System.out.println("Number of rows Deleted" + rs);
-            }
+           int RA= preparedStatement.executeUpdate();
+                System.out.println("Number of rows Deleted" + RA);
+
 
 
         } catch (DBConnectionException | SQLException e) {

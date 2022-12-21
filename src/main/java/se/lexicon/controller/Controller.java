@@ -24,7 +24,7 @@ public class Controller {
     public Controller() {
         ui = new ConsoleUI();
 
-        todoDBA = todoDBA.getInstance();
+       // todoDBA = todoDBA.getInstance();
 
 
     }

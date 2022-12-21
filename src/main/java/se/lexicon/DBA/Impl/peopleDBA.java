@@ -120,7 +120,7 @@ public class peopleDBA implements IpeopleDBA {
 
     @Override
     public Person update(Person person) {
-        String query = "update todoit.person set first_name = ?, last_name =  ?  where id = ?";
+        String query = "update todoit.person set first_name = ?, last_name =  ?  where person_id = ?";
 
         try (Connection connection = SQLConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query);) {
@@ -152,12 +152,14 @@ public class peopleDBA implements IpeopleDBA {
 
         try (Connection connection = SQLConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+            connection.setAutoCommit(false);
 
             preparedStatement.setInt(1, id);
 
-            try (ResultSet rs = preparedStatement.executeQuery()) {
-                System.out.println("Number of rows Deleted" + rs);
-            }
+            int rowsAffected= preparedStatement.executeUpdate();
+                System.out.println("Number of rows Deleted" + rowsAffected);
+
+                connection.commit();
 
 
         } catch (DBConnectionException | SQLException e) {

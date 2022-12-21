@@ -18,10 +18,20 @@ public class TodoItem {
     public TodoItem() {
     }
 
-    public TodoItem(Integer id, String title, String taskDescription, LocalDate deadline,boolean done, Person assignee) {
+    public TodoItem(Integer id, String title, String taskDescription, LocalDate deadline, boolean done, Person assignee) {
         setId(id);
         setTitle(title);
         this.done = false;
+        this.taskDescription = taskDescription;
+        setDeadline(deadline);
+        setDone(done);
+        setAssignee(assignee);
+
+    }
+
+    public TodoItem(String title, String taskDescription, LocalDate deadline, boolean done, Person assignee) {
+
+        setTitle(title);
         this.taskDescription = taskDescription;
         setDeadline(deadline);
         setDone(done);
@@ -47,7 +57,8 @@ public class TodoItem {
         setDeadline(deadline);
 
     }
-    public TodoItem(Integer id,String title, String description, LocalDate deadline,boolean done) {
+
+    public TodoItem(Integer id, String title, String description, LocalDate deadline, boolean done) {
         setId(id);
         setTitle(title);
         this.taskDescription = description;
@@ -117,20 +128,17 @@ public class TodoItem {
         return false;
     }
 
+
     @Override
     public String toString() {
-
-        String status = "Not done";
-        if (this.done)
-            status = "done";
-
         return "TodoItem{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", taskDescription='" + taskDescription + '\'' +
                 ", deadline=" + deadline +
                 ", done=" + done +
-                '}' + "\n";
+                ", assignee=" + assignee +
+                '}';
     }
 
     @Override  // Excluded creator person objects
