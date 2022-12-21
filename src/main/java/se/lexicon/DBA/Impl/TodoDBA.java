@@ -157,7 +157,7 @@ public class TodoDBA implements ITodoDBA {
     @Override
     public boolean deleteById(int id) {
 
-        String query = "delete  from todoit.todo_item where todo_id = ? ";
+        String query = "delete from todoit.todo_item where todo_id = ? ";
 
         try (Connection connection = SQLConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query);) {
@@ -185,7 +185,8 @@ public class TodoDBA implements ITodoDBA {
         ArrayList<TodoItem> todoItemsList = new ArrayList<>();
 
 
-        String query = "select * from todoit.todo_item as todo,todoit.person as person where person.person_id = ? and todo.done = ? ";
+        String query = "select * from todoit.todo_item as todo,todoit.person as person where " +
+                "person.person_id = todo.assignee_id. and todo.done = ? ";
 
         try (Connection connection = SQLConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query);) {
@@ -220,8 +221,9 @@ public class TodoDBA implements ITodoDBA {
         TodoItem todoItem = new TodoItem();
         Person person = new Person();
 
-        String query = "select * from todoit.todo_item as todo,todoit.person as person where " +
-                "person.person_id = todo.assignee_id and todo_id=?;";
+        String query = "select * from todoit.todo_item as todo,todoit.person as person " +
+                "where person.person_id = todo.assignee_id and todo.assignee_id = ?";
+
 
         try (Connection connection = SQLConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query);) {
