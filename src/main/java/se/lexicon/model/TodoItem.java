@@ -47,6 +47,14 @@ public class TodoItem {
         setDeadline(deadline);
 
     }
+    public TodoItem(Integer id,String title, String description, LocalDate deadline,boolean done) {
+        setId(id);
+        setTitle(title);
+        this.taskDescription = description;
+        setDeadline(deadline);
+        setDone(done);
+
+    }
 
 
     public int getId() {

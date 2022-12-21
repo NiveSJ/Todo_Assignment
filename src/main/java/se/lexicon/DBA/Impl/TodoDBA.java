@@ -314,8 +314,7 @@ public class TodoDBA implements ITodoDBA {
                     todoItemsList.add(new
                             TodoItem(rs.getInt("todo_id"), rs.getString("title"),
                             rs.getString("description"), rs.getDate("deadline").toLocalDate(),
-                            rs.getBoolean("done"), new Person(rs.getInt("person_id"),
-                            rs.getString("first_name"), rs.getString("last_name"))));
+                            rs.getBoolean("done")));
 
                 }
 
