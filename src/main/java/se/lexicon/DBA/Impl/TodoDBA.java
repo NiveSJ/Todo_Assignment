@@ -262,7 +262,7 @@ public class TodoDBA implements ITodoDBA {
 
 
         String query = "select * from todoit.todo_item as todo,todoit.person as person where " +
-                "person.person_id = ? ";
+                "person.person_id = todo.assignee_id and person.person_id = ? ";
 
         try (Connection connection = SQLConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query);) {
@@ -302,8 +302,7 @@ public class TodoDBA implements ITodoDBA {
         TodoItem todoItem = new TodoItem();
         Person person = new Person();
 
-        String query = "select * from todoit.todo_item as todo,todoit.person as person where " +
-                "person.person_id is NULL";
+        String query = " select * from todoit.todo_item where assignee_id is NULL";
 
         try (Connection connection = SQLConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query);) {
